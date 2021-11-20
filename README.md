@@ -7,6 +7,7 @@ The members of the team are:
 - Abdurrahman (Abdi) Lleshi
 - Kai Corr
 - Abbenayan Jeyakumar
+
 *Add any further information about the team here, such as absent team members.*
 
 ## Project structure
