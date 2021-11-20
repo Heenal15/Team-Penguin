@@ -1,11 +1,12 @@
-# Team *enter team name here* Small Group project
+# Team Penguin Small Group project
 
 ## Team members
 The members of the team are:
-- *Enter member 1*
-- *Enter member 2*
-- *Enter member 3*
-- *Enter member 4*
+- Heenal Vyas
+- Yiting Gao
+- Abdurrahman (Abdi) Lleshi
+- Kai Corr
+- Abbenayan Jeyakumar
 *Add any further information about the team here, such as absent team members.*
 
 ## Project structure
