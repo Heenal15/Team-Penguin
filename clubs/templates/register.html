@@ -1,40 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Register</title>
-</head>
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h1>Register</h1>
-        <form action="{% url 'register' %}" method="post">
-          {% csrf_token %}
-          {% load widget_tweaks %}
-          {% for field in form %}
-           <div class="mb-3">
-             {{ field.label_tag }}
-             {% if form.is_bound %}
-              {% if field.errors %}
-                {% render_field field class="form-control is-invalid" %}
-              {% else %}
-                {% render_field field class="form-control is-valid" %}
-              {% endif %}
-             {% else %}
-              {% render_field field class="form-control" %}
-             {% endif %}
-             <div class="valid-feedback">
-               Looks good!
-             </div>
-             <div class="invalid-feedback">
-               {{ field.errors }}
-             </div>
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Register</h1>
+      <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        {% load widget_tweaks %}
+        {% for field in form %}
+         <div class="mb-3">
+           {{ field.label_tag }}
+           {% if form.is_bound %}
+            {% if field.errors %}
+              {% render_field field class="form-control is-invalid" %}
+            {% else %}
+              {% render_field field class="form-control is-valid" %}
+            {% endif %}
+           {% else %}
+            {% render_field field class="form-control" %}
+           {% endif %}
+           <div class="valid-feedback">
+             Looks good!
            </div>
-          {% endfor %}
-          <input type="submit" value="Sign Up" class="btn btn-primary"> </input>
-        </form>
-      </div>
+           <div class="invalid-feedback">
+             {{ field.errors }}
+           </div>
+         </div>
+        {% endfor %}
+        <input type="submit" value="Register" class="btn btn-primary"> </input>
+      </form>
     </div>
   </div>
-</body>
-</html>
+</div>
+
+{% endblock %}
