@@ -1,12 +1,37 @@
 """Models in the clubs app."""
 
 from django.core.validators import RegexValidator
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from libgravatar import Gravatar
 
+"""Overriding model manager user model with email as username"""
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        email = self.normalize_email(email)
+        user = self.model(
+            email = email,
+            **extra_fields
+        )
+        user.set_password(password)
+        user.is_superuser = False
+        user.is_staff = False
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        user = self.create_user(email, password=None, **extra_fields)
+        user.is_superuser = True
+        user.is_staff = True
+        user.save(using=self._db)
+        return user
+
 class User(AbstractUser):
     """User model used for authentication and club authoring."""
+    username = None
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
     USER_TYPE_CHOICES = (
         (1, 'member'),
         (2, 'officer'),
@@ -15,21 +40,14 @@ class User(AbstractUser):
     )
 
     #user_type = models.PostiveSmallInegerField(choices=USER_TYPE_CHOICES)
-
-    username = models.CharField(
-        max_length=30,
-        unique=True,
-        validators=[RegexValidator(
-            regex=r'^@\w{3,}$',
-            message='Username must consist of @ followed by at least three alphanumericals'
-        )]
-    )
+    email = models.EmailField(unique=True, blank=False)
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)
-    email = models.EmailField(unique=True, blank=False)
     bio = models.CharField(max_length=520, blank=True)
     experience = models.CharField(max_length=300, blank=True)
     statement = models.CharField(max_length=1000, blank=True)
+
+    objects = UserManager()
 
     def full_name(self):
         return f'{self.first_name} {self.last_name}'

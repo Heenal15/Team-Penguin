@@ -11,7 +11,7 @@ class LogInViewTestCase(TestCase, LogInTester):
 
     def setUp(self):
         self.url = reverse('log_in')
-        self.user = User.objects.create_user('@johndoe',
+        self.user = User.objects.create_user(
             first_name = 'John',
             last_name = 'Doe',
             email = 'johndoe@example.org',
@@ -34,7 +34,7 @@ class LogInViewTestCase(TestCase, LogInTester):
         self.assertEqual(len(messages_list), 0)
 
     def test_unsuccesful_log_in(self):
-        form_input = { 'username': '@janedoe', 'password': 'WrongPassword123'}
+        form_input = { 'email': '@johndoe', 'password': 'WrongPassword123'}
         response = self.client.post(self.url, form_input)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'log_in.html')
@@ -47,7 +47,7 @@ class LogInViewTestCase(TestCase, LogInTester):
         self.assertEqual(messages_list[0].level, messages.ERROR)
 
     def test_succesful_log_in(self):
-        form_input = { 'username': '@johndoe', 'password': 'Password123'}
+        form_input = { 'email': 'johndoe@example.org', 'password': 'Password123'}
         response = self.client.post(self.url, form_input, follow = True)
         self.assertTrue(self._is_logged_in())
         response_url = reverse('feed')
@@ -59,7 +59,7 @@ class LogInViewTestCase(TestCase, LogInTester):
     def test_valid_log_in_by_inavctive_user(self):
         self.user.is_active = False
         self.user.save()
-        form_input = { 'username': '@johndoe', 'password': 'Password123'}
+        form_input = { 'email': 'johndoe@example.org', 'password': 'Password123'}
         response = self.client.post(self.url, form_input, follow = True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'log_in.html')
