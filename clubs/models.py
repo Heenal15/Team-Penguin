@@ -10,6 +10,7 @@ class User(AbstractUser):
     USER_TYPE_CHOICES = (
         (1, 'members'),
         (2, 'officers'),
+        (3, 'admin'),
     )
 
     user_type = models.PostiveSmallInegerField(choices=USER_TYPE_CHOICES)
