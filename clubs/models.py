@@ -8,9 +8,10 @@ from libgravatar import Gravatar
 class User(AbstractUser):
     """User model used for authentication and club authoring."""
     USER_TYPE_CHOICES = (
-        (1, 'members'),
-        (2, 'officers'),
+        (1, 'member'),
+        (2, 'officer'),
         (3, 'admin'),
+        (4, 'clubowner'),
     )
 
     user_type = models.PostiveSmallInegerField(choices=USER_TYPE_CHOICES)
