@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, get_user_model
+from django.shortcuts import redirect, render
+from django.http import HttpResponse
 from .forms import ApplicationForm, LogInForm
-from django.contrib.auth import authenticate, login
 
 def log_in(request):
     if request.method == 'POST':
