@@ -1,5 +1,6 @@
 from django.shortcuts import render
-
+from .forms import ApplicationForm, LogInForm
+from django.contrib.auth import authenticate, login
 
 def log_in(request):
     if request.method == 'POST':
@@ -21,4 +22,12 @@ def home(request):
     return render(request, 'home.html')
 
 def register(request):
-    return render(request, 'register.html')
+    if request.method == 'POST':
+        form = ApplicationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('log_in') #redirects to log_in after a valid form is completed
+    else:
+        form = ApplicationForm()
+    return render(request,'register.html', {'form':form})
