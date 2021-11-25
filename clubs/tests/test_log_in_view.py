@@ -2,8 +2,8 @@
 from django.contrib import messages
 from django.test import TestCase
 from django.urls import reverse
-from microblogs.forms import LogInForm
-from microblogs.models import User
+from clubs.forms import LogInForm
+from clubs.models import User
 from .helpers import LogInTester
 
 class LogInViewTestCase(TestCase, LogInTester):

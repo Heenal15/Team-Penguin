@@ -1,7 +1,7 @@
 """ Unit tests for the log in form """
 from django import forms
 from django.test import TestCase
-from microblogs.forms import LogInForm
+from clubs.forms import LogInForm
 
 class LogInFormTestCase(TestCase):
     """ Unit tests for the log in form """
