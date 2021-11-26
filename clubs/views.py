@@ -42,7 +42,7 @@ def user_list(request):
 
 def show_user(request, user_id):
     try:
-        user = User.objects.get(id=user_id)
+        user = User.objects.get(id = user_id)
     except ObjectDoesNotExist:
         return redirect('user_list')
     else:
