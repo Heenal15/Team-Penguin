@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, get_user_model
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .forms import ApplicationForm, LogInForm
+from .models import User
+from django.http import HttpResponseForbidden
 
 def log_in(request):
     if request.method == 'POST':
@@ -33,3 +35,15 @@ def register(request):
     else:
         form = ApplicationForm()
     return render(request,'register.html', {'form':form})
+
+def user_list(request):
+    users = User.objects.all()
+    return render(request, 'user_list.html', {'users': users})
+
+def show_user(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+    except ObjectDoesNotExist:
+        return redirect('user_list')
+    else:
+        return render(request, 'show_user.html', {'user': user})

@@ -14,7 +14,7 @@ class User(AbstractUser):
         (4, 'clubowner'),
     )
 
-    user_type = models.PostiveSmallInegerField(choices=USER_TYPE_CHOICES)
+    #user_type = models.PostiveSmallInegerField(choices=USER_TYPE_CHOICES)
 
     username = models.CharField(
         max_length=30,
