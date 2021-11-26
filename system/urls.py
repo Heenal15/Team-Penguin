@@ -22,6 +22,8 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('log_in/', views.log_in, name='log_in'),
     path('register/', views.register, name='register'),
+    path('member/<int:user_id>', views.show_member, name='show_member'),
     path('user/<int:user_id>', views.show_user, name='show_user'),
-    path('users/', views.user_list, name='user_list'),
+    path('members/', views.member_list, name='member_list'),
+    path('all_users/', views.full_user_list, name='full_user_list'),
 ]

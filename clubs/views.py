@@ -36,14 +36,26 @@ def register(request):
         form = ApplicationForm()
     return render(request,'register.html', {'form':form})
 
-def user_list(request):
+def full_user_list(request):
     users = User.objects.all()
-    return render(request, 'user_list.html', {'users': users})
+    return render(request, 'full_user_list.html', {'users': users})
+
+def member_list(request):
+    users = User.objects.all()
+    return render(request, 'member_list.html', {'users': users})
 
 def show_user(request, user_id):
     try:
         user = User.objects.get(id = user_id)
     except ObjectDoesNotExist:
-        return redirect('user_list')
+        return redirect('full_user_list')
     else:
         return render(request, 'show_user.html', {'user': user})
+
+def show_member(request, user_id):
+    try:
+        user = User.objects.get(id = user_id)
+    except ObjectDoesNotExist:
+        return redirect('member_list')
+    else:
+        return render(request, 'show_member.html', {'user': user})

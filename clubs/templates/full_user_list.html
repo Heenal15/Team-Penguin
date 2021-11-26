@@ -13,6 +13,7 @@
             </td>
             <td>{{ user.full_name }}</td>
             <td><a href="{% url 'show_user' user.id %}">{{ user.email }}</a></td>
+            <td>{{ user.experience }}</td>
           </tr>
         {% endfor %}
       </table>
