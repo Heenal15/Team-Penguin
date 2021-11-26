@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from faker import Faker
 from clubs.models import User
+import random
 
 class Command(BaseCommand):
     """The database seeder."""
@@ -49,8 +50,13 @@ class Command(BaseCommand):
     def _username(self, first_name, last_name):
         username = f'@{first_name}{last_name}'
         return username
-        
+
     # Method to set experience level.
     def _experience(self):
-        level = 'Member'
-        return level
+        member = 'Member'
+        officer = 'Officer'
+        random_number = random.randint(1, 4)
+        if random_number != 1:
+            return member
+        else:
+            return officer
