@@ -8,7 +8,8 @@
       <table class="table">
         <th scope="col"> </th>
         <th scope="col">Full Name:</th>
-        <th scope="col">Email:</th>
+        <th scope="col">Personal Details:</th>
+        <th scope="col">Position:</th>
         {% for user in users %}
           <tr>
             <td>
@@ -17,7 +18,6 @@
             <td>{{ user.full_name }}</td>
             <td><a href="{% url 'show_user' user.id %}">{{ user.email }}</a></td>
             <td>{{ user.experience }}</td>
-          </tr>
         {% endfor %}
       </table>
     </div>

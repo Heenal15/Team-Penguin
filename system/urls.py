@@ -26,4 +26,5 @@ urlpatterns = [
     path('user/<int:user_id>', views.show_user, name='show_user'),
     path('members/', views.member_list, name='member_list'),
     path('all_users/', views.full_user_list, name='full_user_list'),
+    path('promotion_demotion/',views.memberlist_Clubowner, name='memberlist_Clubowner'),
 ]
