@@ -15,7 +15,6 @@
               <img src="{{ user.mini_gravatar }}" alt="Gravatar of {{ user.email }}" class="rounded-circle" >
             </td>
             <td>{{ user.full_name }}
-            <td><a href="{% url 'show_member' user.id %}">{{ user.email }}</a></td>
           </tr>
         {% endfor %}
       </table>
