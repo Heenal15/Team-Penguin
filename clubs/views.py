@@ -2,11 +2,12 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from .forms import ApplicationForm, LogInForm, UserForm
+from .forms import ApplicationForm, LogInForm, UserForm, PasswordForm
 from .models import User
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.hashers import check_password
 
 def log_in(request):
     if request.method == 'POST':
@@ -76,3 +77,20 @@ def profile(request):
     else:
         form = UserForm(instance=current_user)
     return render(request, 'profile.html', {'form': form})
+
+@login_required
+def password(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = PasswordForm(data=request.POST)
+        if form.is_valid():
+            password = form.cleaned_data.get('password')
+            if check_password(password, current_user.password):
+                new_password = form.cleaned_data.get('new_password')
+                current_user.set_password(new_password)
+                current_user.save()
+                login(request, current_user)
+                messages.add_message(request, messages.SUCCESS, "Password updated!")
+                return redirect('home')
+    form = PasswordForm()
+    return render(request, 'password.html', {'form': form})

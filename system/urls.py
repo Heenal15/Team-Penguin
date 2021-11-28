@@ -28,4 +28,5 @@ urlpatterns = [
     path('members/', views.member_list, name='member_list'),
     path('all_users/', views.full_user_list, name='full_user_list'),
     path('profile/', views.profile, name='profile'),
+    path('password/', views.password, name='password'),
 ]
