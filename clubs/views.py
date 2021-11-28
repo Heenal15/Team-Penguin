@@ -1,10 +1,12 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from .forms import ApplicationForm, LogInForm
+from .forms import ApplicationForm, LogInForm, UserForm
 from .models import User
 from django.http import HttpResponseForbidden
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 
 def log_in(request):
     if request.method == 'POST':
@@ -15,12 +17,14 @@ def log_in(request):
             user = authenticate(email=email, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('feed')
-        # Add error message here
-        messages.add_message(request, messages.ERROR, "The credentials provided are invalid.")
-
+                return redirect('home')
+        messages.add_message(request, messages.ERROR, "The credentials provided were invalid!")
     form = LogInForm()
-    return render(request, 'log_in.html', {'form' : form})
+    return render(request, 'log_in.html', {'form': form})
+
+def log_out(request):
+    logout(request)
+    return redirect('home')
 
 def home(request):
     return render(request, 'home.html')
@@ -59,3 +63,16 @@ def show_member(request, user_id):
         return redirect('member_list')
     else:
         return render(request, 'show_member.html', {'user': user})
+
+@login_required
+def profile(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = UserForm(instance=current_user, data=request.POST)
+        if form.is_valid():
+            messages.add_message(request, messages.SUCCESS, "Profile updated!")
+            form.save()
+            return redirect('home')
+    else:
+        form = UserForm(instance=current_user)
+    return render(request, 'profile.html', {'form': form})

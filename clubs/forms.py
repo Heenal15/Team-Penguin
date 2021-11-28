@@ -30,6 +30,17 @@ class ApplicationForm(forms.ModelForm):
         )
     password_confirmation = forms.CharField(label='Password Confirmation', widget=forms.PasswordInput())
 
+class UserForm(forms.ModelForm):
+    """Form to update user profiles."""
+
+    class Meta:
+        """Form options."""
+
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'bio', 'experience', 'statement']
+        widgets = { 'bio': forms.Textarea(), 'experience':forms.Textarea(), 'statement':forms.Textarea()}
+
+
     def clean(self):
         super().clean()
         new_password = self.cleaned_data.get('new_password')
