@@ -16,7 +16,7 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.is_superuser = False
         user.is_staff = False
-        user.save(using=self._db)
+        user.save(using=self._db) #giving error in tests
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):

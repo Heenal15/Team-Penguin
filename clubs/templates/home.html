@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base_content.html' %}
 <head>
   <title>Home</title>
 </head>
-<body>
+{% block body %}
 
   <h1>Chess Club Mangement System</h1>
 
@@ -13,7 +12,8 @@
     <br><br>
     <li><a href='{% url 'member_list' %}'> Member List for Members </a></li>
     <li><a href='{% url 'full_user_list' %}'> Member List for Officers </a></li>
+    <li><a href='{% url 'full_user_list' %}'> Member List for Officers </a></li>
+
   </ul>
 
-</body>
-</html>
+{% endblock %}
