@@ -33,10 +33,10 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     USER_TYPE_CHOICES = (
-        (1, 'member'),
-        (2, 'officer'),
-        (3, 'admin'),
-        (4, 'clubowner'),
+        (1, 'Member'),
+        (2, 'Officer'),
+        (3, 'Admin'),
+        (4, 'Owner'),
     )
 
     #user_type = models.PostiveSmallInegerField(choices=USER_TYPE_CHOICES)

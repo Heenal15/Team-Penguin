@@ -29,4 +29,5 @@ urlpatterns = [
     path('all_users/', views.full_user_list, name='full_user_list'),
     path('profile/', views.profile, name='profile'),
     path('password/', views.password, name='password'),
+    path('promotion_demotion/',views.memberlist_Clubowner, name='memberlist_Clubowner'),
 ]
