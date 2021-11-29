@@ -8,13 +8,14 @@
       <table class="table">
         <th scope="col"> </th>
         <th scope="col">Full Name:</th>
-        <th scope="col">Bio:</th>
+        <th scope="col">Experience:</th>
         {% for user in users %}
           <tr>
             <td>
               <img src="{{ user.mini_gravatar }}" alt="Gravatar of {{ user.email }}" class="rounded-circle" >
             </td>
             <td>{{ user.full_name }}
+            <td>{{ user.experience}}
           </tr>
         {% endfor %}
       </table>
