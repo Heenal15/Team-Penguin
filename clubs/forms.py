@@ -29,7 +29,7 @@ class ApplicationForm(forms.ModelForm):
             ]
         )
     password_confirmation = forms.CharField(label='Password Confirmation', widget=forms.PasswordInput())
-    user_type = forms.IntegerField(label='User Type', widget=forms.IntegerInput())
+    user_type = forms.IntegerField(label='User Type')
 
     def clean(self):
         super().clean()
