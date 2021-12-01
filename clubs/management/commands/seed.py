@@ -28,12 +28,12 @@ class Command(BaseCommand):
         first_name = self.faker.first_name()
         last_name = self.faker.last_name()
         email = self._email(first_name, last_name)
-        
+
         bio = self.faker.text(max_nb_chars=520)
         statement = self.faker.text(max_nb_chars=520)
         experience = self._experience()
         User.objects.create_user(
-            
+
             first_name=first_name,
             last_name=last_name,
             email=email,
@@ -41,6 +41,7 @@ class Command(BaseCommand):
             bio=bio,
             statement=statement,
             experience=experience,
+            user_type=random.randint(1, 4),
         )
 
     def _email(self, first_name, last_name):

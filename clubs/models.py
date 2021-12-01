@@ -33,13 +33,14 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     USER_TYPE_CHOICES = (
+        (0, 'waiting'),
         (1, 'member'),
         (2, 'officer'),
         (3, 'admin'),
         (4, 'clubowner'),
     )
 
-    user_type = models.IntegerField(choices=USER_TYPE_CHOICES)
+    user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=0)
 
     email = models.EmailField(unique=True, blank=False)
     first_name = models.CharField(max_length=50, blank=False)
