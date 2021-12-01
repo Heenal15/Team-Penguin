@@ -28,8 +28,8 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     """User model used for authentication and club authoring."""
-    username = None
 
+    username = None
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     USER_TYPE_CHOICES = (
@@ -39,13 +39,16 @@ class User(AbstractUser):
         (4, 'clubowner'),
     )
 
-    #user_type = models.PostiveSmallInegerField(choices=USER_TYPE_CHOICES)
+    user_type = models.IntegerField(choices=USER_TYPE_CHOICES)
+
     email = models.EmailField(unique=True, blank=False)
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)
     bio = models.CharField(max_length=520, blank=True)
     experience = models.CharField(max_length=300, blank=True)
     statement = models.CharField(max_length=1000, blank=True)
+
+    is_waiting_list = True
 
     objects = UserManager()
 

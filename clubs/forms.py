@@ -10,7 +10,7 @@ class LogInForm(forms.Form):
 class ApplicationForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'bio', 'experience', 'statement']
+        fields = ['first_name', 'last_name', 'email', 'bio', 'experience', 'statement', 'user_type']
         widgets = {'bio':forms.Textarea(), 'experience':forms.Textarea(), 'statement':forms.Textarea()}
     new_password = forms.CharField(label='Password', widget=forms.PasswordInput(),
         validators=[
@@ -29,6 +29,7 @@ class ApplicationForm(forms.ModelForm):
             ]
         )
     password_confirmation = forms.CharField(label='Password Confirmation', widget=forms.PasswordInput())
+    user_type = forms.IntegerField(label='User Type', widget=forms.IntegerInput())
 
     def clean(self):
         super().clean()

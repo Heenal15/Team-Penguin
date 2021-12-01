@@ -29,4 +29,5 @@ urlpatterns = [
     path('all_users/', views.full_user_list, name='full_user_list'),
     path('profile/', views.profile, name='profile'),
     path('password/', views.password, name='password'),
+    path('waiting_list/', views.waiting_list, name='waiting_list')
 ]
