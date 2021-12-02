@@ -1,26 +1,45 @@
-{% extends 'base_content.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% block body %}
 
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="wide=device-width, initial_scale=1.0">
+  <link href="{% static 'custom.css' %}" rel="stylesheet">
   <title> Log In </title>
 </head>
-{% block body %}
-<h1> Chess Club </h1>
-{% for message in messages %}
-<p><b>{{ message }}</b></p>
-{% endfor %}
-<p> Please Log In Your Account </p>
-<form action="{% url 'log_in' %}" method="post">
-  {% csrf_token %}
 
-  {{ form.as_p }}
+<body>
+  <div id="cover-image">
+    <div class="container" vh-100>
+      <div class="row" h-100>
+        <div class="col-12 my-auto">
+          <div class="card cover-card offset-sm-2 offset-md-4 offset-lg-7">
+            <h2 class="cover-heading">Chess Club </h2>
 
-  <input type="submit" value="Log In">
+            {% for message in messages %}
+            <p><b>{{ message }}</b></p>
+            {% endfor %}
+            <h3 class="cover-text"> Please Log In Your Account </h3>
+            <form action="{% url 'log_in' %}" method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <input type="submit" value="Log In">
+              <p></p>
+              <p class="forget">Forget password?<a href='{% url 'password' %}'>
+                  Find Password
+                </a></p>
+              <p class="forget">Don't have account?<a href='{% url 'register' %}'>
+                  Sign Up
+                </a></p>
 
-  <p class="forget">Forget password?<a href='{% url 'password' %}'>
-      Find Password
-    </a></p>
-  <p class="forget">Don't have account?<a href='{% url 'register' %}'>
-      Sign Up
-    </a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 
-  {% endblock %}
+{% endblock %}
