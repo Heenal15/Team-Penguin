@@ -1,17 +1,26 @@
 {% extends 'base_content.html' %}
+
 <head>
   <title> Log In </title>
 </head>
 {% block body %}
-    <h1> Log In </h1>
-    {% for message in messages %}
-      <p><b>{{ message }}</b></p>
-    {% endfor %}
+<h1> Chess Club </h1>
+{% for message in messages %}
+<p><b>{{ message }}</b></p>
+{% endfor %}
+<p> Please Log In Your Account </p>
+<form action="{% url 'log_in' %}" method="post">
+  {% csrf_token %}
 
-    <form action= "{% url 'log_in' %}" method="post">
-      {% csrf_token %}
+  {{ form.as_p }}
 
-      {{ form.as_p }}
+  <input type="submit" value="Log In">
 
-    <input type="submit" value="Log In">
-{% endblock %}
+  <p class="forget">Forget password?<a href='{% url 'password' %}'>
+      Find Password
+    </a></p>
+  <p class="forget">Don't have account?<a href='{% url 'register' %}'>
+      Sign Up
+    </a></p>
+
+  {% endblock %}

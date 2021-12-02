@@ -21,7 +21,7 @@ def log_in(request):
                 return redirect('home')
         messages.add_message(request, messages.ERROR, "The credentials provided were invalid!")
     form = LogInForm()
-    return render(request, 'member_list.html', {'form': form})
+    return render(request, 'log_in.html', {'form': form})
 
 def log_out(request):
     logout(request)
