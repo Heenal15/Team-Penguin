@@ -16,10 +16,11 @@
 }
 
 #cover-image {
-  background: url('images/chess-playing-hand.jpeg') no-repeat center center fixed;
+  background: url('images/Background.png') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
+  background-attachment: fixed;
   -o-background-size: cover;
 }
 
@@ -36,24 +37,36 @@
 /*
  * Cover page
  */
-h2.cover-heading {
-  font-size: 4rem;
+.cover-heading {
+  font-size: 2rem;
+  font-weight: 600;
 }
-h3.cover-text {
-  font-size: 1.7rem;
+.cover-text {
+  font-size: 0.9rem;
+  color: #787777;
 }
-
 .cover-card {
+  postion: absolut;
   background-color: #FFFFFF;
-  max-width: 30rem;
-  padding-top: 30px;
-  padding-left: 50px;
-  padding-right: 50px;
+  max-width: 20rem;
+  max-height: 40rem;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   padding-bottom: 30px;
-  border-radius: 10%;
+  border-radius: 10px 10px;
+  text-align: center;
 }
 .cover-card-block {
   opacity: 1
+}
+.forget {
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+  font-style: normal;
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: #787777;
 }
 
 

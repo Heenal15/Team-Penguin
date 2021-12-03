@@ -13,28 +13,26 @@
 
 <body>
   <div id="cover-image">
-    <div class="container" vh-100>
-      <div class="row" h-100>
+    <div class="container vh-100">
+      <div class="row h-100">
         <div class="col-12 my-auto">
           <div class="card cover-card offset-sm-2 offset-md-4 offset-lg-7">
-            <h2 class="cover-heading">Chess Club </h2>
-
-            {% for message in messages %}
-            <p><b>{{ message }}</b></p>
-            {% endfor %}
-            <h3 class="cover-text"> Please Log In Your Account </h3>
+            <h1 class="cover-heading">CHESS CLUB</h1>
+            <h1 class="cover-text"> Please Sign In Your Account </h1>
             <form action="{% url 'log_in' %}" method="post">
               {% csrf_token %}
               {{ form.as_p }}
-              <input type="submit" value="Log In">
-              <p></p>
-              <p class="forget">Forget password?<a href='{% url 'password' %}'>
-                  Find Password
-                </a></p>
+              <div class="inputBox">
+                <input type="submit" value="Sign In">
+              </div>
+
+              &nbsp;
               <p class="forget">Don't have account?<a href='{% url 'register' %}'>
                   Sign Up
                 </a></p>
-
+              <p class="forget">Forget password?<a href='{% url 'password' %}'>
+                  Find Password
+                </a></p>
           </div>
         </div>
       </div>
