@@ -21,8 +21,14 @@ def log_in(request):
                 login(request, user)
                 if user.user_type == 0:
                     return redirect('waiting_list')
-                else:
-                    return redirect('home')
+                elif user.user_type == 1:
+                    return redirect('members')
+                elif user.user_type == 2:
+                    return redirect('member_list_for_officer')
+                elif user.user_type == 3:
+                    return redirect('members_and_officers_for_clubowner')
+                ## else:
+                ##    return redirect('home')
 
         messages.add_message(request, messages.ERROR, "The credentials provided were invalid!")
     form = LogInForm()
