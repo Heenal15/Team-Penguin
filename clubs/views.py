@@ -57,8 +57,8 @@ def member_list_for_officer(request):
     return render(request, 'member_list_for_officer.html', {'members': members})
 
 def member_list(request):
-    users = User.objects.all()
-    return render(request, 'member_list.html', {'users': users})
+    members = User.objects.filter(user_type = 1)
+    return render(request, 'member_list.html', {'members': members})
 
 def applicant_list(request):
     applicants = User.objects.filter(user_type = 0)
@@ -68,7 +68,7 @@ def show_user(request, user_id):
     try:
         user = User.objects.get(id = user_id)
     except ObjectDoesNotExist:
-        return redirect('full_user_list')
+        return redirect('home')
     else:
         return render(request, 'show_user.html', {'user': user})
 
