@@ -41,6 +41,7 @@ class Command(BaseCommand):
             bio=bio,
             statement=statement,
             experience=experience,
+            user_type=random.randint(1, 4),
         )
 
     def _email(self, first_name, last_name):
