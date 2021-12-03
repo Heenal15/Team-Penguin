@@ -74,6 +74,21 @@ def show_member(request, user_id):
     else:
         return render(request, 'show_member.html', {'user': user})
 
+@login_required
+def promotion(request):
+    users = User.objects.all()
+    current_user = request.user
+    if current_user.user_type == 1:
+        current_user.user_type = 2
+    return render(request, 'memberlist_Clubowner.html', {'users': users})
+    
+@login_required
+def demotion(request):
+    users = User.objects.all()
+    current_user = request.user
+    if current_user.user_type == 2:
+        current_user.user_type == 1
+    return render(request, 'memberlist_Clubowner.html', {'users': users})
 
 @login_required
 def waiting_list(request):

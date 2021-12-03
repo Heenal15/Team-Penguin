@@ -19,7 +19,12 @@
             <td>{{ user.full_name }}</td>
             <td><a href="{% url 'show_user' user.id %}">{{ user.email }}</a></td>
             <td>{{ user.experience }}</td>
-            <td> <button type="button">Promote</button><button type="button">Demote</button></td>
+            <td><form action="{% url 'promotion'%}" method="POST">
+              <input id="submit" type="button" value="Promote"  />
+            </form></td>
+            <td><form action="{% url 'demotion'%}" method="POST">
+              <input id="submit" type="button" value="Demote" />
+            </form></td>
           </tr>
         {% endfor %}
       </table>
