@@ -33,11 +33,10 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     USER_TYPE_CHOICES = (
-        (0, 'waiting'),
-        (1, 'member'),
-        (2, 'officer'),
-        (3, 'admin'),
-        (4, 'clubowner'),
+        (0, 'Applicant'),
+        (1, 'Member'),
+        (2, 'Club Officer'),
+        (3, 'Club Owner'),
     )
 
     user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=0)
@@ -49,7 +48,7 @@ class User(AbstractUser):
     experience = models.CharField(max_length=300, blank=True)
     statement = models.CharField(max_length=1000, blank=True)
 
-    is_waiting_list = True
+    #is_waiting_list = True
 
     objects = UserManager()
 
