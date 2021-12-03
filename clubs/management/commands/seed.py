@@ -57,7 +57,7 @@ class Command(BaseCommand):
         member = 'Member'
         officer = 'Officer'
         random_number = random.randint(1, 4)
-        if random_number != 1:
+        if random_number != 2:
             return member
         else:
             return officer

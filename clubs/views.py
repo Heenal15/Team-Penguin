@@ -54,11 +54,15 @@ def member_list(request):
     users = User.objects.all()
     return render(request, 'member_list.html', {'users': users})
 
+def memberlist_Clubowner(request):
+    users = User.objects.all()
+    return render(request, 'memberlist_Clubowner.html', {'users': users})
+
 def show_user(request, user_id):
     try:
         user = User.objects.get(id = user_id)
     except ObjectDoesNotExist:
-        return redirect('full_user_list')
+        return redirect('full_user_list','memberlist_Clubowner')
     else:
         return render(request, 'show_user.html', {'user': user})
 
