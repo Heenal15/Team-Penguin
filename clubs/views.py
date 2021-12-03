@@ -16,9 +16,14 @@ def log_in(request):
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password')
             user = authenticate(email=email, password=password)
+
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                if user.user_type == 0:
+                    return redirect('waiting_list')
+                else:
+                    return redirect('home')
+
         messages.add_message(request, messages.ERROR, "The credentials provided were invalid!")
     form = LogInForm()
     return render(request, 'log_in.html', {'form': form})
@@ -68,6 +73,15 @@ def show_member(request, user_id):
         return redirect('member_list')
     else:
         return render(request, 'show_member.html', {'user': user})
+
+
+@login_required
+def waiting_list(request):
+    current_user = request.user
+    if current_user.user_type == 0:
+        return render(request, 'waiting_list.html')
+    return render(request, 'home.html')
+
 
 @login_required
 def profile(request):

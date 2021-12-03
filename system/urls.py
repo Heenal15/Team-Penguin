@@ -30,4 +30,5 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('password/', views.password, name='password'),
     path('promotion_demotion/',views.memberlist_Clubowner, name='memberlist_Clubowner'),
+    path('waiting_list/', views.waiting_list, name='waiting_list'),
 ]
