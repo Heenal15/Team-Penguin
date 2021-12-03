@@ -46,13 +46,23 @@ def register(request):
         form = ApplicationForm()
     return render(request,'register.html', {'form':form})
 
-def full_user_list(request):
-    users = User.objects.all()
-    return render(request, 'full_user_list.html', {'users': users})
+def members_and_officers_for_clubowner(request):
+    members = User.objects.filter(user_type = 1)
+    officers =  User.objects.filter(user_type = 2)
+    members_and_officers = members | officers
+    return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
+
+def member_list_for_officer(request):
+    members = User.objects.filter(user_type = 1)
+    return render(request, 'member_list_for_officer.html', {'members': members})
 
 def member_list(request):
     users = User.objects.all()
     return render(request, 'member_list.html', {'users': users})
+
+def applicant_list(request):
+    applicants = User.objects.filter(user_type = 0)
+    return render(request, 'applicant_list.html', {'applicants': applicants})
 
 def show_user(request, user_id):
     try:
