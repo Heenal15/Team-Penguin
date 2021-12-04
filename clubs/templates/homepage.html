@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% block body %}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="wide=device-width, initial_scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../../../static/homepage.css" />
+  <title> homepage </title>
+</head>
+
+<body>
+  <div class="header">
+    <nav id"navbar">
+      <img src="images/logo.png" class="logo">
+      <ul id="menu">
+        <li>MY CLUB</li>
+        <li>CLUBS</li>
+        <li>APPLICATION</li>
+        <li>MY PROFILE</li>
+      </ul>
+    </nav>
+  </div>
+  <p class="text">Chess Club System Create by Team-Penguin</p>
+
+  <script>
+    var navbar = document.getElementById("navbar");
+    var menu = document.getElementById("menu");
+
+    window.onscroll = function() {
+      if (window.pageYOffset >= menu.offsetTop) {
+        navbar.classList.add("sticky");
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    }
+  </script>
+</body>
+
+</html>
+{% endblock %}
