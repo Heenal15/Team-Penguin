@@ -94,14 +94,6 @@ def approve(request, user_id):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
 
-def approve(request, user_id):
-    current_user = User.objects.get(id = user_id)
-    if current_user.user_type == 0:
-        current_user.user_type = 1
-        current_user.save()
-    applicants = User.objects.filter(user_type = 0)
-    return render(request, 'applicant_list.html', {'applicants': applicants})
-
 def unapprove(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 0:
