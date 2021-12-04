@@ -30,6 +30,8 @@ urlpatterns = [
     path('members_and_officers_for_clubowner/', views.members_and_officers_for_clubowner, name='members_and_officers_for_clubowner'),
     path('applicants/', views.applicant_list, name='applicant_list'),
     path('profile/', views.profile, name='profile'),
+    path('approve/<int:user_id>', views.approve, name='approve'),
+    path('unapprove/<int:user_id>', views.approve, name='unapprove'),
     path('password/', views.password, name='password'),
     path('waiting_list/', views.waiting_list, name='waiting_list')
 ]
