@@ -19,7 +19,7 @@
             <td>{{ user.full_name }}</td>
             <td><a href="{% url 'show_user' user.id %}">{{ user.email }}</a></td>
             <td>{{ user.get_user_type_display }}</td>
-            <td><button type="button">Approve</button><button type="button">Unapprove</button></td>
+            <td><button type="button" onclick="location.href='{% url 'approve' user.id %}'">Approve</button><button type="button" onclick="location.href='{% url 'unapprove' user.id %}'">Unapprove</button></td>
           </tr>
         {% endfor %}
       </table>
