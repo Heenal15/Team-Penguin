@@ -101,6 +101,26 @@ def unapprove(request, user_id):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
 
+def promote(request, user_id):
+    current_user = User.objects.get(id = user_id)
+    if current_user.user_type == 1:
+        current_user.user_type = 2
+        current_user.save()
+    members = User.objects.filter(user_type = 1)
+    officers =  User.objects.filter(user_type = 2)
+    members_and_officers = members | officers
+    return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
+
+def demote(request, user_id):
+    current_user = User.objects.get(id = user_id)
+    if current_user.user_type == 2:
+        current_user.user_type = 1
+        current_user.save()
+    members = User.objects.filter(user_type = 1)
+    officers =  User.objects.filter(user_type = 2)
+    members_and_officers = members | officers
+    return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
+
 
 @login_required
 def waiting_list(request):
