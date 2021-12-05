@@ -65,24 +65,24 @@ def is_club_owner(user):
 def is_club_officer_or_club_owner(user):
     return (user.user_type == 2 or user.user_type == 3)
 
-@user_passes_test(is_club_owner)
+@user_passes_test(is_club_owner, login_url='home', redirect_field_name=None) #redirects unauthorised users home
 def members_and_officers_for_clubowner(request):
     members = User.objects.filter(user_type = 1)
     officers =  User.objects.filter(user_type = 2)
     members_and_officers = members | officers
     return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
 
-@user_passes_test(is_club_officer)
+@user_passes_test(is_club_officer, login_url='home', redirect_field_name=None)
 def member_list_for_officer(request):
     members = User.objects.filter(user_type = 1)
     return render(request, 'member_list_for_officer.html', {'members': members})
 
-@user_passes_test(is_member)
+@user_passes_test(is_member, login_url='home', redirect_field_name=None)
 def member_list(request):
     members = User.objects.filter(user_type = 1)
     return render(request, 'member_list.html', {'members': members})
 
-@user_passes_test(is_club_officer or is_club_owner)
+@user_passes_test(is_club_officer or is_club_owner, login_url='home', redirect_field_name=None)
 def applicant_list(request):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
