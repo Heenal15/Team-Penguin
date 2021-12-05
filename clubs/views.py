@@ -22,7 +22,7 @@ def log_in(request):
                 if user.user_type == 0:
                     return redirect('waiting_list')
                 elif user.user_type == 1:
-                    return redirect('members')
+                    return redirect('member_list')
                 elif user.user_type == 2:
                     return redirect('member_list_for_officer')
                 elif user.user_type == 3:
