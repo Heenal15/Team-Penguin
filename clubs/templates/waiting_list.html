@@ -3,10 +3,14 @@
 <html lang="en">
 
 {% block body %}
-
 <head>
   <meta name="viewport" content="wide=device-width, initial_scale=1.0">
-  <link rel="stylesheet" type="text/css" href="../../../static/homepage.css"/>
+  <link rel="stylesheet" type="text/css" href="../../../static/homepage.css" />
+  <style type="text/css">
+    a:link {color: white;}
+    a:hover {color: gray;}
+    a:active {color: gray;}
+  </style>
   <title> homepage </title>
 </head>
 
@@ -15,11 +19,14 @@
     <nav id="navbar">
       <img src="../../static/images/logo3.png" class="logo">
       <ul id="menu">
+        <li><a href='{% url 'log_out' %}' style="text-decoration: none">LOG OUT</a></li>
+        <li></li>
+        <li></li>
         <li>COMPETITION</li>
         <li>CLUBS</li>
         <li>APPLICATION</li>
-        <li>MY CLUB</li>
-        <li>MY PROFILE</li>
+        <li><a href='{% url 'memberlist_Clubowner' %}' style="text-decoration: none">MY CLUB</a></li>
+        <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
       </ul>
     </nav>
   </div>
