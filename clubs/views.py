@@ -41,6 +41,9 @@ def log_out(request):
 def home(request):
     return render(request, 'home.html')
 
+def password(request):
+    return render(request, 'password.html')
+
 def register(request):
     if request.method == 'POST':
         form = ApplicationForm(request.POST)
