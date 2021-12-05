@@ -29,25 +29,26 @@ class MemberListTest(TestCase):
     def test_get_member_list_as_authorised_user(self):
         request = self.factory.get('/')
         request.user = self.user
-        self._create_test_members(15)
+        self._create_test_members(5)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'user_list.html')
-        self.assertEqual(len(response.context['users']), 15)
-        for user_id in range(15):
-            self.assertContains(response, f'@user{user_id}')
+        self.assertTemplateUsed(response, 'member_list.html')
+        self.assertEqual(len(response.context['users']), 5)
+        for user_id in range(5):
+            self.assertContains(response, f'Email{user_id}')
             self.assertContains(response, f'First{user_id}')
             self.assertContains(response, f'Last{user_id}')
-            user = User.objects.get(username=f'@user{user_id}')
+            user = User.objects.get(username=f'Email{user_id}')
             user_url = reverse('show_user', kwargs={'user_id': user.id})
             self.assertContains(response, user_url)
 
-    def _create_test_members(self, user_count=10):
+    def _create_test_members(self, user_count=5):
         for user_id in range(user_count):
-            User.objects.create_user(f'@user{user_id}',
-                email=f'user{user_id}@test.org',
+            User.objects.create_user(f'Email{user_id}',
                 password='Password123',
                 first_name=f'First{user_id}',
                 last_name=f'Last{user_id}',
                 bio=f'Bio {user_id}',
+                experience=f'Experience {user_id}',
+                statement=f'Statement {user_id}',
             )

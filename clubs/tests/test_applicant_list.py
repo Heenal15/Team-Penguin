@@ -29,12 +29,12 @@ class ApplicantListTest(TestCase):
     def test_get_applicant_list_as_authorised_user(self):
         request = self.factory.get('/')
         request.user = self.user
-        self._create_test_applicants(15)
+        self._create_test_applicants(5)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'applicant_list.html')
-        self.assertEqual(len(response.context['applicants']), 15)
-        for user_id in range(15):
+        self.assertEqual(len(response.context['applicants']), 5)
+        for user_id in range(5):
             self.assertContains(response, f'Email{user_id}')
             self.assertContains(response, f'First{user_id}')
             self.assertContains(response, f'Last{user_id}')
@@ -42,7 +42,7 @@ class ApplicantListTest(TestCase):
             user_url = reverse('show_user', kwargs={'user_id': user.id})
             self.assertContains(response, user_url)
 
-    def _create_test_applicants(self, user_count=10):
+    def _create_test_applicants(self, user_count=5):
         for user_id in range(user_count):
             User.objects.create_user(f'Email{user_id}@test.org',
                 password='Password123',
