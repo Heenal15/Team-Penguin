@@ -62,9 +62,6 @@ def is_club_officer(user):
 def is_club_owner(user):
     return (user.user_type == 3)
 
-def is_club_officer_or_club_owner(user):
-    return (user.user_type == 2 or user.user_type == 3)
-
 @user_passes_test(is_club_owner, login_url='home', redirect_field_name=None) #redirects unauthorised users home
 def members_and_officers_for_clubowner(request):
     members = User.objects.filter(user_type = 1)
