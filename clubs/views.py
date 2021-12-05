@@ -65,7 +65,7 @@ def is_club_owner(user):
 def unauthorised_access(request):
     return render(request, 'unauthorised_access.html')
 
-@user_passes_test(is_club_owner, login_url='unauthorised_access', redirect_field_name=None) #redirects unauthorised users home
+@user_passes_test(is_club_owner, login_url='unauthorised_access', redirect_field_name=None) #redirects unauthorised users
 def members_and_officers_for_clubowner(request):
     members = User.objects.filter(user_type = 1)
     officers =  User.objects.filter(user_type = 2)
