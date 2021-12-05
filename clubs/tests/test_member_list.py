@@ -1,16 +1,35 @@
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
 from clubs.models import User
+from django.contrib.auth.models import AnonymousUser
 
-class UserListTest(TestCase):
+class MemberListTest(TestCase):
     def setUp(self):
-        self.url = reverse('user_list')
+        self.url = reverse('member_list')
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(
+            first_name = 'John',
+            last_name = 'Doe',
+            email = 'johndoe@example.org',
+            bio = 'Hello, I am John Doe',
+            password = 'Password123',
+            is_active = True,
+            user_type = 1
+        )
 
-    def test_user_list_url(self):
-        self.assertEqual(self.url,'/users/')
+    def test_member_list_url(self):
+        self.assertEqual(self.url,'/members/')
 
-    def test_get_user_list(self):
-        self._create_test_users(15)
+    def test_get_member_list_as_anonymous_user(self):
+        request = self.factory.get('/')
+        request.user = AnonymousUser()
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 302)
+
+    def test_get_member_list_as_authorised_user(self):
+        request = self.factory.get('/')
+        request.user = self.user
+        self._create_test_members(15)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'user_list.html')
@@ -23,7 +42,7 @@ class UserListTest(TestCase):
             user_url = reverse('show_user', kwargs={'user_id': user.id})
             self.assertContains(response, user_url)
 
-    def _create_test_users(self, user_count=10):
+    def _create_test_members(self, user_count=10):
         for user_id in range(user_count):
             User.objects.create_user(f'@user{user_id}',
                 email=f'user{user_id}@test.org',
