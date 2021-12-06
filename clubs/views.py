@@ -65,6 +65,9 @@ def is_club_officer(user):
 def is_club_owner(user):
     return (user.is_authenticated and user.user_type == 3)
 
+def is_club_owner_or_officer(user):
+    return (user.is_authenticated and user.user_type == 2 or user.user_type == 3)
+
 def unauthorised_access(request):
     return render(request, 'unauthorised_access.html')
 
@@ -85,7 +88,7 @@ def member_list(request):
     members = User.objects.filter(user_type = 1)
     return render(request, 'member_list.html', {'members': members})
 
-@user_passes_test(is_club_officer or is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
+@user_passes_test(is_club_owner_or_officer, login_url='unauthorised_access', redirect_field_name=None)
 def applicant_list(request):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
