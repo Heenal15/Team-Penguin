@@ -22,11 +22,11 @@ def log_in(request):
                 if user.user_type == 0:
                     return redirect('waiting_list')
                 elif user.user_type == 1:
-                    return redirect('member_list')
+                    return redirect('member_home')
                 elif user.user_type == 2:
-                    return redirect('member_list_for_officer')
+                    return redirect('officer_home')
                 elif user.user_type == 3:
-                    return redirect('members_and_officers_for_clubowner')
+                    return redirect('owner_home')
                 ## else:
                 ##    return redirect('home')
 
@@ -160,6 +160,26 @@ def waiting_list(request):
         return render(request, 'waiting_list.html')
     return render(request, 'home.html')
 
+@login_required
+def member_home(request):
+    current_user = request.user
+    if current_user.user_type == 1:
+        return render(request, 'member_home.html')
+    return render(request, 'home.html')
+
+@login_required
+def officer_home(request):
+    current_user = request.user
+    if current_user.user_type == 2:
+        return render(request, 'officer_home.html')
+    return render(request, 'home.html')
+
+@login_required
+def owner_home(request):
+    current_user = request.user
+    if current_user.user_type == 3:
+        return render(request, 'owner_home.html')
+    return render(request, 'home.html')
 
 @login_required
 def profile(request):
