@@ -102,7 +102,7 @@ def show_user(request, user_id):
         user = User.objects.get(id = user_id)
     except ObjectDoesNotExist:
 
-        return redirect('full_user_list','memberlist_Clubowner')
+        #return redirect('full_user_list','memberlist_Clubowner')
 
         return redirect('home')
 
