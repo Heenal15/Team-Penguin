@@ -21,8 +21,14 @@ def log_in(request):
                 login(request, user)
                 if user.user_type == 0:
                     return redirect('waiting_list')
-                else:
-                    return redirect('home')
+                elif user.user_type == 1:
+                    return redirect('members')
+                elif user.user_type == 2:
+                    return redirect('member_list_for_officer')
+                elif user.user_type == 3:
+                    return redirect('members_and_officers_for_clubowner')
+                ## else:
+                ##    return redirect('home')
 
         messages.add_message(request, messages.ERROR, "The credentials provided were invalid!")
     form = LogInForm()
@@ -46,13 +52,23 @@ def register(request):
         form = ApplicationForm()
     return render(request,'register.html', {'form':form})
 
-def full_user_list(request):
-    users = User.objects.all()
-    return render(request, 'full_user_list.html', {'users': users})
+def members_and_officers_for_clubowner(request):
+    members = User.objects.filter(user_type = 1)
+    officers =  User.objects.filter(user_type = 2)
+    members_and_officers = members | officers
+    return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
+
+def member_list_for_officer(request):
+    members = User.objects.filter(user_type = 1)
+    return render(request, 'member_list_for_officer.html', {'members': members})
 
 def member_list(request):
-    users = User.objects.all()
-    return render(request, 'member_list.html', {'users': users})
+    members = User.objects.filter(user_type = 1)
+    return render(request, 'member_list.html', {'members': members})
+
+def applicant_list(request):
+    applicants = User.objects.filter(user_type = 0)
+    return render(request, 'applicant_list.html', {'applicants': applicants})
 
 def memberlist_Clubowner(request):
     users = User.objects.all()
@@ -62,7 +78,11 @@ def show_user(request, user_id):
     try:
         user = User.objects.get(id = user_id)
     except ObjectDoesNotExist:
+<<<<<<< HEAD
         return redirect('full_user_list','memberlist_Clubowner')
+=======
+        return redirect('home')
+>>>>>>> main
     else:
         return render(request, 'show_user.html', {'user': user})
 
