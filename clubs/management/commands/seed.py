@@ -48,3 +48,20 @@ class Command(BaseCommand):
     def _email(self, first_name, last_name):
         email = f'{first_name}.{last_name}@example.org'
         return email
+<<<<<<< HEAD
+
+    def _username(self, first_name, last_name):
+        username = f'@{first_name}{last_name}'
+        return username
+
+    # Method to set experience level.
+    def _experience(self):
+        member = 'Member'
+        officer = 'Officer'
+        random_number = random.randint(1, 4)
+        if random_number != 2:
+            return member
+        else:
+            return officer
+=======
+>>>>>>> main

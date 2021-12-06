@@ -90,11 +90,19 @@ def applicant_list(request):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
 
+def memberlist_Clubowner(request):
+    users = User.objects.all()
+    return render(request, 'memberlist_Clubowner.html', {'users': users})
+
 def show_user(request, user_id):
     try:
         user = User.objects.get(id = user_id)
     except ObjectDoesNotExist:
+<<<<<<< HEAD
+        return redirect('full_user_list','memberlist_Clubowner')
+=======
         return redirect('home')
+>>>>>>> main
     else:
         return render(request, 'show_user.html', {'user': user})
 

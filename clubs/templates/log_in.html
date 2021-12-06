@@ -1,17 +1,40 @@
-{% extends 'base_content.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% block body %}
+
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="wide=device-width, initial_scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../../../static/custom.css" />
   <title> Log In </title>
 </head>
-{% block body %}
-    <h1> Log In </h1>
-    {% for message in messages %}
-      <p><b>{{ message }}</b></p>
-    {% endfor %}
 
-    <form action= "{% url 'log_in' %}" method="post">
-      {% csrf_token %}
+<body>
+  <div id="cover-image">
+    <div class="container vh-100">
+      <div class="row h-100">
+        <div class="col-12 my-auto">
+          <div class="card cover-card offset-sm-2 offset-md-4 offset-lg-7">
+            <h1 class="cover-heading">CHESS CLUB</h1>
+            <h1 class="cover-text"> Please Sign In Your Account </h1>
+            <form action="{% url 'log_in' %}" method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <div class="Box">
+                <input type="submit" value="Sign In">
+              </div>
 
-      {{ form.as_p }}
+              &nbsp;
+              <p class="forget">Don't have account?<a href='{% url 'register' %}'>
+                  Sign Up
+                </a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 
-    <input type="submit" value="Log In">
 {% endblock %}

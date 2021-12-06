@@ -35,6 +35,7 @@ urlpatterns = [
     path('promote/<int:user_id>', views.promote, name='promote'),
     path('demote/<int:user_id>', views.demote, name='demote'),
     path('password/', views.password, name='password'),
+    path('promotion_demotion/',views.memberlist_Clubowner, name='memberlist_Clubowner'),
     path('waiting_list/', views.waiting_list, name='waiting_list'),
     path('unauthorised_access/', views.unauthorised_access, name='unauthorised_access')
 ]

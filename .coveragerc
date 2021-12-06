@@ -1,3 +1,0 @@
-[run]
-branch = True
-omit = *__init__.py,manage.py,*migrations*,*settings.py,*tests*
