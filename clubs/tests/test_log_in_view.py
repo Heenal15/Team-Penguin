@@ -50,13 +50,13 @@ class LogInViewTestCase(TestCase, LogInTester):
         form_input = { 'email': 'johndoe@example.org', 'password': 'Password123'}
         response = self.client.post(self.url, form_input, follow = True)
         self.assertTrue(self._is_logged_in())
-        response_url = reverse('feed')
+        response_url = reverse('waiting_list')
         self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
-        self.assertTemplateUsed(response, 'feed.html')
+        self.assertTemplateUsed(response, 'waiting_list.html')
         messages_list = list(response.context['messages'])
         self.assertEqual(len(messages_list), 0)
 
-    def test_valid_log_in_by_inavctive_user(self):
+    def test_valid_log_in_by_inactive_user(self):
         self.user.is_active = False
         self.user.save()
         form_input = { 'email': 'johndoe@example.org', 'password': 'Password123'}

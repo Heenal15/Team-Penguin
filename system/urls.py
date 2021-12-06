@@ -30,7 +30,12 @@ urlpatterns = [
     path('members_and_officers_for_clubowner/', views.members_and_officers_for_clubowner, name='members_and_officers_for_clubowner'),
     path('applicants/', views.applicant_list, name='applicant_list'),
     path('profile/', views.profile, name='profile'),
+    path('approve/<int:user_id>', views.approve, name='approve'),
+    path('unapprove/<int:user_id>', views.unapprove, name='unapprove'),
+    path('promote/<int:user_id>', views.promote, name='promote'),
+    path('demote/<int:user_id>', views.demote, name='demote'),
     path('password/', views.password, name='password'),
     path('promotion_demotion/',views.memberlist_Clubowner, name='memberlist_Clubowner'),
     path('waiting_list/', views.waiting_list, name='waiting_list'),
+    path('unauthorised_access/', views.unauthorised_access, name='unauthorised_access')
 ]

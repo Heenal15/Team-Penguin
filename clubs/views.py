@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from .forms import ApplicationForm, LogInForm, UserForm, PasswordForm
 from .models import User
 from django.http import HttpResponseForbidden
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import check_password
 
@@ -22,7 +22,7 @@ def log_in(request):
                 if user.user_type == 0:
                     return redirect('waiting_list')
                 elif user.user_type == 1:
-                    return redirect('members')
+                    return redirect('member_list')
                 elif user.user_type == 2:
                     return redirect('member_list_for_officer')
                 elif user.user_type == 3:
@@ -41,6 +41,9 @@ def log_out(request):
 def home(request):
     return render(request, 'home.html')
 
+def password(request):
+    return render(request, 'password.html')
+
 def register(request):
     if request.method == 'POST':
         form = ApplicationForm(request.POST)
@@ -52,20 +55,37 @@ def register(request):
         form = ApplicationForm()
     return render(request,'register.html', {'form':form})
 
+#used to check if current user has privaleges to view page
+def is_member(user):
+    return (user.is_authenticated and user.user_type == 1)
+
+def is_club_officer(user):
+    return (user.is_authenticated and user.user_type == 2)
+
+def is_club_owner(user):
+    return (user.is_authenticated and user.user_type == 3)
+
+def unauthorised_access(request):
+    return render(request, 'unauthorised_access.html')
+
+@user_passes_test(is_club_owner, login_url='unauthorised_access', redirect_field_name=None) #redirects unauthorised users
 def members_and_officers_for_clubowner(request):
     members = User.objects.filter(user_type = 1)
     officers =  User.objects.filter(user_type = 2)
     members_and_officers = members | officers
     return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
 
+@user_passes_test(is_club_officer, login_url='unauthorised_access', redirect_field_name=None)
 def member_list_for_officer(request):
     members = User.objects.filter(user_type = 1)
     return render(request, 'member_list_for_officer.html', {'members': members})
 
+@user_passes_test(is_member, login_url='unauthorised_access', redirect_field_name=None)
 def member_list(request):
     members = User.objects.filter(user_type = 1)
     return render(request, 'member_list.html', {'members': members})
 
+@user_passes_test(is_club_officer or is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
 def applicant_list(request):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
@@ -93,6 +113,41 @@ def show_member(request, user_id):
         return redirect('member_list')
     else:
         return render(request, 'show_member.html', {'user': user})
+
+def approve(request, user_id):
+    current_user = User.objects.get(id = user_id)
+    if current_user.user_type == 0:
+        current_user.user_type = 1
+        current_user.save()
+    applicants = User.objects.filter(user_type = 0)
+    return render(request, 'applicant_list.html', {'applicants': applicants})
+
+def unapprove(request, user_id):
+    current_user = User.objects.get(id = user_id)
+    if current_user.user_type == 0:
+        current_user.delete()
+    applicants = User.objects.filter(user_type = 0)
+    return render(request, 'applicant_list.html', {'applicants': applicants})
+
+def promote(request, user_id):
+    current_user = User.objects.get(id = user_id)
+    if current_user.user_type == 1:
+        current_user.user_type = 2
+        current_user.save()
+    members = User.objects.filter(user_type = 1)
+    officers =  User.objects.filter(user_type = 2)
+    members_and_officers = members | officers
+    return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
+
+def demote(request, user_id):
+    current_user = User.objects.get(id = user_id)
+    if current_user.user_type == 2:
+        current_user.user_type = 1
+        current_user.save()
+    members = User.objects.filter(user_type = 1)
+    officers =  User.objects.filter(user_type = 2)
+    members_and_officers = members | officers
+    return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
 
 
 @login_required
