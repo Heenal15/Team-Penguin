@@ -45,11 +45,6 @@ class Command(BaseCommand):
             user_type=user_type,
         )
 
-    def _email(self, first_name, last_name):
-        email = f'{first_name}.{last_name}@example.org'
-        return email
-<<<<<<< HEAD
-
     def _username(self, first_name, last_name):
         username = f'@{first_name}{last_name}'
         return username
@@ -63,5 +58,3 @@ class Command(BaseCommand):
             return member
         else:
             return officer
-=======
->>>>>>> main

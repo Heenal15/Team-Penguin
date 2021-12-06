@@ -8,8 +8,7 @@
   <link rel="stylesheet" type="text/css" href="../../../static/homepage.css" />
   <style type="text/css">
     a:link {color: white;}
-    a:hover {color: gray;}
-    a:active {color: gray;}
+    a:hover {color: black;}
   </style>
   <title> homepage </title>
 </head>
@@ -17,14 +16,14 @@
 <body>
   <div class="header">
     <nav id="navbar">
-      <img src="../../static/images/logo3.png" class="logo">
+      <img src="../../static/images/logo.png" class="logo">
       <ul id="menu">
         <li><a href='{% url 'log_out' %}' style="text-decoration: none">LOG OUT</a></li>
         <li></li>
         <li></li>
         <li>COMPETITION</li>
         <li>CLUBS</li>
-        <li>APPLICATION</li>
+        <li><a href='{% url 'applicant_list' %}'style="text-decoration: none">APPLICATION</a></li>
         <li><a href='{% url 'memberlist_Clubowner' %}' style="text-decoration: none">MY CLUB</a></li>
         <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
       </ul>

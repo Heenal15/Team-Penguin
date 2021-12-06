@@ -3,36 +3,29 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-<<<<<<< HEAD:clubs/templates/memberlist_Clubowner.html
       <h1>Chess Club Members(For Owner):</h1>
-=======
       <h1>Chess Club Members(For Officer):</h1>
->>>>>>> main:clubs/templates/member_list_for_officer.html
       <br> <br>
       <table class="table">
         <th scope="col"> </th>
         <th scope="col">Full Name:</th>
         <th scope="col">Email:</th>
-<<<<<<< HEAD:clubs/templates/memberlist_Clubowner.html
         <th scope="col">Position:</th>
         <th scope="col">Promotion/Demotion</th>
         {% for user in users %}
-=======
+
         <th scope="col">Rank:</th>
         {% for user in members %}
->>>>>>> main:clubs/templates/member_list_for_officer.html
+
           <tr>
             <td>
               <img src="{{ user.mini_gravatar }}" alt="Gravatar of {{ user.email }}" class="rounded-circle" >
             </td>
             <td>{{ user.full_name }}</td>
             <td><a href="{% url 'show_user' user.id %}">{{ user.email }}</a></td>
-<<<<<<< HEAD:clubs/templates/memberlist_Clubowner.html
             <td>{{ user.experience }}</td>
             <td> <button type="button">Promote</button><button type="button">Demote</button></td>
-=======
             <td>{{ user.get_user_type_display }}</td>
->>>>>>> main:clubs/templates/member_list_for_officer.html
           </tr>
         {% endfor %}
       </table>

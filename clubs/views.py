@@ -36,7 +36,7 @@ def log_in(request):
 
 def log_out(request):
     logout(request)
-    return redirect('home')
+    return redirect('log_in.html')
 
 def home(request):
     return render(request, 'home.html')
@@ -98,11 +98,7 @@ def show_user(request, user_id):
     try:
         user = User.objects.get(id = user_id)
     except ObjectDoesNotExist:
-<<<<<<< HEAD
-        return redirect('full_user_list','memberlist_Clubowner')
-=======
-        return redirect('home')
->>>>>>> main
+        return redirect('full_user_list.html')
     else:
         return render(request, 'show_user.html', {'user': user})
 
