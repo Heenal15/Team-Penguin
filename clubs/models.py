@@ -16,7 +16,7 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.is_superuser = False
         user.is_staff = False
-        user.user_type=0
+        #user.user_type=0   #overrides seeder and makes all users applicants
         user.save(using=self._db) #giving error in tests
         return user
 

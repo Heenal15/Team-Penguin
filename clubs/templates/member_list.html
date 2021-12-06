@@ -4,6 +4,12 @@
   <div class="row">
     <div class="col-12">
       <h1>Chess Club Members(For Member):</h1>
+      <form action="{% url 'log_out' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" value="log_out">
+          Logout
+        </button>
+      </form>
       <br> <br>
       <table class="table">
         <th scope="col"> </th>
@@ -22,13 +28,5 @@
   </div>
 </div>
 </div>
-
-
-<form action="{% url 'log_out' %}" method="post">
-  {% csrf_token %}
-  <button type="submit" value="log_out">
-    Logout
-  </button>
-</form>
 
 {% endblock %}

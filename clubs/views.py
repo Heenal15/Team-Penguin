@@ -22,11 +22,11 @@ def log_in(request):
                 if user.user_type == 0:
                     return redirect('waiting_list')
                 elif user.user_type == 1:
-                    return redirect('member_list')
+                    return redirect('member_home')
                 elif user.user_type == 2:
-                    return redirect('member_list_for_officer')
+                    return redirect('officer_home')
                 elif user.user_type == 3:
-                    return redirect('members_and_officers_for_clubowner')
+                    return redirect('owner_home')
                 ## else:
                 ##    return redirect('home')
 
@@ -65,6 +65,9 @@ def is_club_officer(user):
 def is_club_owner(user):
     return (user.is_authenticated and user.user_type == 3)
 
+def is_club_owner_or_officer(user):
+    return (user.is_authenticated and user.user_type == 2 or user.user_type == 3)
+
 def unauthorised_access(request):
     return render(request, 'unauthorised_access.html')
 
@@ -85,7 +88,7 @@ def member_list(request):
     members = User.objects.filter(user_type = 1)
     return render(request, 'member_list.html', {'members': members})
 
-@user_passes_test(is_club_officer or is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
+@user_passes_test(is_club_owner_or_officer, login_url='unauthorised_access', redirect_field_name=None)
 def applicant_list(request):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
@@ -98,7 +101,11 @@ def show_user(request, user_id):
     try:
         user = User.objects.get(id = user_id)
     except ObjectDoesNotExist:
-        return redirect('full_user_list.html')
+
+        #return redirect('full_user_list','memberlist_Clubowner')
+
+        return redirect('home')
+
     else:
         return render(request, 'show_user.html', {'user': user})
 
@@ -153,6 +160,26 @@ def waiting_list(request):
         return render(request, 'waiting_list.html')
     return render(request, 'home.html')
 
+@login_required
+def member_home(request):
+    current_user = request.user
+    if current_user.user_type == 1:
+        return render(request, 'member_home.html')
+    return render(request, 'home.html')
+
+@login_required
+def officer_home(request):
+    current_user = request.user
+    if current_user.user_type == 2:
+        return render(request, 'officer_home.html')
+    return render(request, 'home.html')
+
+@login_required
+def owner_home(request):
+    current_user = request.user
+    if current_user.user_type == 3:
+        return render(request, 'owner_home.html')
+    return render(request, 'home.html')
 
 @login_required
 def profile(request):
