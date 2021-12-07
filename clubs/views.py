@@ -188,6 +188,26 @@ def owner_home(request):
     return render(request, 'home.html')
 
 @login_required
+def officers(request):
+    officers = User.objects.filter(user_type = 2)
+    return render(request, 'officers.html', {'officers': officers})
+
+@login_required
+def make_owner(request, user_id):
+    user = request.user
+    current_user = User.objects.get(id = user_id)
+    # Current club owner becomes an officer
+    user.user_type = 2
+    user.save()
+    if User.objects.filter(user_type = 3).exists():
+        officers = User.objects.filter(user_type = 2)
+    else:
+        current_user.user_type = 3
+        current_user.save()
+        officers = User.objects.filter(user_type = 3)
+    return render(request, 'officers.html', {'officers': officers})
+
+@login_required
 def profile(request):
     current_user = request.user
     if request.method == 'POST':
