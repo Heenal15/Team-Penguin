@@ -7,7 +7,7 @@ class LogInForm(forms.Form):
     email = forms.EmailField(label='Email')
     password = forms.CharField(label='Password', widget=forms.PasswordInput())
 
-class ApplicationForm(forms.ModelForm):
+class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'bio', 'experience', 'statement']

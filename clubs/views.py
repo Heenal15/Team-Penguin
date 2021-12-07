@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from .forms import ApplicationForm, LogInForm, UserForm, PasswordForm
+from .forms import RegisterForm, LogInForm, UserForm, PasswordForm
 from .models import User
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -46,13 +46,13 @@ def password(request):
 
 def register(request):
     if request.method == 'POST':
-        form = ApplicationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('log_in') #redirects to log_in after a valid form is completed
     else:
-        form = ApplicationForm()
+        form = RegisterForm()
     return render(request,'register.html', {'form':form})
 
 #used to check if current user has privaleges to view page

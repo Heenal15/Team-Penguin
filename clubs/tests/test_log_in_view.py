@@ -7,21 +7,16 @@ from clubs.models import User
 from .helpers import LogInTester
 
 class LogInViewTestCase(TestCase, LogInTester):
-    """ Tests of the log in view. """
+    """Tests of the log in view."""
+
+    fixtures = ['clubs/tests/fixtures/default_user.json']
 
     def setUp(self):
         self.url = reverse('log_in')
-        self.user = User.objects.create_user(
-            first_name = 'John',
-            last_name = 'Doe',
-            email = 'johndoe@example.org',
-            bio = 'Hello, I am John Doe',
-            password = 'Password123',
-            is_active = True,
-        )
+        self.user = User.objects.get(email='johndoe@example.org')
 
     def test_login_in_url(self):
-        self.assertEqual(self.url, '/log_in/')
+        self.assertEqual(self.url,'/log_in/')
 
     def test_get_log_in(self):
         response = self.client.get(self.url)
