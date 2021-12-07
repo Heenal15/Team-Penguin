@@ -63,9 +63,9 @@ class ProfileViewTest(TestCase):
         self.assertEqual(self.user.experience, 'Beginner')
         self.assertEqual(self.user.statement, 'Hi I like to play chess at beginner level')
 
-    def test_unsuccessful_profile_update_due_to_duplicate_username(self):
+    def test_unsuccessful_profile_update_due_to_duplicate_email(self):
         self.client.login(email=self.user.email, password='Password123')
-        self.form_input['Email'] = 'janedoe@example.org'
+        self.form_input['email'] = 'janedoe@example.org'
         before_count = User.objects.count()
         response = self.client.post(self.url, self.form_input)
         after_count = User.objects.count()

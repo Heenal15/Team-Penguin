@@ -36,7 +36,7 @@ def log_in(request):
 
 def log_out(request):
     logout(request)
-    return redirect('log_in.html')
+    return redirect('log_in')
 
 def home(request):
     return render(request, 'home.html')
@@ -97,6 +97,7 @@ def memberlist_Clubowner(request):
     users = User.objects.all()
     return render(request, 'memberlist_Clubowner.html', {'users': users})
 
+@login_required
 def show_user(request, user_id):
     try:
         user = User.objects.get(id = user_id)
@@ -109,6 +110,7 @@ def show_user(request, user_id):
     else:
         return render(request, 'show_user.html', {'user': user})
 
+@login_required
 def show_member(request, user_id):
     try:
         user = User.objects.get(id = user_id)
@@ -117,6 +119,7 @@ def show_member(request, user_id):
     else:
         return render(request, 'show_member.html', {'user': user})
 
+@login_required
 def approve(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 0:
@@ -125,6 +128,7 @@ def approve(request, user_id):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
 
+@login_required
 def unapprove(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 0:
@@ -132,6 +136,7 @@ def unapprove(request, user_id):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
 
+@login_required
 def promote(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 1:
@@ -142,6 +147,7 @@ def promote(request, user_id):
     members_and_officers = members | officers
     return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
 
+@login_required
 def demote(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 2:
