@@ -4,7 +4,6 @@ from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from libgravatar import Gravatar
-from django import forms
 
 """Overriding model manager user model with email as username"""
 class UserManager(BaseUserManager):
