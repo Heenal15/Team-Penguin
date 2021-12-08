@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from .forms import ApplicationForm, LogInForm, UserForm, PasswordForm
+from .forms import RegisterForm, LogInForm, UserForm, PasswordForm
 from .models import User
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -22,11 +22,11 @@ def log_in(request):
                 if user.user_type == 0:
                     return redirect('waiting_list')
                 elif user.user_type == 1:
-                    return redirect('member_list')
+                    return redirect('member_home')
                 elif user.user_type == 2:
-                    return redirect('member_list_for_officer')
+                    return redirect('officer_home')
                 elif user.user_type == 3:
-                    return redirect('members_and_officers_for_clubowner')
+                    return redirect('owner_home')
                 ## else:
                 ##    return redirect('home')
 
@@ -36,7 +36,7 @@ def log_in(request):
 
 def log_out(request):
     logout(request)
-    return redirect('home')
+    return redirect('log_in')
 
 def home(request):
     return render(request, 'home.html')
@@ -46,13 +46,13 @@ def password(request):
 
 def register(request):
     if request.method == 'POST':
-        form = ApplicationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('log_in') #redirects to log_in after a valid form is completed
     else:
-        form = ApplicationForm()
+        form = RegisterForm()
     return render(request,'register.html', {'form':form})
 
 #used to check if current user has privaleges to view page
@@ -64,6 +64,9 @@ def is_club_officer(user):
 
 def is_club_owner(user):
     return (user.is_authenticated and user.user_type == 3)
+
+def is_club_owner_or_officer(user):
+    return (user.is_authenticated and user.user_type == 2 or user.user_type == 3)
 
 def unauthorised_access(request):
     return render(request, 'unauthorised_access.html')
@@ -85,19 +88,29 @@ def member_list(request):
     members = User.objects.filter(user_type = 1)
     return render(request, 'member_list.html', {'members': members})
 
-@user_passes_test(is_club_officer or is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
+@user_passes_test(is_club_owner_or_officer, login_url='unauthorised_access', redirect_field_name=None)
 def applicant_list(request):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
 
+def memberlist_Clubowner(request):
+    users = User.objects.all()
+    return render(request, 'memberlist_Clubowner.html', {'users': users})
+
+@login_required
 def show_user(request, user_id):
     try:
         user = User.objects.get(id = user_id)
     except ObjectDoesNotExist:
+
+        #return redirect('full_user_list','memberlist_Clubowner')
+
         return redirect('home')
+
     else:
         return render(request, 'show_user.html', {'user': user})
 
+@login_required
 def show_member(request, user_id):
     try:
         user = User.objects.get(id = user_id)
@@ -106,6 +119,7 @@ def show_member(request, user_id):
     else:
         return render(request, 'show_member.html', {'user': user})
 
+@login_required
 def approve(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 0:
@@ -114,6 +128,7 @@ def approve(request, user_id):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
 
+@login_required
 def unapprove(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 0:
@@ -121,6 +136,7 @@ def unapprove(request, user_id):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
 
+@login_required
 def promote(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 1:
@@ -131,6 +147,7 @@ def promote(request, user_id):
     members_and_officers = members | officers
     return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
 
+@login_required
 def demote(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 2:
@@ -149,6 +166,46 @@ def waiting_list(request):
         return render(request, 'waiting_list.html')
     return render(request, 'home.html')
 
+@login_required
+def member_home(request):
+    current_user = request.user
+    if current_user.user_type == 1:
+        return render(request, 'member_home.html')
+    return render(request, 'home.html')
+
+@login_required
+def officer_home(request):
+    current_user = request.user
+    if current_user.user_type == 2:
+        return render(request, 'officer_home.html')
+    return render(request, 'home.html')
+
+@login_required
+def owner_home(request):
+    current_user = request.user
+    if current_user.user_type == 3:
+        return render(request, 'owner_home.html')
+    return render(request, 'home.html')
+
+@login_required
+def officers(request):
+    officers = User.objects.filter(user_type = 2)
+    return render(request, 'officers.html', {'officers': officers})
+
+@login_required
+def make_owner(request, user_id):
+    user = request.user
+    current_user = User.objects.get(id = user_id)
+    # Current club owner becomes an officer
+    user.user_type = 2
+    user.save()
+    if User.objects.filter(user_type = 3).exists():
+        officers = User.objects.filter(user_type = 2)
+    else:
+        current_user.user_type = 3
+        current_user.save()
+        officers = User.objects.filter(user_type = 2)
+    return render(request, 'officers.html', {'officers': officers})
 
 @login_required
 def profile(request):
