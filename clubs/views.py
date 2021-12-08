@@ -204,7 +204,7 @@ def make_owner(request, user_id):
     else:
         current_user.user_type = 3
         current_user.save()
-        officers = User.objects.filter(user_type = 3)
+        officers = User.objects.filter(user_type = 2)
     return render(request, 'officers.html', {'officers': officers})
 
 @login_required
