@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base_content.html' %}
+
 <head>
   <title>Home</title>
 </head>
-<body>
+{% block body %}
 
   <h1>Chess Club Mangement System</h1>
 
-  <ul>
-    <li><a href='{% url 'log_in' %}'> Log In </a></li>
-    <li><a href='{% url 'register' %}'> Register </a></li>
-    <br><br>
-    <li><a href='{% url 'member_list' %}'> Member List for Members </a></li>
-    <li><a href='{% url 'full_user_list' %}'> User List for Officers </a></li>
-  </ul>
 
-</body>
-</html>
+<ul>
+  <li><a href='{% url 'log_in' %}'> Log In </a></li>
+  <li><a href='{% url 'register' %}'> Register </a></li>
+  <br></br>
+  <li><a href='{% url 'applicant_list' %}'> Applicants List (Club Owner and Officer can approve and unapprove applicants)</a></li>
+  <li><a href='{% url 'member_list' %}'> Member List for Members (Just for members to see other basic details of other members) </a></li>
+  <li><a href='{% url 'member_list_for_officer' %}'> Member List for Officers (Just for officers to see all details about members) </a></li>
+  <li><a href='{% url 'members_and_officers_for_clubowner' %}'> Officer and Member List for Club Owner (only for club owner, can view all details about members and offciers, can also promote and demote) </a></li>
+</ul>
+{% endblock %}

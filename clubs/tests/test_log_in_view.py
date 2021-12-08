@@ -7,21 +7,16 @@ from clubs.models import User
 from .helpers import LogInTester
 
 class LogInViewTestCase(TestCase, LogInTester):
-    """ Tests of the log in view. """
+    """Tests of the log in view."""
+
+    fixtures = ['clubs/tests/fixtures/default_user.json']
 
     def setUp(self):
         self.url = reverse('log_in')
-        self.user = User.objects.create_user('@johndoe',
-            first_name = 'John',
-            last_name = 'Doe',
-            email = 'johndoe@example.org',
-            bio = 'Hello, I am John Doe',
-            password = 'Password123',
-            is_active = True,
-        )
+        self.user = User.objects.get(email='johndoe@example.org')
 
     def test_login_in_url(self):
-        self.assertEqual(self.url, '/log_in/')
+        self.assertEqual(self.url,'/log_in/')
 
     def test_get_log_in(self):
         response = self.client.get(self.url)
@@ -34,7 +29,7 @@ class LogInViewTestCase(TestCase, LogInTester):
         self.assertEqual(len(messages_list), 0)
 
     def test_unsuccesful_log_in(self):
-        form_input = { 'username': '@janedoe', 'password': 'WrongPassword123'}
+        form_input = { 'email': '@johndoe', 'password': 'WrongPassword123'}
         response = self.client.post(self.url, form_input)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'log_in.html')
@@ -47,19 +42,19 @@ class LogInViewTestCase(TestCase, LogInTester):
         self.assertEqual(messages_list[0].level, messages.ERROR)
 
     def test_succesful_log_in(self):
-        form_input = { 'username': '@johndoe', 'password': 'Password123'}
+        form_input = { 'email': 'johndoe@example.org', 'password': 'Password123'}
         response = self.client.post(self.url, form_input, follow = True)
         self.assertTrue(self._is_logged_in())
-        response_url = reverse('feed')
+        response_url = reverse('waiting_list')
         self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
-        self.assertTemplateUsed(response, 'feed.html')
+        self.assertTemplateUsed(response, 'waiting_list.html')
         messages_list = list(response.context['messages'])
         self.assertEqual(len(messages_list), 0)
 
-    def test_valid_log_in_by_inavctive_user(self):
+    def test_valid_log_in_by_inactive_user(self):
         self.user.is_active = False
         self.user.save()
-        form_input = { 'username': '@johndoe', 'password': 'Password123'}
+        form_input = { 'email': 'johndoe@example.org', 'password': 'Password123'}
         response = self.client.post(self.url, form_input, follow = True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'log_in.html')

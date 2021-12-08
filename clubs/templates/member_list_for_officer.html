@@ -9,15 +9,15 @@
         <th scope="col"> </th>
         <th scope="col">Full Name:</th>
         <th scope="col">Email:</th>
-        <th scope="col">Position:</th>
-        {% for user in users %}
+        <th scope="col">Rank</th>
+        {% for user in members %}
           <tr>
             <td>
               <img src="{{ user.mini_gravatar }}" alt="Gravatar of {{ user.email }}" class="rounded-circle" >
             </td>
             <td>{{ user.full_name }}</td>
             <td><a href="{% url 'show_user' user.id %}">{{ user.email }}</a></td>
-            <td>{{ user.experience }}</td>
+            <td>{{ user.get_user_type_display }}</td>
           </tr>
         {% endfor %}
       </table>
