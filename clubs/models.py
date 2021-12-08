@@ -41,9 +41,9 @@ class User(AbstractUser):
     )
 
     USER_EXPERIENCE_LEVELS = (
-        ('beginner', 'Beginner'),
-        ('intermediate', 'Intermediate'),
-        ('advanced', 'Advanced'),
+        ('Beginner', 'Beginner'),
+        ('Intermediate', 'Intermediate'),
+        ('Advanced', 'Advanced'),
     )
 
     user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=0)
