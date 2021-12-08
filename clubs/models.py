@@ -4,6 +4,7 @@ from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from libgravatar import Gravatar
+from django import forms
 
 """Overriding model manager user model with email as username"""
 class UserManager(BaseUserManager):
@@ -40,13 +41,21 @@ class User(AbstractUser):
         (3, 'Club Owner'),
     )
 
+    USER_EXPERIENCE_LEVELS = (
+        ('beginner', 'Beginner'),
+        ('rookie', 'Rookie'),
+        ('intermediate', 'Intermediate'),
+        ('advanced', 'Advanced'),
+        ('expert', 'Expert'),
+    )
+
     user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=0)
 
     email = models.EmailField(unique=True, blank=False)
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)
     bio = models.CharField(max_length=520, blank=True)
-    experience = models.CharField(max_length=300, blank=True)
+    experience = models.CharField(max_length=20, choices=USER_EXPERIENCE_LEVELS, default='beginner')
     statement = models.CharField(max_length=1000, blank=True)
 
     #is_waiting_list = True

@@ -11,7 +11,7 @@ class ApplicationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'bio', 'experience', 'statement']
-        widgets = {'bio':forms.Textarea(), 'experience':forms.Textarea(), 'statement':forms.Textarea()}
+        widgets = {'bio':forms.Textarea(), 'statement':forms.Textarea()}
     new_password = forms.CharField(label='Password', widget=forms.PasswordInput(),
         validators=[
             RegexValidator(
