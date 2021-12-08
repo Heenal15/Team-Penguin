@@ -54,6 +54,7 @@ class User(AbstractUser):
     bio = models.CharField(max_length=520, blank=True)
     experience = models.CharField(max_length=20, choices=USER_EXPERIENCE_LEVELS, default='beginner')
     statement = models.CharField(max_length=1000, blank=True)
+    clubs = models.CharField(max_length=50, blank=False, default ='Kerbal')
 
     #is_waiting_list = True
 
