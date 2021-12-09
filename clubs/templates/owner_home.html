@@ -17,9 +17,9 @@
       <li><a>COMPETITION</a></li>
       <li><a>CLUBS</a></li>
       <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
-       <li><a href='{% url 'members_and_officers_for_clubowner' %}' style="text-decoration: none">MY CLUB</a></li>
-       <li><a href='{% url 'officers' %}' style="text-decoration: none">OWNERSHIP</a></li>
-       <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
+      <li><a href='{% url 'members_and_officers_for_clubowner' %}' style="text-decoration: none">MY CLUB</a></li>
+      <li><a href='{% url 'officers' %}' style="text-decoration: none">OWNERSHIP</a></li>
+      <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
     </ul>
     <a class="logout" href='{% url 'log_out' %}'><button>LOG OUT</button></a>
   </header>
@@ -27,9 +27,9 @@
   <section class="banner">
     <div class="content">
       <h2>Let's Play Together</h2>
-      <p>Create club to play with friends</p>
+      <p>Create club to play with other</p>
       <br><br>
-      <a href="#" class="btn">Creat Club</a>
+      <a href="#" class="btn">Create Club</a>
     </div>
   </section>
 
@@ -53,14 +53,14 @@
   </section>
 
 
-      <script type="text/javascript">
-        window.addEventListener("scroll", function() {
-          var header = document.querySelector("header");
-          header.classList.toggle("sticky", window.scrollY > 0);
-        })
-      </script>
+  <script type="text/javascript">
+    window.addEventListener("scroll", function() {
+      var header = document.querySelector("header");
+      header.classList.toggle("sticky", window.scrollY > 0);
+    })
+  </script>
 
-      </body>
+</body>
 
-      </html>
-      {% endblock %}
+</html>
+{% endblock %}
