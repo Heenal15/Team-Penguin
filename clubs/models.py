@@ -33,6 +33,7 @@ class User(AbstractUser):
     username = None
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
     USER_TYPE_CHOICES = (
         (0, 'Applicant'),
         (1, 'Member'),
@@ -47,6 +48,8 @@ class User(AbstractUser):
     )
 
     user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=0)
+    
+    #user_type = models.ManyToManyField(Role)
 
     email = models.EmailField(unique=True, blank=False)
     first_name = models.CharField(max_length=50, blank=False)
@@ -76,3 +79,17 @@ class Club(models.Model):
     club_name = models.CharField(max_length=50, blank=False)
     club_location = models.CharField(max_length=100, blank=False)
     club_description = models.CharField(max_length=520, blank=False)
+
+class Role(models.Model):
+
+    USER_TYPE_CHOICES = (
+        (0, 'Applicant'),
+        (1, 'Member'),
+        (2, 'Club Officer'),
+        (3, 'Club Owner'),
+    )
+
+    id = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, primary_key=True)
+
+    def __str__(self):
+        return self.get_id_display()

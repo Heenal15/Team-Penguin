@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User, Club
 from django.core.validators import RegexValidator
 
 
@@ -83,3 +83,11 @@ class PasswordForm(forms.Form):
         password_confirmation = self.cleaned_data.get('password_confirmation')
         if new_password != password_confirmation:
             self.add_error('password_confirmation', 'Confirmation does not match password.')
+
+class ClubForm(forms.ModelForm):
+    """Form for creation of a club"""
+
+    class Meta:
+        model = Club
+        fields = ['club_name', 'club_location', 'club_description']
+        widgets = {'club_location': forms.Textarea(), 'club_description': forms.Textarea()}

@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from .forms import RegisterForm, LogInForm, UserForm, PasswordForm
+from .forms import RegisterForm, LogInForm, UserForm, PasswordForm, ClubForm
 from .models import User
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -236,3 +236,8 @@ def password(request):
                 return redirect('home')
     form = PasswordForm()
     return render(request, 'password.html', {'form': form})
+
+@login_required
+def club_sign_up(request):
+    form = ClubForm(data=request.POST)
+    return render(request, 'club_sign_up.html', {'form': form})
