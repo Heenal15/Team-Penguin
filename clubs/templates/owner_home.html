@@ -16,9 +16,10 @@
     <ul>
       <li><a>COMPETITION</a></li>
       <li><a>CLUBS</a></li>
-      <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICATION</a></li>
-      <li><a>MY CLUB</a></li>
-      <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
+      <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
+       <li><a href='{% url 'members_and_officers_for_clubowner' %}' style="text-decoration: none">MY CLUB</a></li>
+       <li><a href='{% url 'officers' %}' style="text-decoration: none">OWNERSHIP</a></li>
+       <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
     </ul>
     <a class="logout" href='{% url 'log_out' %}'><button>LOG OUT</button></a>
   </header>

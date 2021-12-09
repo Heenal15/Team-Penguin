@@ -30,7 +30,7 @@ def log_in(request):
                 ## else:
                 ##    return redirect('home')
 
-        messages.add_message(request, messages.ERROR, "The credentials provided were invalid!")
+        messages.add_message(request, messages.ERROR, "Couldn't Find Your Account ")
     form = LogInForm()
     return render(request, 'log_in.html', {'form': form})
 
