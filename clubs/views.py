@@ -30,7 +30,7 @@ def log_in(request):
                 ## else:
                 ##    return redirect('home')
 
-        messages.add_message(request, messages.ERROR, "The credentials provided were invalid!")
+        messages.add_message(request, messages.ERROR, "Couldn't Find Your Account ")
     form = LogInForm()
     return render(request, 'log_in.html', {'form': form})
 
@@ -218,7 +218,7 @@ def profile(request):
         if form.is_valid():
             messages.add_message(request, messages.SUCCESS, "Profile updated!")
             form.save()
-            return redirect('home')
+            return redirect('profile')
     else:
         form = UserForm(instance=current_user)
     return render(request, 'profile.html', {'form': form})
