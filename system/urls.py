@@ -41,5 +41,6 @@ urlpatterns = [
     path('owner_home/', views.owner_home, name='owner_home'),
     path('officers/', views.officers, name='officers'),
     path('make_owner/<int:user_id>', views.make_owner, name='make_owner'),
-    path('unauthorised_access/', views.unauthorised_access, name='unauthorised_access')
+    path('unauthorised_access/', views.unauthorised_access, name='unauthorised_access'),
+    path('club_list/', views.club_list, name='club_list')
 ]

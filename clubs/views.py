@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .forms import RegisterForm, LogInForm, UserForm, PasswordForm
-from .models import User
+from .models import User, Club
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
@@ -206,6 +206,11 @@ def make_owner(request, user_id):
         current_user.save()
         officers = User.objects.filter(user_type = 2)
     return render(request, 'officers.html', {'officers': officers})
+
+
+def club_list(request):
+    clubs = Club.objects.all()
+    return render(request, 'club_list.html', {'clubs': clubs})
 
 @login_required
 def profile(request):
