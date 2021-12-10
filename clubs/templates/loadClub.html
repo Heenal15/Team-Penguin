@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% block body %}
+<head>
+  <meta name="viewport" content="wide=device-width, initial_scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../../../static/homepage.css" />
+  <style type="text/css">
+    a:link {color: white;}
+    a:hover {color: gray;}
+    a:active {color: gray;}
+  </style>
+  <title> homepage </title>
+</head>
+
+<body>
+  <div class="header">
+    <nav id="navbar">
+      <img src="../../static/images/logo3.png" class="logo">
+      <ul id="menu">
+        <li><a href='{% url 'log_out' %}' style="text-decoration: none">LOG OUT</a></li>
+        <li></li>
+        <li></li>
+        <li>COMPETITION</li>
+        <li>CLUBS</li>
+        <li>APPLICATION</li>
+        <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">Applicants</a></li>
+        <li><a href='{% url 'members_and_officers_for_clubowner' %}' style="text-decoration: none">Club Users</a></li>
+        <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
+        <li><a  <label for="clubs">Club:</label>
+
+          <select name="clubs" id="clubs">
+            <option
+            {%if user.club == 'Kerbal'%}
+             value="Kerbal">Kerbal
+           {% endif %}</option>
+            <option
+            {%if user.club == 'Apollo'%}
+             value="Apollo">Apollo
+           {% endif %}</option>
+            <option
+            {%if user.club == 'Mercury'%}
+             value="Mercury">Mercury
+           {% endif %}</option>
+            <option
+            {%if user.club == 'Soyuz'%}
+             value="Soyuz">Soyuz
+           {% endif %}
+          </option>
+          </select>
+<button type="button" onclick="location.href='{% url 'loadClub' %}'">Pick Club</button>
+</a></li>
+      </ul>
+    </nav>
+  </div>
+  <p
+  {%if user.club == 'FC2'%}
+class="text">FC2 HOME PAGE
+  <p
+  {%elif user.club == 'INS'%}
+class="text">INS HOME PAGE
+  <p
+  {%elif user.club == 'SEG'%}
+  class="text">SEG HOME PAGE
+  <p
+  {%elif user.club == 'PEP'%}
+  class="text">PEP HOME PAGE
+  {% endif %}
+  </p>
+
+
+  <p class="text">Basic Chess Club Management System:The Chess Club Management System is a web application that enables the officers of the club to manage membership of the club. People interested in joining the club can apply to join using a simple application form that asks for their name, email (ideally associated with a gravatar), a public bio, chess experience level, and a short personal statement. The form also requires the user to create a password. Applicants can log into the application with their email and password to see or edit their personal information. Applicants become members if membership is approved by an officer. Members can access access a list of all the other members, their names, public bio and gravatar, but no contact details, information about chess experience, or their personal statement. Officers have access to information about all members. Members can be promoted to officer and officers can be demoted to member by the club owner. There is one and only one club owner who can transfer ownership to another officer.</p>
+  <p class="text">Advanced Chess Club Management System: In this variant of the Chess Club Management System, some features of the Basic Chess Club Management System are changed. Instead of supporting a single unnamed Chess Club, the system provides administrative support for multiple Chess Clubs, each with their own owner, officers and members. Each club has its own name, location, and description/mission statement. This information is available to all users of the system, as well as relevant statistics (initially just the number of members), and the name, gravatar and public bio of the owner. Users of the system can apply for membership of multiple clubs. Users can be a member of multiple clubs, in a variety of roles. For example, a user can be a member of one club, an officer in another, and owner of a third. Any user in the system can create their own chess club. The application enables users to switch between clubs they are a member/officer/owner of using a combobox-like widget in the applications navbar or menu.</p>
+  <p class="text">Tournaments:The Chess Club Management System supports the organisation of tournaments within clubs. A tournament can be organised by any officer. Tournaments will have a name and a short description. All members of the club are allowed to participate in the tournament, except for the organising officer, up to a maximum number of players (the tournament capacity). Ideally, an organiser can assign other officers as a co-organisers of the tournament. The tournament capacity should be at least 2 and no more than 96 (you can set tighter limits to make the application a bit simplier). To participate, club members need to sign up for the tournament by a deadline set by the tournament organiser. Until that deadline, they can also withdraw from the tournament.
+
+After this deadline and before the tournament itself, the organiser can get the system to arrange and publish the schedule of matches. This consists of the required matches, and a partial ordering of matches. A variety of approaches are possible. Generally, tournaments of up to 16 players consist of up to four elimination rounds (final, 2 semi-finals, 4 quarter finals, etc.). Participants are paired, play a game of chess and the winner of each game moves onto the next round. For tournaments of more than 16 and up to 32 players, the elimination rounds should be preceded by an additional group stage with up to four players per group. Participants play a game of chess against each member of their group and get a score of 1 for a win, 0.5 for a draw and 0 for loss. The two best players of each group move to the elimination rounds. For even larger tournaments of more than 32 and up to 96 players, a further group stage with up to 6 players per group is needed. In this group stage, participants also play all other members of the group, and the two best players of each stage move on to the next round. Where group stages are employed, the system must ensure that players who have encountered one another in a group only encounter one another as late as possible later in the game.
+
+The organiser can enter results for matches. dWhen a group stage or an elimination match is complete, and the result is entered into the system, the winners are assigned their next match slots.
+
+The tournaments a chess club has organised should be visible for all on the club's profile. This should include the tournament name, description and number of participants.
+
+
+  <script>
+    var navbar = document.getElementById("navbar");
+    var menu = document.getElementById("menu");
+
+    window.onscroll = function(){
+      if (window.pageYOffset >= menu.offsetTop){
+        navbar.classList.add("sticky");
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    }
+  </script>
+</body>
+
+</html>
+{% endblock %}
