@@ -1,10 +1,6 @@
 * {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'poppins', sans-serif;
-}
-li, a, button3{
+  padding: 0;li, a, button3{
   font-family: sans-serif;
   font-weight: 500;
   font-size: 1rem;
@@ -22,7 +18,7 @@ header{
 }
 button3{
   color:#000;
-  font-size: 1rem;
+  font-size: 0.8rem;
   padding:4px 20px;
   background-color: #C4C4C4;
   border: none;
@@ -52,6 +48,9 @@ button3:hover{
   color:gray;
 }
 
+  box-sizing: border-box;
+  font-family: 'poppins', sans-serif;
+}
 body th{
   text-align: center;
 }
