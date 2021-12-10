@@ -14,11 +14,13 @@ li, a, button3{
 header{
   width:1196px;
   height:60px;
+  position: fixed;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding: 20px 3%;
   background-color: black;
+  z-index: 100000;
 }
 button3{
   color:#000;
