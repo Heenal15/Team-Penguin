@@ -52,7 +52,7 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)
     bio = models.CharField(max_length=520, blank=True)
-    experience = models.CharField(max_length=20, choices=USER_EXPERIENCE_LEVELS, default='beginner')
+    experience = models.CharField(max_length=20, choices=USER_EXPERIENCE_LEVELS, default='Beginner')
     statement = models.CharField(max_length=1000, blank=True)
 
     objects = UserManager()

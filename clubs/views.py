@@ -20,8 +20,10 @@ def log_in(request):
             if user is not None:
                 login(request, user)
                 return redirect('home')
-
-        messages.add_message(request, messages.ERROR, "Couldn't Find Your Account ")
+            else:
+                messages.add_message(request, messages.ERROR, "Username And Password Do Not Match")
+        else:
+            messages.add_message(request, messages.ERROR, "You Have Provided An Invalid Input")
     form = LogInForm()
     return render(request, 'log_in.html', {'form': form})
 
