@@ -43,6 +43,17 @@
     <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
   </ul>
   {% endif %}
+  <li><a  <label for="clubs">Club:</label>
+
+    <select name="clubs" id="clubs">
+      <option value="Club 1">Club 1</option>
+      <option value="Club 2">Club 2</option>
+      <option value="Club 3">Club 3</option>
+      <option value="Club 4">Club 4</option>
+    </select>
+
+<button type="button" onclick="location.href='{% url 'load_club' %}'">Pick Club</button>
+</a></li>
 
     <a class="logout" href='{% url 'log_out' %}'><button>LOG OUT</button></a>
   </header>
