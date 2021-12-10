@@ -19,23 +19,14 @@
           <div class="card cover-card offset-sm-2 offset-md-4 offset-lg-7">
             <h1 class="cover-heading">CHESS CLUB</h1>
             <h1 class="cover-text"> Please Sign In Your Account </h1>
-
-
             <form action="{% url 'log_in' %}" method="post">
               {% csrf_token %}
               {{ form.as_p }}
-
               <div class="Box">
                 <input type="submit" value="Sign In">
               </div>
-
               <font color="#af444a" size="2">
-                {% for message in messages %}
-                <p><b>{{ message }}</b></p>
-                {% endfor %}
               </font>
-
-
               &nbsp;
               <p class="forget">Don't have account?<a href='{% url 'register' %}'>
                 Register

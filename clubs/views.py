@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from .forms import RegisterForm, LogInForm, UserForm, PasswordForm
+from .forms import RegisterForm, LogInForm, UserForm, PasswordForm, ClubForm
 from .models import User, Club
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -32,9 +32,6 @@ def log_out(request):
 @login_required
 def home(request):
     return render(request, 'home.html')
-
-def password(request):
-    return render(request, 'password.html')
 
 def register(request):
     if request.method == 'POST':
@@ -207,3 +204,17 @@ def password(request):
                 return redirect('home')
     form = PasswordForm()
     return render(request, 'password.html', {'form': form})
+
+@login_required
+def create_club(request):
+    if request.method == 'POST':
+        form = ClubForm(request.POST)
+        if form.is_valid():
+            club = Club.objects.create(
+                club_name=form.cleaned_data.get('club_name'),
+                club_location=form.cleaned_data.get('club_location'),
+                club_description=form.cleaned_data.get('club_description')
+            )
+    else:
+        form = ClubForm()
+    return render(request, 'create_club.html', {'form': form})
