@@ -49,20 +49,7 @@
         </li>
         <li><a href="">clubs</a></li>
         <li><a href='{% url 'profile' %}'>my profile</a></li>
-        <li>
-          {% if user.user_type == 0 %}
-          <a href='{% url 'waiting_list' %}'>home</a>
-          {% endif %}
-          {% if user.user_type == 1 %}
-          <a href='{% url 'member_home' %}'>home</a>
-          {% endif %}
-          {% if user.user_type == 2 %}
-          <a href='{% url 'officer_home' %}'>home</a>
-          {% endif %}
-          {% if user.user_type == 3 %}
-          <a href='{% url 'owner_home' %}'>home</a>
-          {% endif %}
-        </li>
+        <li><a href='{% url 'home' %}'>home</a></li>
       </ul>
     </nav>
     &nbsp

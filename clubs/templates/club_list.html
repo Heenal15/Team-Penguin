@@ -11,8 +11,8 @@
   <div class="row">
     <div class="col-12">
       <br><br>
-      <h2>Club List:</h2>
-      <a class="btn btn-primary" href="{% url 'home' %}"><button2>Home</button2></a>
+      <br><br>
+      <h2>Club List</h2>
       <table class="table">
         <th scope="col"> </th>
         <th scope="col">Club Name</th>
@@ -21,17 +21,17 @@
         {% for club in clubs %}
         <tr>
           <td>
-            <img src="{{ user.mini_gravatar }}" alt="Gravatar of {{ user.email }}" class="rounded-circle" >
+            <img src="{{ user.mini_gravatar }}" alt="Gravatar of {{ user.email }}" class="rounded-circle">
           </td>
           <td>{{ club.club_name }}</td>
 
           <td>{{ club.club_location }}</td>
           <td>{{ club.club_description }}</td>
         </tr>
-      {% endfor %}
-    </table>
+        {% endfor %}
+      </table>
+    </div>
   </div>
-</div>
 </div>
 
 {% endblock %}
