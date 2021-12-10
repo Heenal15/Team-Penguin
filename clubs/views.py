@@ -19,16 +19,7 @@ def log_in(request):
 
             if user is not None:
                 login(request, user)
-                if user.user_type == 0:
-                    return redirect('waiting_list')
-                elif user.user_type == 1:
-                    return redirect('member_home')
-                elif user.user_type == 2:
-                    return redirect('officer_home')
-                elif user.user_type == 3:
-                    return redirect('owner_home')
-                ## else:
-                ##    return redirect('home')
+                return redirect('home')
 
         messages.add_message(request, messages.ERROR, "Couldn't Find Your Account ")
     form = LogInForm()
@@ -38,6 +29,7 @@ def log_out(request):
     logout(request)
     return redirect('log_in')
 
+@login_required
 def home(request):
     return render(request, 'home.html')
 
@@ -157,35 +149,6 @@ def demote(request, user_id):
     officers =  User.objects.filter(user_type = 2)
     members_and_officers = members | officers
     return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
-
-
-@login_required
-def waiting_list(request):
-    current_user = request.user
-    if current_user.user_type == 0:
-        return render(request, 'waiting_list.html')
-    return render(request, 'home.html')
-
-@login_required
-def member_home(request):
-    current_user = request.user
-    if current_user.user_type == 1:
-        return render(request, 'member_home.html')
-    return render(request, 'home.html')
-
-@login_required
-def officer_home(request):
-    current_user = request.user
-    if current_user.user_type == 2:
-        return render(request, 'officer_home.html')
-    return render(request, 'home.html')
-
-@login_required
-def owner_home(request):
-    current_user = request.user
-    if current_user.user_type == 3:
-        return render(request, 'owner_home.html')
-    return render(request, 'home.html')
 
 @login_required
 def officers(request):

@@ -35,12 +35,9 @@ urlpatterns = [
     path('promote/<int:user_id>', views.promote, name='promote'),
     path('demote/<int:user_id>', views.demote, name='demote'),
     path('password/', views.password, name='password'),
-    path('waiting_list/', views.waiting_list, name='waiting_list'),
-    path('member_home/', views.member_home, name='member_home'),
-    path('officer_home/', views.officer_home, name='officer_home'),
-    path('owner_home/', views.owner_home, name='owner_home'),
     path('officers/', views.officers, name='officers'),
     path('make_owner/<int:user_id>', views.make_owner, name='make_owner'),
     path('unauthorised_access/', views.unauthorised_access, name='unauthorised_access'),
-    path('club_list/', views.club_list, name='club_list')
+    path('club_list/', views.club_list, name='club_list'),
+    path('home', views.home, name='home'),
 ]
