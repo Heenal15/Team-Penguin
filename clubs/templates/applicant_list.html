@@ -15,6 +15,7 @@
     <div class="row">
       <div class="col-12">
         <br><br>
+        <br><br>
         <h2>Applicants</h2>
         <table class="table">
           <th scope="col"> </th>
@@ -32,10 +33,12 @@
             <td>{{ user.get_user_type_display }}</td>
             <td>
               <a class="approve" href="{% url 'approve' user.id %}"><button>APPROVE</button></a>
-              <a class="unapprove" href="{% url 'unapprove' user.id %}" style="text-decoration: none"><button1>UNAPPROVE</button1></a>
+              <a class="unapprove" href="{% url 'unapprove' user.id %}" style="text-decoration: none">
+                <button1>UNAPPROVE</button1>
+              </a>
             </td>
           </tr>
-            {% endfor %}
+          {% endfor %}
         </table>
       </div>
     </div>
