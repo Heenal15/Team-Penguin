@@ -30,26 +30,26 @@
         <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
         <li><a  <label for="clubs">Club:</label>
 
-          <select name="clubs" id="clubs">
-            <option
-            {%if user.club == 'Kerbal'%}
-             value="Kerbal">Kerbal
-           {% endif %}</option>
-            <option
-            {%if user.club == 'Apollo'%}
-             value="Apollo">Apollo
-           {% endif %}</option>
-            <option
-            {%if user.club == 'Mercury'%}
-             value="Mercury">Mercury
-           {% endif %}</option>
-            <option
-            {%if user.club == 'Soyuz'%}
-             value="Soyuz">Soyuz
-           {% endif %}
-          </option>
-          </select>
-<button type="button" onclick="location.href='{% url 'loadClub' %}'">Pick Club</button>
+          <select>
+          <option
+          {%if user.club == 'Kerbal'%}
+           value="Kerbal">Kerbal
+         {% endif %}</option>
+          <option
+          {%if user.club == 'Apollo'%}
+           value="Apollo">Apollo
+         {% endif %}</option>
+          <option
+          {%if user.club == 'Mercury'%}
+           value="Mercury">Mercury
+         {% endif %}</option>
+          <option
+          {%if user.club == 'Soyuz'%}
+           value="Soyuz">Soyuz
+         {% endif %}
+        </option>
+        </select>
+<button type="button" onclick="location.href='{% url 'load_club' %}'">Pick Club</button>
 </a></li>
       </ul>
     </nav>
