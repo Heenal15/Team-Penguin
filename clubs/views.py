@@ -70,6 +70,9 @@ def is_club_owner(user):
 def is_club_owner_or_officer(user):
     return (user.is_authenticated and user.user_type == 2 or user.user_type == 3)
 
+def is_club_owner_or_officer_or_member(user):
+    return (user.is_authenticated and user.user_type == 1 or user.user_type == 2 or user.user_type == 3)
+
 def unauthorised_access(request):
     return render(request, 'unauthorised_access.html')
 
@@ -99,7 +102,7 @@ def memberlist_Clubowner(request):
     users = User.objects.all()
     return render(request, 'memberlist_Clubowner.html', {'users': users})
 
-@login_required
+@user_passes_test(is_club_owner_or_officer, login_url='unauthorised_access', redirect_field_name=None)
 def show_user(request, user_id):
     try:
         user = User.objects.get(id = user_id)
@@ -112,7 +115,7 @@ def show_user(request, user_id):
     else:
         return render(request, 'show_user.html', {'user': user})
 
-@login_required
+@user_passes_test(is_club_owner_or_officer_or_member, login_url='unauthorised_access', redirect_field_name=None)
 def show_member(request, user_id):
     try:
         user = User.objects.get(id = user_id)
