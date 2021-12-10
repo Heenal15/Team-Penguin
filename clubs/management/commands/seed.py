@@ -1,12 +1,13 @@
 from django.core.management.base import BaseCommand, CommandError
 from faker import Faker
-from clubs.models import User
+from clubs.models import User, Club
 import random
 
 class Command(BaseCommand):
     """The database seeder."""
     PASSWORD = "Password123"
     USER_COUNT = 100
+    CLUB_COUNT = 3
 
     def __init__(self):
         super().__init__()
@@ -14,6 +15,16 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
+        club_count = 0
+        while club_count < Command.CLUB_COUNT:
+            print(f'Seeding club {club_count}',  end='\r')
+            try:
+                self._create_club()
+            except (django.db.utils.IntegrityError):
+                continue
+            club_count += 1
+        print('Club seeding is complete')
+
         user_count = 0
         while user_count < Command.USER_COUNT:
             print(f'Seeding user {user_count}',  end='\r')
@@ -29,6 +40,9 @@ class Command(BaseCommand):
         print('Officer: Valentina Kerman has been created')
         self._create_owner()
         print('Owner: Billie Kerman has been created')
+
+
+
 
     def _create_user(self):
         first_name = self.faker.first_name()
@@ -118,5 +132,17 @@ class Command(BaseCommand):
             bio=bio,
             statement=statement,
             experience=experience,
+
+        )
+
+    def _create_club(self):
+        club_name = self.faker.word()
+        club_location = self.faker.location_on_land()
+        club_description = self.faker.text(max_nb_chars=200)
+        Club.objects.create(
+
+        club_name = club_name,
+        club_location = club_location,
+        club_description = club_description,
 
         )
