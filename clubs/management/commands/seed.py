@@ -24,6 +24,8 @@ class Command(BaseCommand):
                 continue
             club_count += 1
         print('Club seeding is complete')
+        self._create_kerbal_club()
+        print('Kerbal Chess Club has been created')
 
         user_count = 0
         while user_count < Command.USER_COUNT:
@@ -40,8 +42,6 @@ class Command(BaseCommand):
         print('Officer: Valentina Kerman has been created')
         self._create_owner()
         print('Owner: Billie Kerman has been created')
-
-
 
 
     def _create_user(self):
@@ -144,5 +144,17 @@ class Command(BaseCommand):
         club_name = club_name,
         club_location = club_location,
         club_description = club_description,
+
+        )
+
+    def _create_kerbal_club(self):
+        club_name = 'Kerbal Chess Club'
+        club_location = self.faker.location_on_land()
+        club_description = 'Welcome to Kerbal Chess Club'
+        Club.objects.create(
+
+            club_name = club_name,
+            club_location = club_location,
+            club_description = club_description,
 
         )
