@@ -55,8 +55,6 @@ class User(AbstractUser):
     experience = models.CharField(max_length=20, choices=USER_EXPERIENCE_LEVELS, default='beginner')
     statement = models.CharField(max_length=1000, blank=True)
 
-    #is_waiting_list = True
-
     objects = UserManager()
 
     def full_name(self):
@@ -71,3 +69,8 @@ class User(AbstractUser):
     def mini_gravatar(self):
         """Return a URL to a miniature version of the user's gravatar."""
         return self.gravatar(size=60)
+
+class Club(models.Model):
+    club_name = models.CharField(max_length=50, blank=False)
+    club_location = models.CharField(max_length=100, blank=False)
+    club_description = models.CharField(max_length=520, blank=False)
