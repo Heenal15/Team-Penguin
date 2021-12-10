@@ -47,9 +47,9 @@ class User(AbstractUser):
         ('Advanced', 'Advanced'),
     )
 
-    user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=0)
-    
-    #user_type = models.ManyToManyField(Role)
+    #user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=0)
+
+    user_type = models.ManyToManyField(Role)
 
     email = models.EmailField(unique=True, blank=False)
     first_name = models.CharField(max_length=50, blank=False)
@@ -76,9 +76,11 @@ class User(AbstractUser):
         return self.gravatar(size=60)
 
 class Club(models.Model):
+    user = models.ManyToManyField(User)
     club_name = models.CharField(max_length=50, blank=False)
     club_location = models.CharField(max_length=100, blank=False)
     club_description = models.CharField(max_length=520, blank=False)
+
 
 class Role(models.Model):
 
