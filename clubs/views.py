@@ -155,6 +155,9 @@ def officers(request):
     officers = User.objects.filter(user_type = 2)
     return render(request, 'officers.html', {'officers': officers})
 
+def loadClub(request):
+    return render(request, 'loadClub.html',)
+
 @login_required
 def make_owner(request, user_id):
     user = request.user
