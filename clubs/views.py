@@ -10,6 +10,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import check_password
 
 def log_in(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == 'POST':
         form = LogInForm(request.POST)
         if form.is_valid():
@@ -20,11 +23,14 @@ def log_in(request):
             if user is not None:
                 login(request, user)
                 return redirect('home')
-
-        messages.add_message(request, messages.ERROR, "Couldn't Find Your Account ")
+            else:
+                messages.add_message(request, messages.ERROR, "Username And Password Do Not Match")
+        else:
+            messages.add_message(request, messages.ERROR, "You Have Provided An Invalid Input")
     form = LogInForm()
     return render(request, 'log_in.html', {'form': form})
 
+@login_required
 def log_out(request):
     logout(request)
     return redirect('log_in')
@@ -32,8 +38,11 @@ def log_out(request):
 @login_required
 def home(request):
     return render(request, 'home.html')
-
+  
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -56,6 +65,9 @@ def is_club_owner(user):
 
 def is_club_owner_or_officer(user):
     return (user.is_authenticated and user.user_type == 2 or user.user_type == 3)
+
+def is_club_owner_or_officer_or_member(user):
+    return (user.is_authenticated and user.user_type == 1 or user.user_type == 2 or user.user_type == 3)
 
 def unauthorised_access(request):
     return render(request, 'unauthorised_access.html')
@@ -86,7 +98,7 @@ def memberlist_Clubowner(request):
     users = User.objects.all()
     return render(request, 'memberlist_Clubowner.html', {'users': users})
 
-@login_required
+@user_passes_test(is_club_owner_or_officer, login_url='unauthorised_access', redirect_field_name=None)
 def show_user(request, user_id):
     try:
         user = User.objects.get(id = user_id)
@@ -99,7 +111,7 @@ def show_user(request, user_id):
     else:
         return render(request, 'show_user.html', {'user': user})
 
-@login_required
+@user_passes_test(is_club_owner_or_officer_or_member, login_url='unauthorised_access', redirect_field_name=None)
 def show_member(request, user_id):
     try:
         user = User.objects.get(id = user_id)
@@ -152,8 +164,8 @@ def officers(request):
     officers = User.objects.filter(user_type = 2)
     return render(request, 'officers.html', {'officers': officers})
 
-def loadClub(request):
-    return render(request, 'loadClub.html',)
+def load_club(request):
+    return render(request, 'load_club.html',)
 
 @login_required
 def make_owner(request, user_id):
