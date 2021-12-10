@@ -54,7 +54,6 @@ class User(AbstractUser):
     bio = models.CharField(max_length=520, blank=True)
     experience = models.CharField(max_length=20, choices=USER_EXPERIENCE_LEVELS, default='beginner')
     statement = models.CharField(max_length=1000, blank=True)
-    clubs = models.CharField(max_length=50, blank=False, default ='Kerbal')
 
     objects = UserManager()
 
@@ -84,4 +83,4 @@ class Club(models.Model):
 
     def mini_gravatar(self):
         """Return a URL to a miniature version of the user's gravatar."""
-        return self.gravatar(size=60)    
+        return self.gravatar(size=60)
