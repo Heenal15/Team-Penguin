@@ -14,6 +14,7 @@
         {% csrf_token %}
         {% include 'partials/bootstrap_form.html' with form=form %}
         <input type="submit" value="Update" class="btn btn-primary">
+        <a class="btn btn-primary" href="{% url 'password' %}"><button1>Change Password</button1></a>
 
       </form>
     </div>
