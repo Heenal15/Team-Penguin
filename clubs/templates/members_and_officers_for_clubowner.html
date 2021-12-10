@@ -13,6 +13,19 @@
       <br><br>
       <br><br>
       <h2>Chess Club Members</h2>
+
+      <li><a  <label for="clubs">Club:</label>
+
+        <select name="clubs" id="clubs">
+          <option value="Club 1">Club 1</option>
+          <option value="Club 2">Club 2</option>
+          <option value="Club 3">Club 3</option>
+          <option value="Club 4">Club 4</option>
+        </select>
+
+    <button type="button" onclick="location.href='{% url 'load_club' %}'">Pick Club</button>
+    </a></li>
+    
       <table class="table">
         <th scope="col"> </th>
         <th scope="col">Full Name</th>
