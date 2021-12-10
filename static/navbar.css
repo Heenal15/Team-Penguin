@@ -12,8 +12,8 @@ li, a, button3{
   text-decoration: none;
 }
 header{
-  width:1196px;
-  height:60px;
+  width:100%;
+  height:80px;
   position: fixed;
   display: flex;
   justify-content: space-between;
