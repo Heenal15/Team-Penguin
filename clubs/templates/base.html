@@ -20,11 +20,8 @@
     <nav>
       <ul class="nav_links">
         <li>
-          {% if user.user_type == 2 %}
-          <a href="">competition</a>
-          {% endif %}
-          {% if user.user_type == 2 %}
-          <a href="">competition</a>
+          {% if user.user_type == 3 %}
+          <a href='{% url 'officers' %}'>ownership</a>
           {% endif %}
         </li>
         <li>
