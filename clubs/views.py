@@ -10,6 +10,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import check_password
 
 def log_in(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == 'POST':
         form = LogInForm(request.POST)
         if form.is_valid():
@@ -27,6 +30,7 @@ def log_in(request):
     form = LogInForm()
     return render(request, 'log_in.html', {'form': form})
 
+@login_required
 def log_out(request):
     logout(request)
     return redirect('log_in')
@@ -35,10 +39,14 @@ def log_out(request):
 def home(request):
     return render(request, 'home.html')
 
+@login_required
 def password(request):
     return render(request, 'password.html')
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
