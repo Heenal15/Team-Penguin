@@ -27,6 +27,20 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+class Role(models.Model):
+
+    USER_TYPE_CHOICES = (
+        (0, 'Applicant'),
+        (1, 'Member'),
+        (2, 'Club Officer'),
+        (3, 'Club Owner'),
+    )
+
+    id = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, primary_key=True)
+
+    def __str__(self):
+        return self.get_id_display()
+
 class User(AbstractUser):
     """User model used for authentication and club authoring."""
 
@@ -80,18 +94,3 @@ class Club(models.Model):
     club_name = models.CharField(max_length=50, blank=False)
     club_location = models.CharField(max_length=100, blank=False)
     club_description = models.CharField(max_length=520, blank=False)
-
-
-class Role(models.Model):
-
-    USER_TYPE_CHOICES = (
-        (0, 'Applicant'),
-        (1, 'Member'),
-        (2, 'Club Officer'),
-        (3, 'Club Owner'),
-    )
-
-    id = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, primary_key=True)
-
-    def __str__(self):
-        return self.get_id_display()
