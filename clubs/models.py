@@ -27,20 +27,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-class Role(models.Model):
-
-    USER_TYPE_CHOICES = (
-        (0, 'Applicant'),
-        (1, 'Member'),
-        (2, 'Club Officer'),
-        (3, 'Club Owner'),
-    )
-
-    id = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, primary_key=True)
-
-    def __str__(self):
-        return self.get_id_display()
-
 class User(AbstractUser):
     """User model used for authentication and club authoring."""
 
@@ -62,8 +48,9 @@ class User(AbstractUser):
     )
 
     #user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=0)
+    #user_type = models.ManyToManyField(Role)
 
-    user_type = models.ManyToManyField(Role)
+    user_db = models.ManyToManyField('ClubContract', through='ClubContract')
 
     email = models.EmailField(unique=True, blank=False)
     first_name = models.CharField(max_length=50, blank=False)
@@ -90,7 +77,19 @@ class User(AbstractUser):
         return self.gravatar(size=60)
 
 class Club(models.Model):
-    user = models.ManyToManyField(User)
+    club_db = models.ManyToManyField('ClubContract', through='ClubContract')
     club_name = models.CharField(max_length=50, blank=False)
     club_location = models.CharField(max_length=100, blank=False)
     club_description = models.CharField(max_length=520, blank=False)
+
+class ClubContract(models.Model):
+    USER_TYPE = (
+        (0, 'Applicant'),
+        (1, 'Member'),
+        (2, 'Club Officer'),
+        (3, 'Club Owner'),
+    )
+
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    club = models.ForeignKey(Club, on_delete=models.SET_NULL, null=True)
+    role = models.IntegerField(choices=USER_TYPE, default=0)
