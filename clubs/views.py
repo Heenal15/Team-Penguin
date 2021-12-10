@@ -59,19 +59,34 @@ def register(request):
 
 #used to check if current user has privaleges to view page
 def is_member(user):
-    return (user.is_authenticated and user.user_type == 1)
+    if (user.is_authenticated):
+        return user.user_type == 1
+    else:
+        return False
 
 def is_club_officer(user):
-    return (user.is_authenticated and user.user_type == 2)
+    if (user.is_authenticated):
+        return user.user_type == 2
+    else:
+        return False
 
 def is_club_owner(user):
-    return (user.is_authenticated and user.user_type == 3)
+    if (user.is_authenticated):
+        return user.user_type == 3
+    else:
+        return False
 
 def is_club_owner_or_officer(user):
-    return (user.is_authenticated and user.user_type == 2 or user.user_type == 3)
+    if (user.is_authenticated):
+        return (user.user_type == 2 or user.user_type == 3)
+    else:
+        return False
 
 def is_club_owner_or_officer_or_member(user):
-    return (user.is_authenticated and user.user_type == 1 or user.user_type == 2 or user.user_type == 3)
+    if (user.is_authenticated):
+        return (user.user_type == 1 or user.user_type == 2 or user.user_type == 3)
+    else:
+        return False
 
 def unauthorised_access(request):
     return render(request, 'unauthorised_access.html')
