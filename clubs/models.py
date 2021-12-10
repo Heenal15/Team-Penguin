@@ -21,7 +21,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
-        user = self.create_user(email, password=None, **extra_fields)
+        user = self.create_user(email, password, **extra_fields)
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)
@@ -32,7 +32,7 @@ class User(AbstractUser):
 
     username = None
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['first_name', 'last_name']
     USER_TYPE_CHOICES = (
         (0, 'Applicant'),
         (1, 'Member'),
@@ -55,8 +55,6 @@ class User(AbstractUser):
     experience = models.CharField(max_length=20, choices=USER_EXPERIENCE_LEVELS, default='beginner')
     statement = models.CharField(max_length=1000, blank=True)
 
-    #is_waiting_list = True
-
     objects = UserManager()
 
     def full_name(self):
@@ -71,3 +69,18 @@ class User(AbstractUser):
     def mini_gravatar(self):
         """Return a URL to a miniature version of the user's gravatar."""
         return self.gravatar(size=60)
+
+class Club(models.Model):
+    club_name = models.CharField(max_length=50, blank=False)
+    club_location = models.CharField(max_length=100, blank=False)
+    club_description = models.CharField(max_length=520, blank=False)
+
+    def gravatar(self, size=120):
+        """Return a URL to the user's gravatar."""
+        gravatar_object = Gravatar(self.email)
+        gravatar_url = gravatar_object.get_image(size=size, default='mp')
+        return gravatar_url
+
+    def mini_gravatar(self):
+        """Return a URL to a miniature version of the user's gravatar."""
+        return self.gravatar(size=60)    

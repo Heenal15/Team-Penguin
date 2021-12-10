@@ -11,22 +11,22 @@
   <div class="row">
     <div class="col-12">
       <br><br>
-      <br><br>
-      <h2>Chess Club Members</h2>
+      <h2>Club List:</h2>
       <a class="btn btn-primary" href="{% url 'home' %}"><button2>Home</button2></a>
       <table class="table">
         <th scope="col"> </th>
-        <th scope="col">Full Name</th>
-        <th scope="col">Profile</th>
-        <th scope="col">Rank</th>
-        {% for user in members %}
+        <th scope="col">Club Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">Description</th>
+        {% for club in clubs %}
         <tr>
           <td>
             <img src="{{ user.mini_gravatar }}" alt="Gravatar of {{ user.email }}" class="rounded-circle" >
           </td>
-          <td>{{ user.full_name }}</td>
-          <td><a href="{% url 'show_member' user.id %}" class="btn">Show Profile</a></td>
-          <td>{{ user.get_user_type_display }}</td>
+          <td>{{ club.club_name }}</td>
+
+          <td>{{ club.club_location }}</td>
+          <td>{{ club.club_description }}</td>
         </tr>
       {% endfor %}
     </table>
