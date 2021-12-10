@@ -21,7 +21,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
-        user = self.create_user(email, password=None, **extra_fields)
+        user = self.create_user(email, password, **extra_fields)
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)
@@ -32,7 +32,7 @@ class User(AbstractUser):
 
     username = None
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['first_name', 'last_name']
     USER_TYPE_CHOICES = (
         (0, 'Applicant'),
         (1, 'Member'),
