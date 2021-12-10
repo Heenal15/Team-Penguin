@@ -16,12 +16,8 @@
       <div class="col-12">
         <br><br>
         <h2>Applicants</h2>
-    {%if user.user_type == 2 %}
-      <a class="btn btn-primary" href="{% url 'officer_home' %}"><button2>Home</button2></a>
-   {% endif %}
-  {%if user.user_type == 3 %}
-      <a class="btn btn-primary" href="{% url 'owner_home' %}"><button2>Home</button2></a>
-   {% endif %}
+        <a class="btn btn-primary" href="{% url 'home' %}"><button2>Home</button2></a>
+
 
         <table class="table">
           <th scope="col"> </th>
