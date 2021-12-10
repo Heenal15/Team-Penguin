@@ -20,6 +20,7 @@ from clubs import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.log_in, name='log_in'),
+    path('home', views.home, name='home'),
     path('log_in/', views.log_in, name='log_in'),
     path('log_out/', views.log_out, name='log_out'),
     path('register/', views.register, name='register'),
@@ -39,5 +40,4 @@ urlpatterns = [
     path('make_owner/<int:user_id>', views.make_owner, name='make_owner'),
     path('unauthorised_access/', views.unauthorised_access, name='unauthorised_access'),
     path('club_list/', views.club_list, name='club_list'),
-    path('home', views.home, name='home'),
 ]
