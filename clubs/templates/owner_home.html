@@ -15,7 +15,7 @@
     <img src="../../static/images/logoko.png" width="90" height="80" class="logo">
     <ul>
       <li><a>COMPETITION</a></li>
-      <li><a>CLUBS</a></li>
+      <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
       <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
       <li><a href='{% url 'members_and_officers_for_clubowner' %}' style="text-decoration: none">MY CLUB</a></li>
       <li><a href='{% url 'officers' %}' style="text-decoration: none">OWNERSHIP</a></li>

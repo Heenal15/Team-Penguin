@@ -74,3 +74,13 @@ class Club(models.Model):
     club_name = models.CharField(max_length=50, blank=False)
     club_location = models.CharField(max_length=100, blank=False)
     club_description = models.CharField(max_length=520, blank=False)
+
+    def gravatar(self, size=120):
+        """Return a URL to the user's gravatar."""
+        gravatar_object = Gravatar(self.email)
+        gravatar_url = gravatar_object.get_image(size=size, default='mp')
+        return gravatar_url
+
+    def mini_gravatar(self):
+        """Return a URL to a miniature version of the user's gravatar."""
+        return self.gravatar(size=60)    
