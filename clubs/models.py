@@ -84,13 +84,20 @@ class ClubManager(models.Manager):
 
         return club
 
-
 class Club(models.Model):
     #club_db = models.ManyToManyField('ClubContract', through='ClubContract')
     objects = ClubManager()
     club_name = models.CharField(max_length=50, blank=False)
     club_location = models.CharField(max_length=100, blank=False)
     club_description = models.CharField(max_length=520, blank=False)
+
+class ClubContractManager(models.Manager):
+    def club_contract_create(self, user, club, role):
+        club_contract = self.create(user = user)
+        club_contract = self.create(club = club)
+        club_contract = self.create(role = role)
+
+        return club_contract
 
 class ClubContract(models.Model):
     USER_TYPE = (
