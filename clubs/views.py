@@ -151,7 +151,7 @@ def unapprove(request, user_id):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
 
-@login_required
+@user_passes_test(is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
 def promote(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 1:
