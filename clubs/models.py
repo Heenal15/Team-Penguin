@@ -21,7 +21,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
-        user = self.create_user(email, password=None, **extra_fields)
+        user = self.create_user(email, password, **extra_fields)
         user.is_superuser = True
         user.is_staff = True
         user.save(using=self._db)
@@ -32,7 +32,7 @@ class User(AbstractUser):
 
     username = None
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     USER_TYPE_CHOICES = (
         (0, 'Applicant'),
@@ -56,10 +56,8 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)
     bio = models.CharField(max_length=520, blank=True)
-    experience = models.CharField(max_length=20, choices=USER_EXPERIENCE_LEVELS, default='beginner')
+    experience = models.CharField(max_length=20, choices=USER_EXPERIENCE_LEVELS, default='Beginner')
     statement = models.CharField(max_length=1000, blank=True)
-
-    #is_waiting_list = True
 
     objects = UserManager()
 
@@ -85,11 +83,20 @@ class ClubManager(models.Manager):
         return club
 
 class Club(models.Model):
-    #club_db = models.ManyToManyField('ClubContract', through='ClubContract')
     objects = ClubManager()
     club_name = models.CharField(max_length=50, blank=False)
     club_location = models.CharField(max_length=100, blank=False)
     club_description = models.CharField(max_length=520, blank=False)
+    
+    def gravatar(self, size=120):
+        """Return a URL to the user's gravatar."""
+        gravatar_object = Gravatar(self.email)
+        gravatar_url = gravatar_object.get_image(size=size, default='mp')
+        return gravatar_url
+
+    def mini_gravatar(self):
+        """Return a URL to a miniature version of the user's gravatar."""
+        return self.gravatar(size=60)
 
 class ClubContractManager(models.Manager):
     def club_contract_create(self, user, club, role):
@@ -110,3 +117,4 @@ class ClubContract(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     club = models.ForeignKey(Club, on_delete=models.SET_NULL, null=True)
     role = models.IntegerField(choices=USER_TYPE, default=0)
+

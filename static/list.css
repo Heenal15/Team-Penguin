@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;li, a, button3{
+  font-family: sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color:white;
+  text-decoration: none;
+}
+header{
+  width:1196px;
+  height:60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px 3%;
+  background-color: black;
+}
+button3{
+  color:#000;
+  font-size: 0.8rem;
+  padding:4px 20px;
+  background-color: #C4C4C4;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+button3:hover{
+  background-color: gray;
+}
+.logo{
+  cursor: pointer;
+  margin-right: auto;
+}
+.nav_links{
+  list-style: none;
+  margin-top: 15px;
+}
+.nav_links li{
+  display: inline-block;
+  padding: 0px 20px;
+}
+.nav_links li a{
+  transition: all 0.3s ease 0s;
+}
+.nav_links li a:hover{
+  color:gray;
+}
+
+  box-sizing: border-box;
+  font-family: 'poppins', sans-serif;
+}
+body th{
+  text-align: center;
+}
+body tr td{
+  text-align: center;
+}
+.btn{
+  text-align: center;
+  font-size: 0.8em;
+  color: #fff;
+  font-weight: 600;
+  background: #c5a772;
+  margin-top: 10px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.btn:hover{
+  color:gray;
+}
+button{
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: white;
+  margin-top: 10px;
+  padding: 7px 23px;
+  background-color: #C8C4C4;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+button1{
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: white;
+  margin-top: 10px;
+  padding: 7px 23px;
+  background-color: black;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+button:hover{
+  color: gray;
+}
+button1:hover{
+  color: gray;
+}

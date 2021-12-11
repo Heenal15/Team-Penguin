@@ -3,22 +3,19 @@
 
 <head>
   <meta content="text/html" charset="UTF-8">
-  <title>profile</title>
+  <title>Create Club</title>
 </head>
 
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <br><br><br><br>
-      <h2>Edit profile</h2>
-      <form action="{% url 'profile' %}" method="post">
+      <br></br><br></br>
+      <h2>Create Club</h2>
+      <form action="{% url 'create_club' %}" method="post">
         {% csrf_token %}
         {% include 'partials/bootstrap_form.html' with form=form %}
         <br><br>
-        <input type="submit" value="Update" class="btn btn-primary">&nbsp<a class="btn btn-primary" href="{% url 'password' %}">
-          <button1>Edit Password</button1>
-        </a>
-        <br><br>
+        <input type="submit" value="Create" class="btn btn-primary">
       </form>
     </div>
   </div>

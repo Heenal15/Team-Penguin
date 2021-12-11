@@ -1,14 +1,22 @@
 {% extends 'base.html' %}
 {% block body %}
+
+<head>
+  <meta name="viewport" content="wide=device-width, initial_scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../../../static/list.css" />
+  <title>applicant</title>
+</head>
+
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h1>Chess Club Members(For Officer):</h1>
-      <br> <br>
+      <br><br>
+      <br><br>
+      <h2>Chess Club Members</h2>
       <table class="table">
         <th scope="col"> </th>
-        <th scope="col">Full Name:</th>
-        <th scope="col">Email:</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Profile</th>
         <th scope="col">Rank</th>
         {% for user in members %}
           <tr>
@@ -16,7 +24,7 @@
               <img src="{{ user.mini_gravatar }}" alt="Gravatar of {{ user.email }}" class="rounded-circle" >
             </td>
             <td>{{ user.full_name }}</td>
-            <td><a href="{% url 'show_user' user.id %}">{{ user.email }}</a></td>
+            <td><a href="{% url 'show_user' user.id %}" class="btn">Show Profile</a></td>
             <td>{{ user.get_user_type_display }}</td>
           </tr>
         {% endfor %}

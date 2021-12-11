@@ -22,7 +22,7 @@ class ProfileViewTest(TestCase):
             'last_name': 'Doe2',
             'email': 'johndoe2@example.org',
             'bio': 'New bio',
-            'experience' : 'Medium',
+            'experience' : 'Advanced',
             'statement' : 'Hi I like to play chess'
         }
 
@@ -89,15 +89,15 @@ class ProfileViewTest(TestCase):
         response = self.client.post(self.url, self.form_input, follow=True)
         after_count = User.objects.count()
         self.assertEqual(after_count, before_count)
-        response_url = reverse('home')
+        response_url = reverse('profile')
         self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
-        self.assertTemplateUsed(response, 'home.html')
+        self.assertTemplateUsed(response, 'profile.html')
         self.user.refresh_from_db()
         self.assertEqual(self.user.first_name, 'John2')
         self.assertEqual(self.user.last_name, 'Doe2')
         self.assertEqual(self.user.email, 'johndoe2@example.org')
         self.assertEqual(self.user.bio, 'New bio')
-        self.assertEqual(self.user.experience, 'Medium')
+        self.assertEqual(self.user.experience, 'Advanced')
         self.assertEqual(self.user.statement, 'Hi I like to play chess')
 
     def test_post_profile_redirects_when_not_logged_in(self):
