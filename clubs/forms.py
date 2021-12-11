@@ -58,7 +58,7 @@ class UserForm(forms.ModelForm):
 
         model = User
         fields = ['first_name', 'last_name', 'email', 'bio', 'experience', 'statement']
-        widgets = { 'bio': forms.Textarea(), 'experience':forms.Textarea(), 'statement':forms.Textarea()}
+        widgets = { 'bio': forms.Textarea(), 'statement':forms.Textarea()}
 
 class PasswordForm(forms.Form):
     """Form enabling users to change their password."""
@@ -91,3 +91,4 @@ class ClubForm(forms.ModelForm):
         model = Club
         fields = ['club_name', 'club_location', 'club_description']
         widgets = {'club_location': forms.Textarea(), 'club_description': forms.Textarea()}
+

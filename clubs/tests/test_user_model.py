@@ -6,27 +6,23 @@ from clubs.models import User
 class UserModelTestCase(TestCase):
     """Unit tests for the User model."""
 
+    fixtures = [
+        'clubs/tests/fixtures/default_user.json',
+        'clubs/tests/fixtures/other_users.json'
+    ]
+
     def setUp(self):
-        self.user = User.objects.create_user(
-            first_name='John',
-            last_name='Doe',
-            email='johndoe@example.org',
-            password='Password123',
-            bio='The quick brown fox jumps over the lazy dog.',
-            experience = 'Beginner',
-            statement = 'Hi I like to play chess at beginner level'
-        )
+        self.user = User.objects.get(email='johndoe@example.org')
 
     def test_valid_user(self):
         self._assert_user_is_valid()
-
 
     def test_first_name_must_not_be_blank(self):
         self.user.first_name = ''
         self._assert_user_is_invalid()
 
     def test_first_name_need_not_be_unique(self):
-        second_user = self._create_second_user()
+        second_user = User.objects.get(email='janedoe@example.org')
         self.user.first_name = second_user.first_name
         self._assert_user_is_valid()
 
@@ -43,7 +39,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_invalid()
 
     def test_last_name_need_not_be_unique(self):
-        second_user = self._create_second_user()
+        second_user = User.objects.get(email='janedoe@example.org')
         self.user.last_name = second_user.last_name
         self._assert_user_is_valid()
 
@@ -60,7 +56,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_invalid()
 
     def test_email_must_be_unique(self):
-        second_user = self._create_second_user()
+        second_user = User.objects.get(email='janedoe@example.org')
         self.user.email = second_user.email
         self._assert_user_is_invalid()
 
@@ -89,7 +85,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_valid()
 
     def test_bio_need_not_be_unique(self):
-        second_user = self._create_second_user()
+        second_user = User.objects.get(email='janedoe@example.org')
         self.user.bio = second_user.bio
         self._assert_user_is_valid()
 
@@ -101,21 +97,18 @@ class UserModelTestCase(TestCase):
         self.user.bio = 'x' * 521
         self._assert_user_is_invalid()
 
-    def test_experience_may_be_blank(self):
-        self.user.experience = ''
-        self._assert_user_is_valid()
 
     def test_experience_need_not_be_unique(self):
-        second_user = self._create_second_user()
+        second_user = User.objects.get(email='janedoe@example.org')
         self.user.experience = second_user.experience
         self._assert_user_is_valid()
 
-    def test_experience_may_contain_300_characters(self):
-        self.user.experience = 'x' * 300
+    def test_experience_may_contain_20_characters(self):
+        self.user.experience = "Beginner"
         self._assert_user_is_valid()
 
-    def test_experience_must_not_contain_more_than_300_characters(self):
-        self.user.experience = 'x' * 301
+    def test_experience_must_not_contain_more_than_21_characters(self):
+        self.user.experience = 'x' * 21
         self._assert_user_is_invalid()
 
     def test_statement_may_be_blank(self):
@@ -123,7 +116,7 @@ class UserModelTestCase(TestCase):
         self._assert_user_is_valid()
 
     def test_statement_need_not_be_unique(self):
-        second_user = self._create_second_user()
+        second_user = User.objects.get(email='janedoe@example.org')
         self.user.statement = second_user.statement
         self._assert_user_is_valid()
 
@@ -144,15 +137,3 @@ class UserModelTestCase(TestCase):
     def _assert_user_is_invalid(self):
         with self.assertRaises(ValidationError):
             self.user.full_clean()
-
-    def _create_second_user(self):
-        user = User.objects.create_user(
-            first_name='Jane',
-            last_name='Doe',
-            email='janedoe@example.org',
-            password='Password123',
-            bio="This is Jane's profile.",
-            experience = "Intermediate",
-            statement = 'Hi I like playing chess at Intermediate level'
-        )
-        return user

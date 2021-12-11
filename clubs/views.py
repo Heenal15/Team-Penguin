@@ -3,13 +3,16 @@ from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .forms import RegisterForm, LogInForm, UserForm, PasswordForm, ClubForm
-from .models import User
+from .models import User, Club
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import check_password
 
 def log_in(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == 'POST':
         form = LogInForm(request.POST)
         if form.is_valid():
@@ -19,18 +22,11 @@ def log_in(request):
 
             if user is not None:
                 login(request, user)
-                if user.user_type == 0:
-                    return redirect('waiting_list')
-                elif user.user_type == 1:
-                    return redirect('member_home')
-                elif user.user_type == 2:
-                    return redirect('officer_home')
-                elif user.user_type == 3:
-                    return redirect('owner_home')
-                ## else:
-                ##    return redirect('home')
-
-        messages.add_message(request, messages.ERROR, "The credentials provided were invalid!")
+                return redirect('home')
+            else:
+                messages.add_message(request, messages.ERROR, "Username And Password Do Not Match")
+        else:
+            messages.add_message(request, messages.ERROR, "You Have Provided An Invalid Input")
     form = LogInForm()
     return render(request, 'log_in.html', {'form': form})
 
@@ -38,13 +34,14 @@ def log_out(request):
     logout(request)
     return redirect('log_in')
 
+@login_required
 def home(request):
     return render(request, 'home.html')
 
-def password(request):
-    return render(request, 'password.html')
-
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -57,16 +54,34 @@ def register(request):
 
 #used to check if current user has privaleges to view page
 def is_member(user):
-    return (user.is_authenticated and user.user_type == 1)
+    if (user.is_authenticated):
+        return user.user_type == 1
+    else:
+        return False
 
 def is_club_officer(user):
-    return (user.is_authenticated and user.user_type == 2)
+    if (user.is_authenticated):
+        return user.user_type == 2
+    else:
+        return False
 
 def is_club_owner(user):
-    return (user.is_authenticated and user.user_type == 3)
+    if (user.is_authenticated):
+        return user.user_type == 3
+    else:
+        return False
 
 def is_club_owner_or_officer(user):
-    return (user.is_authenticated and user.user_type == 2 or user.user_type == 3)
+    if (user.is_authenticated):
+        return (user.user_type == 2 or user.user_type == 3)
+    else:
+        return False
+
+def is_club_owner_or_officer_or_member(user):
+    if (user.is_authenticated):
+        return (user.user_type == 1 or user.user_type == 2 or user.user_type == 3)
+    else:
+        return False
 
 def unauthorised_access(request):
     return render(request, 'unauthorised_access.html')
@@ -97,7 +112,7 @@ def memberlist_Clubowner(request):
     users = User.objects.all()
     return render(request, 'memberlist_Clubowner.html', {'users': users})
 
-@login_required
+@user_passes_test(is_club_owner_or_officer, login_url='unauthorised_access', redirect_field_name=None)
 def show_user(request, user_id):
     try:
         user = User.objects.get(id = user_id)
@@ -110,7 +125,7 @@ def show_user(request, user_id):
     else:
         return render(request, 'show_user.html', {'user': user})
 
-@login_required
+@user_passes_test(is_club_owner_or_officer_or_member, login_url='unauthorised_access', redirect_field_name=None)
 def show_member(request, user_id):
     try:
         user = User.objects.get(id = user_id)
@@ -119,7 +134,7 @@ def show_member(request, user_id):
     else:
         return render(request, 'show_member.html', {'user': user})
 
-@login_required
+@user_passes_test(is_club_owner_or_officer, login_url='unauthorised_access', redirect_field_name=None)
 def approve(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 0:
@@ -128,7 +143,7 @@ def approve(request, user_id):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
 
-@login_required
+@user_passes_test(is_club_owner_or_officer, login_url='unauthorised_access', redirect_field_name=None)
 def unapprove(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 0:
@@ -136,7 +151,7 @@ def unapprove(request, user_id):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
 
-@login_required
+@user_passes_test(is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
 def promote(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 1:
@@ -147,7 +162,7 @@ def promote(request, user_id):
     members_and_officers = members | officers
     return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
 
-@login_required
+@user_passes_test(is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
 def demote(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 2:
@@ -158,41 +173,15 @@ def demote(request, user_id):
     members_and_officers = members | officers
     return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
 
-
-@login_required
-def waiting_list(request):
-    current_user = request.user
-    if current_user.user_type == 0:
-        return render(request, 'waiting_list.html')
-    return render(request, 'home.html')
-
-@login_required
-def member_home(request):
-    current_user = request.user
-    if current_user.user_type == 1:
-        return render(request, 'member_home.html')
-    return render(request, 'home.html')
-
-@login_required
-def officer_home(request):
-    current_user = request.user
-    if current_user.user_type == 2:
-        return render(request, 'officer_home.html')
-    return render(request, 'home.html')
-
-@login_required
-def owner_home(request):
-    current_user = request.user
-    if current_user.user_type == 3:
-        return render(request, 'owner_home.html')
-    return render(request, 'home.html')
-
-@login_required
+@user_passes_test(is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
 def officers(request):
     officers = User.objects.filter(user_type = 2)
     return render(request, 'officers.html', {'officers': officers})
 
-@login_required
+def load_club(request):
+    return render(request, 'load_club.html',)
+
+@user_passes_test(is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
 def make_owner(request, user_id):
     user = request.user
     current_user = User.objects.get(id = user_id)
@@ -207,6 +196,11 @@ def make_owner(request, user_id):
         officers = User.objects.filter(user_type = 2)
     return render(request, 'officers.html', {'officers': officers})
 
+
+def club_list(request):
+    clubs = Club.objects.all()
+    return render(request, 'club_list.html', {'clubs': clubs})
+
 @login_required
 def profile(request):
     current_user = request.user
@@ -215,7 +209,7 @@ def profile(request):
         if form.is_valid():
             messages.add_message(request, messages.SUCCESS, "Profile updated!")
             form.save()
-            return redirect('home')
+            return redirect('profile')
     else:
         form = UserForm(instance=current_user)
     return render(request, 'profile.html', {'form': form})
@@ -241,3 +235,17 @@ def password(request):
 def club_sign_up(request):
     form = ClubForm(data=request.POST)
     return render(request, 'club_sign_up.html', {'form': form})
+
+@login_required
+def create_club(request):
+    if request.method == 'POST':
+        form = ClubForm(request.POST)
+        if form.is_valid():
+            club = Club.objects.create(
+                club_name=form.cleaned_data.get('club_name'),
+                club_location=form.cleaned_data.get('club_location'),
+                club_description=form.cleaned_data.get('club_description')
+            )
+    else:
+        form = ClubForm()
+    return render(request, 'create_club.html', {'form': form})
