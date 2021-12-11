@@ -4,7 +4,7 @@
 <head>
   <meta name="viewport" content="wide=device-width, initial_scale=1.0">
   <link rel="stylesheet" type="text/css" href="../../../static/list.css" />
-  <title>applicant</title>
+  <title>clubs</title>
 </head>
 
 <div class="container">
@@ -16,17 +16,29 @@
       <table class="table">
         <th scope="col"> </th>
         <th scope="col">Club Name</th>
-        <th scope="col">Location</th>
+        <th scope="col">Profile</th>
         <th scope="col">Description</th>
+        <th scope="col">Apply/ Unapply</th>
         {% for club in clubs %}
         <tr>
           <td>
+            <!-- will be club owners gravatar -->
             <img src="{{ user.mini_gravatar }}" alt="Gravatar of {{ user.email }}" class="rounded-circle">
           </td>
           <td>{{ club.club_name }}</td>
-
-          <td>{{ club.club_location }}</td>
+          <td><a href="{% url 'show_club' club.id %}" class="btn">Show Profile</a></td>
           <td>{{ club.club_description }}</td>
+          <td>
+            <!-- will show button depending on if user has applied to club already -->
+            {%if user.user_type == 0 %}
+            <a class="apply" href="{% url 'apply' user.id %}"><button>APPLY</button></a>
+            {% endif %}
+            {%if user.user_type == 1 %}
+            <a class="unapply" href="{% url 'unapply' user.id %}" style="text-decoration: none">
+              <button1>UNAPPLY</button1>
+            </a>
+            {% endif %}
+          </td>
         </tr>
         {% endfor %}
       </table>

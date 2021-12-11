@@ -1,0 +1,25 @@
+<div class="row content">
+  <div class="col-12">
+    <div class="profile-text">
+      <h3 class="profile-title">{{ club.club_name }}</h3>
+    </div>
+  </div>
+</div>
+<h4>Description</h4>
+<div class="row content">
+<div class="col-12">
+<p class="profile-bio">{{ club.club_description }}</p>
+<h4>Club Location:</h4>
+<div class="row content">
+<div class="col-12">
+<p class="profile-bio">{{ club.club_location }}</p>
+
+<h4>Club Owner</h4>
+<!-- will show club owners gravatar -->
+<img src="{{ user.gravatar }}" alt="Gravatar of {{ user.username }}" class="rounded-circle profile-image" >
+<h4>Bio:</h4>
+<div class="row content">
+  <div class="col-12">
+    <p class="profile-bio">{{ user.bio }}</p>
+  </div>
+</div>

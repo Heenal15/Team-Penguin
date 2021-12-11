@@ -26,6 +26,7 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('member/<int:user_id>', views.show_member, name='show_member'),
     path('user/<int:user_id>', views.show_user, name='show_user'),
+    path('club/<int:club_id>', views.show_club, name='show_club'),
     path('members/', views.member_list, name='member_list'),
     path('member_list_for_officer/', views.member_list_for_officer, name='member_list_for_officer'),
     path('members_and_officers_for_clubowner/', views.members_and_officers_for_clubowner, name='members_and_officers_for_clubowner'),
@@ -33,6 +34,8 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('approve/<int:user_id>', views.approve, name='approve'),
     path('unapprove/<int:user_id>', views.unapprove, name='unapprove'),
+    path('apply/<int:user_id>', views.apply, name='apply'),
+    path('unapply/<int:user_id>', views.unapply, name='unapply'),
     path('promote/<int:user_id>', views.promote, name='promote'),
     path('demote/<int:user_id>', views.demote, name='demote'),
     path('password/', views.password, name='password'),
@@ -43,4 +46,3 @@ urlpatterns = [
     path('create_club/', views.create_club, name='create_club'),
     path('load_club/', views.load_club, name='load_club'),
 ]
-

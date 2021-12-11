@@ -38,7 +38,7 @@ def log_out(request):
 @login_required
 def home(request):
     return render(request, 'home.html')
-  
+
 def register(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -135,6 +135,16 @@ def show_member(request, user_id):
     else:
         return render(request, 'show_member.html', {'user': user})
 
+@user_passes_test(is_club_owner_or_officer_or_member, login_url='unauthorised_access', redirect_field_name=None)
+def show_club(request, club_id):
+    try:
+        club = Club.objects.get(id = club_id)
+    except ObjectDoesNotExist:
+        return redirect('club_list')
+    else:
+        return render(request, 'show_club.html', {'club': club})
+
+
 @login_required
 def approve(request, user_id):
     current_user = User.objects.get(id = user_id)
@@ -151,6 +161,28 @@ def unapprove(request, user_id):
         current_user.delete()
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
+
+@login_required
+def apply(request, user_id):
+    '''
+    current_user = User.objects.get(id = user_id)
+    if current_user.user_type == 0:
+        current_user.user_type = 1
+        current_user.save()
+    applicants = User.objects.filter(user_type = 0)
+    '''
+    return render(request, 'club_list.html', {'applicants': applicants})
+
+
+@login_required
+def unapply(request, user_id):
+    '''
+    current_user = User.objects.get(id = user_id)
+    if current_user.user_type == 0:
+        current_user.delete()
+    applicants = User.objects.filter(user_type = 0)
+    '''
+    return render(request, 'club_list.html', {'applicants': applicants})
 
 @login_required
 def promote(request, user_id):
@@ -197,7 +229,7 @@ def make_owner(request, user_id):
         officers = User.objects.filter(user_type = 2)
     return render(request, 'officers.html', {'officers': officers})
 
-
+@login_required
 def club_list(request):
     clubs = Club.objects.all()
     return render(request, 'club_list.html', {'clubs': clubs})
