@@ -17,7 +17,7 @@ class UserFormTestCase(TestCase):
             'last_name': 'Doe',
             'email': 'janedoe@example.org',
             'bio': 'My bio',
-            'experience':'My experience',
+            'experience':'Beginner',
             'statement':'My statement'
         }
 
@@ -52,5 +52,5 @@ class UserFormTestCase(TestCase):
         self.assertEqual(user.last_name, 'Doe')
         self.assertEqual(user.email, 'janedoe@example.org')
         self.assertEqual(user.bio, 'My bio')
-        self.assertEqual(user.experience, 'My experience')
+        self.assertEqual(user.experience, 'Beginner')
         self.assertEqual(user.statement, 'My statement')

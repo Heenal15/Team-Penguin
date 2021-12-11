@@ -30,7 +30,6 @@ def log_in(request):
     form = LogInForm()
     return render(request, 'log_in.html', {'form': form})
 
-@login_required
 def log_out(request):
     logout(request)
     return redirect('log_in')
@@ -38,7 +37,7 @@ def log_out(request):
 @login_required
 def home(request):
     return render(request, 'home.html')
-  
+
 def register(request):
     if request.user.is_authenticated:
         return redirect('home')
