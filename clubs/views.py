@@ -134,7 +134,7 @@ def show_member(request, user_id):
     else:
         return render(request, 'show_member.html', {'user': user})
 
-@login_required
+@user_passes_test(is_club_owner_or_officer, login_url='unauthorised_access', redirect_field_name=None)
 def approve(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 0:
@@ -143,7 +143,7 @@ def approve(request, user_id):
     applicants = User.objects.filter(user_type = 0)
     return render(request, 'applicant_list.html', {'applicants': applicants})
 
-@login_required
+@user_passes_test(is_club_owner_or_officer, login_url='unauthorised_access', redirect_field_name=None)
 def unapprove(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 0:
@@ -173,7 +173,7 @@ def demote(request, user_id):
     members_and_officers = members | officers
     return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
 
-@login_required
+@user_passes_test(is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
 def officers(request):
     officers = User.objects.filter(user_type = 2)
     return render(request, 'officers.html', {'officers': officers})
@@ -181,7 +181,7 @@ def officers(request):
 def load_club(request):
     return render(request, 'load_club.html',)
 
-@login_required
+@user_passes_test(is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
 def make_owner(request, user_id):
     user = request.user
     current_user = User.objects.get(id = user_id)
