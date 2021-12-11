@@ -162,7 +162,7 @@ def promote(request, user_id):
     members_and_officers = members | officers
     return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
 
-@login_required
+@user_passes_test(is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
 def demote(request, user_id):
     current_user = User.objects.get(id = user_id)
     if current_user.user_type == 2:
