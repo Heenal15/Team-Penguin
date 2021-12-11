@@ -13,39 +13,39 @@
       <div class="col-12">
         <br><br><br><br>
         <h2>Chess Club Members</h2>
-<div class="select">
-        <select name="clubs" id="clubs">
-          <option value="Club 1">Club 1</option>
-          <option value="Club 2">Club 2</option>
-          <option value="Club 3">Club 3</option>
-          <option value="Club 4">Club 4</option>
-        </select>
-        <button type="button" onclick="location.href='{% url 'load_club' %}'">Pick Club</button>
-</div>
-        <table class="table">
-          <th scope="col"> </th>
-          <th scope="col">Full Name</th>
-          <th scope="col">Profile</th>
-          <th scope="col">Rank</th>
-          <th scope="col">Promote/ Demote</th>
-          {% for user in members_and_officers %}
-          <tr>
-            <td>
-              <img src="{{ user.mini_gravatar }}" alt="Gravatar of {{ user.email }}" class="rounded-circle">
-            </td>
-            <td>{{ user.full_name }}</td>
-            <td><a href="{% url 'show_user' user.id %}" class="btn">Show Profile</a></td>
-            <td>{{ user.get_user_type_display }}</td>
-            <td>
-              <a class="promote" href="{% url 'promote' user.id %}"><button>PROMOTE</button></a>
-              <a class="demote" href="{% url 'demote' user.id %}">
-                <button1>DEMOTE</button1>
-              </a>
-            </td>
-            {% endfor %}
-        </table>
-      </div>
+
+          <select name="clubs" id="clubs">
+            <option value="Club 1">Club 1</option>
+            <option value="Club 2">Club 2</option>
+            <option value="Club 3">Club 3</option>
+            <option value="Club 4">Club 4</option>
+          </select>
+          <button type="button" onclick="location.href='{% url 'load_club' %}'">Pick Club</button>
+
+      <table class="table">
+        <th scope="col"> </th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Profile</th>
+        <th scope="col">Rank</th>
+        <th scope="col">Promote/ Demote</th>
+        {% for user in members_and_officers %}
+        <tr>
+          <td>
+            <img src="{{ user.mini_gravatar }}" alt="Gravatar of {{ user.email }}" class="rounded-circle">
+          </td>
+          <td>{{ user.full_name }}</td>
+          <td><a href="{% url 'show_user' user.id %}" class="btn">Show Profile</a></td>
+          <td>{{ user.get_user_type_display }}</td>
+          <td>
+            <a class="promote" href="{% url 'promote' user.id %}"><button>PROMOTE</button></a>
+            <a class="demote" href="{% url 'demote' user.id %}">
+              <button1>DEMOTE</button1>
+            </a>
+          </td>
+          {% endfor %}
+      </table>
     </div>
+  </div>
   </div>
 </body>
 {% endblock %}

@@ -14,7 +14,11 @@
       <form action="{% url 'profile' %}" method="post">
         {% csrf_token %}
         {% include 'partials/bootstrap_form.html' with form=form %}
-        <input type="submit" value="Update" class="btn btn-primary">&nbsp<a class="btn btn-primary" href="{% url 'password' %}"><button1>Edit Password</button1></a>
+        <br><br>
+        <input type="submit" value="Update" class="btn btn-primary">&nbsp<a class="btn btn-primary" href="{% url 'password' %}">
+          <button1>Edit Password</button1>
+        </a>
+        <br><br>
       </form>
     </div>
   </div>
