@@ -85,10 +85,10 @@ class PasswordForm(forms.Form):
             self.add_error('password_confirmation', 'Confirmation does not match password.')
 
 class ClubForm(forms.ModelForm):
-    """Form to create a club"""
+    """Form for creation of a club"""
 
     class Meta:
-        """Form options."""
         model = Club
         fields = ['club_name', 'club_location', 'club_description']
-        widgets = { 'club_description':forms.Textarea()}
+        widgets = {'club_location': forms.Textarea(), 'club_description': forms.Textarea()}
+

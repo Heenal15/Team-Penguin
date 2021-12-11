@@ -33,6 +33,7 @@ class User(AbstractUser):
     username = None
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
+
     USER_TYPE_CHOICES = (
         (0, 'Applicant'),
         (1, 'Member'),
@@ -46,7 +47,10 @@ class User(AbstractUser):
         ('Advanced', 'Advanced'),
     )
 
-    user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=0)
+    #user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=0)
+    #user_type = models.ManyToManyField(Role)
+
+    #user_db = models.ManyToManyField('ClubContract', through='ClubContract')
 
     email = models.EmailField(unique=True, blank=False)
     first_name = models.CharField(max_length=50, blank=False)
@@ -70,11 +74,20 @@ class User(AbstractUser):
         """Return a URL to a miniature version of the user's gravatar."""
         return self.gravatar(size=60)
 
+class ClubManager(models.Manager):
+    def create_club(self, club_name, club_location, club_description):
+        club = self.create(club_name = club_name)
+        club = self.create(club_location = club_location)
+        club = self.create(club_description=club_description)
+
+        return club
+
 class Club(models.Model):
+    objects = ClubManager()
     club_name = models.CharField(max_length=50, blank=False)
     club_location = models.CharField(max_length=100, blank=False)
     club_description = models.CharField(max_length=520, blank=False)
-
+    
     def gravatar(self, size=120):
         """Return a URL to the user's gravatar."""
         gravatar_object = Gravatar(self.email)
@@ -84,3 +97,16 @@ class Club(models.Model):
     def mini_gravatar(self):
         """Return a URL to a miniature version of the user's gravatar."""
         return self.gravatar(size=60)
+
+class ClubContract(models.Model):
+    USER_TYPE = (
+        (0, 'Applicant'),
+        (1, 'Member'),
+        (2, 'Club Officer'),
+        (3, 'Club Owner'),
+    )
+
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    club = models.ForeignKey(Club, on_delete=models.SET_NULL, null=True)
+    role = models.IntegerField(choices=USER_TYPE, default=0)
+

@@ -232,6 +232,11 @@ def password(request):
     return render(request, 'password.html', {'form': form})
 
 @login_required
+def club_sign_up(request):
+    form = ClubForm(data=request.POST)
+    return render(request, 'club_sign_up.html', {'form': form})
+
+@login_required
 def create_club(request):
     if request.method == 'POST':
         form = ClubForm(request.POST)
