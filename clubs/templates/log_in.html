@@ -1,41 +1,43 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 {% block body %}
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="wide=device-width, initial_scale=1.0">
-  <link rel="stylesheet" type="text/css" href="../../../static/custom.css" />
+  <link rel="stylesheet" type="text/css" href="../../../static/login.css" />
   <title> Log In </title>
 </head>
 
 <body>
-  <div id="cover-image">
-    <div class="container vh-100">
-      <div class="row h-100">
-        <div class="col-12 my-auto">
-          <div class="card cover-card offset-sm-2 offset-md-4 offset-lg-7">
-            <h1 class="cover-heading">CHESS CLUB</h1>
-            <h1 class="cover-text"> Please Sign In Your Account </h1>
-            <form action="{% url 'log_in' %}" method="post">
-              {% csrf_token %}
-              {{ form.as_p }}
-              <div class="Box">
-                <input type="submit" value="Sign In">
-              </div>
-              <font color="#af444a" size="2">
-              </font>
-              &nbsp;
-              <p class="forget">Don't have account?<a href='{% url 'register' %}'>
-                Register
-                </a></p>
-          </div>
-        </div>
+  <div class="container">
+    <form action="{% url 'log_in' %}" method="post">
+      {% csrf_token %}
+      <h1 class="cover-heading">CHESS CLUB</h1>
+      <h2 class="cover-text"> Please Sign In Your Account </h2>
+      <div class="form-control">
+        <input type="text" name='email' required>
+        <label>Email</label>
       </div>
-    </div>
+      <div class="form-control">
+        <input type="password" name='password' required>
+        <label>Password</label>
+      </div>
+      <div class="warning">
+        <a>
+          {% if messages %}
+              {% for message in messages %}
+                  <p>{{ message }}</p>
+              {% endfor %}
+          {% else %}
+          <p>&nbsp</p>
+          {% endif %}
+        </a>
+      </div>
+      <button class="btn">Sign In</button>
+      <p class="text">Don't have account?&nbsp<a href='{% url 'register' %}'>Register</a></p>
+    </form>
   </div>
 </body>
-
 {% endblock %}

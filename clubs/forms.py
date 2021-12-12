@@ -91,4 +91,3 @@ class ClubForm(forms.ModelForm):
         model = Club
         fields = ['club_name', 'club_location', 'club_description']
         widgets = {'club_location': forms.Textarea(), 'club_description': forms.Textarea()}
-

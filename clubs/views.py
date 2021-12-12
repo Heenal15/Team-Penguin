@@ -24,9 +24,7 @@ def log_in(request):
                 login(request, user)
                 return redirect('home')
             else:
-                messages.add_message(request, messages.ERROR, "Username And Password Do Not Match")
-        else:
-            messages.add_message(request, messages.ERROR, "You Have Provided An Invalid Input")
+                messages.add_message(request, messages.ERROR, "Please Check Your Email And Password")
     form = LogInForm()
     return render(request, 'log_in.html', {'form': form})
 
