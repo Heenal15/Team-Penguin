@@ -98,6 +98,14 @@ class Club(models.Model):
         """Return a URL to a miniature version of the user's gravatar."""
         return self.gravatar(size=60)
 
+class ClubContractManager(models.Manager):
+    def club_contract_create(self, user, club, role):
+        club_contract = self.create(user = user)
+        club_contract = self.create(club = club)
+        club_contract = self.create(role = role)
+
+        return club_contract
+
 class ClubContract(models.Model):
     USER_TYPE = (
         (0, 'Applicant'),
