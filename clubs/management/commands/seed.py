@@ -58,7 +58,7 @@ class Command(BaseCommand):
         print('Billie is the owner of Kerbal Chess Club')
         print('Contract seeding is complete')
 
-def _create_user(self):
+    def _create_user(self):
         first_name = self.faker.first_name()
         last_name = self.faker.last_name()
         email = self._email(first_name, last_name)
@@ -78,7 +78,6 @@ def _create_user(self):
             experience=experience,
 
         )
-
     def _email(self, first_name, last_name):
         email = f'{first_name}.{last_name}@example.org'
         return email

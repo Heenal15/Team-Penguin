@@ -31,21 +31,21 @@
   </form>
 
     {% for contract in contracts %}
-    {%if contract.club.club_name == pls and contract.role == 0 %}
+    {%if contract.club.club_name == choice and contract.role == 0 %}
     <ul>
       <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
       <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
     </ul>
    {% endif %}
 
-   {%if contract.club.club_name == pls and contract.role == 1 %}
+   {%if contract.club.club_name == choice and contract.role == 1 %}
    <ul>
      <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
      <li><a href='{% url 'member_list' %}' style="text-decoration: none">MEMBERS</a></li>
      <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
    </ul>
     {% endif %}
-   {%if contract.club.club_name == pls and contract.role == 2 %}
+   {%if contract.club.club_name == choice and contract.role == 2 %}
     <ul>
       <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
       <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
@@ -53,7 +53,7 @@
       <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
     </ul>
   {% endif %}
-  {%if contract.club.club_name == pls and contract.role == 3 %}
+  {%if contract.club.club_name == choice and contract.role == 3 %}
   <ul>
     <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
     <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
@@ -79,13 +79,10 @@
 
   <section class="about">
     <div class="col-xs-12 col-lg-6 col-xl-8">
-    <h1>Feed</h1>
-    {% include 'partials/contracts_as_table.html' with contracts=contracts %}
-      </div>
 
     <p>Your ID is {{ user.id }}</p>
-    {% if pls %}
-    <p>  {{ pls }} </p>
+    {% if choice %}
+    <p>  {{ choice }} </p>
     {% endif %}
 
     <p>Basic Chess Club Management System:The Chess Club Management System is a web application that enables the officers of the club to manage membership of the club. People interested in joining the club can apply to join using a

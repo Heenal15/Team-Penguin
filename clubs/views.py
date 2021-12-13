@@ -37,8 +37,8 @@ def home(request):
     please = None
     contracts = ClubContract.objects.filter(user = request.user)
     if request.method == 'GET':
-        please = request.GET.get('selected_club')
-    return render(request, 'home.html', {'contracts' : contracts, 'pls': please})
+        Club_Choice = request.GET.get('selected_club')
+    return render(request, 'home.html', {'contracts' : contracts, 'choice': Club_Choice})
 
 def register(request):
     if request.user.is_authenticated:
