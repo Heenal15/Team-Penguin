@@ -12,37 +12,38 @@
 
 <body>
   <header>
-    <img src="../../static/images/logoko.png" width="90" height="80" class="logo">
-    {%if user.user_type == 0 %}
+    <a href='{% url 'home' %}' >
+     <img src="../../static/images/logoko.png" width="90" height="80" class="logo">
+   </a>
+   <form method="POST">
+     {% csrf_token %}
+    <select name='selected_club' >
+      <option disabled='true' selected>-- Choose Club --</option>
+    {% for contract in contracts %}
+      <option value = {{contract.club.club_name}} >{{ contract.club.club_name }}</option>
+      <tr>
+        <td>{{ contract.club.club_name }}</td>
+      </tr>
+    {% endfor %}
+    </select>
+    <input type="submit" value="Pick Club"/>
+    {% if messages %}
+    {% for message in messages %}
+    <h3> {{message}} </h3>
+    {% endfor %}
+    {% endif %}
+  </form>
+
+    <button type="button" onclick="location.href='{% url 'load_club' %}'">Pick Club</button>
+
+    {% for contract in contracts %}
+    {%if contract.club.club_name == 'Kerbal Chess Club' %}
     <ul>
       <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
       <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
     </ul>
    {% endif %}
-   {%if user.user_type == 1 %}
-   <ul>
-     <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
-     <li><a href='{% url 'member_list' %}' style="text-decoration: none">MEMBERS</a></li>
-     <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
-   </ul>
-    {% endif %}
-   {%if user.user_type == 2 %}
-    <ul>
-      <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
-      <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
-      <li><a href='{% url 'member_list_for_officer' %}' style="text-decoration: none">MY CLUBS</a></li>
-      <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
-    </ul>
-  {% endif %}
-  {%if user.user_type == 3 %}
-  <ul>
-    <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
-    <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
-    <li><a href='{% url 'members_and_officers_for_clubowner' %}' style="text-decoration: none">MY CLUBS</a></li>
-    <li><a href='{% url 'officers' %}' style="text-decoration: none">OWNERSHIP</a></li>
-    <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
-  </ul>
-  {% endif %}
+   {% endfor %}
 
 
     <a class="logout" href='{% url 'log_out' %}'><button>LOG OUT</button></a>
@@ -58,6 +59,14 @@
   </section>
 
   <section class="about">
+    <p>You are a {{ contract.role }}</p>
+      </div>
+    {% for contract in contracts %}
+      {%if contract.user.id == user.id  %}
+          <p> Hello {{ contract.user.id }}</p>
+      {%endif%}
+    {% endfor %}
+    <p>Your ID is {{ user.id }}</p>
     <p>You are a {{ user.get_user_type_display }}</p>
     <p>Basic Chess Club Management System:The Chess Club Management System is a web application that enables the officers of the club to manage membership of the club. People interested in joining the club can apply to join using a
       simple application form that asks for their name, email (ideally associated with a gravatar), a public bio, chess experience level, and a short personal statement. The form also requires the user to create a password. Applicants can log
