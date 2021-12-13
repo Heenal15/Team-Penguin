@@ -117,6 +117,3 @@ class ClubContract(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     club = models.ForeignKey(Club, on_delete=models.SET_NULL, null=True)
     role = models.IntegerField(choices=USER_TYPE, default=0)
-
-class SelectedClub(models.Model):
-    selected_club = models.CharField(max_length=50, blank=False)
