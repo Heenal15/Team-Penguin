@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from .models import User, Club, ClubContract, SelectedClub
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -26,3 +26,26 @@ class ChessUserAdmin(UserAdmin):
 
 
 admin.site.register(User, ChessUserAdmin)
+@admin.register(Club)
+class ClubAdmin(admin.ModelAdmin):
+    """Configuration of the admin interface for clubs."""
+
+    list_display = [
+        'club_name', 'club_location', 'club_description',
+    ]
+
+@admin.register(ClubContract)
+class ContractAdmin(admin.ModelAdmin):
+    """Configuration of the admin interface for contracts."""
+
+    list_display = [
+        'user', 'club', 'role',
+    ]
+
+@admin.register(SelectedClub)
+class ContractAdmin(admin.ModelAdmin):
+    """Configuration of the admin interface for selected club."""
+
+    list_display = [
+        'selected_club',
+    ]

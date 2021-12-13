@@ -1,0 +1,16 @@
+<head>
+  <title> Selected Club </title>
+</head>
+{% block body %}
+
+      <select name='Club Selector' id='clubID' size='1'>
+        <option disabled='true' selected>-- Choose Club --</option>
+      {% for contract in contracts %}
+        <option value = contract.club.club_name >{{ contract.club.club_name }}</option>
+        <tr>
+          <td>{{ contract.club.club_name }}</td>
+        </tr>
+      {% endfor %}
+      </select>
+
+{% endblock %}
