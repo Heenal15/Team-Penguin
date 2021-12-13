@@ -87,7 +87,7 @@ class Club(models.Model):
     club_name = models.CharField(max_length=50, blank=False)
     club_location = models.CharField(max_length=100, blank=False)
     club_description = models.CharField(max_length=520, blank=False)
-    
+
     def gravatar(self, size=120):
         """Return a URL to the user's gravatar."""
         gravatar_object = Gravatar(self.email)
@@ -118,3 +118,5 @@ class ClubContract(models.Model):
     club = models.ForeignKey(Club, on_delete=models.SET_NULL, null=True)
     role = models.IntegerField(choices=USER_TYPE, default=0)
 
+class SelectedClub(models.Model):
+    selected_club = models.CharField(max_length=50, blank=False)
