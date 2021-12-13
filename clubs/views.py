@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .forms import RegisterForm, LogInForm, UserForm, PasswordForm, ClubForm
-from .models import User, Club
+from .models import User, Club, ClubContract, SelectedClub
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
@@ -34,7 +34,29 @@ def log_out(request):
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    contracts = ClubContract.objects.filter(user = request.user)
+    return render(request, 'home.html', {'contracts' : contracts})
+
+def load_club(request):
+    contracts = ClubContract.objects.filter(user = request.user)
+    selected_club = request.GET.get('Club Selector')
+    return render(request, 'load_club.html', {'contracts' : contracts})
+
+def save_club(request):
+    contracts = ClubContract.objects.filter(user = request.user)
+    if request.method == "POST":
+        if request.POST.get('selected_club'):
+            chosen_club = SelectedClub()
+            chosen_club.selected_club = request.POST.get('selected_club')
+            chosen_club.save()
+            messages.success(request, 'The Selected Club is' + chosen_club.selected_club)
+            return render(request, 'home.html', {'contracts' : contracts})
+    else:
+            return render(request,'home.html', {'contracts' : contracts})
+
+def show_club(request):
+    clubs = SelectedClub.objects.all()
+    return render(request, 'show_club.html', {'clubs' : clubs})
 
 def register(request):
     if request.user.is_authenticated:
