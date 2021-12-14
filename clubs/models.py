@@ -47,7 +47,7 @@ class User(AbstractUser):
         ('Advanced', 'Advanced'),
     )
 
-    #user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=0)
+    user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=0)
     #user_type = models.ManyToManyField(Role)
 
     #user_db = models.ManyToManyField('ClubContract', through='ClubContract')
@@ -87,7 +87,7 @@ class Club(models.Model):
     club_name = models.CharField(max_length=50, blank=False)
     club_location = models.CharField(max_length=100, blank=False)
     club_description = models.CharField(max_length=520, blank=False)
-    
+
     def gravatar(self, size=120):
         """Return a URL to the user's gravatar."""
         gravatar_object = Gravatar(self.email)
@@ -117,4 +117,3 @@ class ClubContract(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     club = models.ForeignKey(Club, on_delete=models.SET_NULL, null=True)
     role = models.IntegerField(choices=USER_TYPE, default=0)
-
