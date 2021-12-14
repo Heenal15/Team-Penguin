@@ -6,45 +6,18 @@
 
 <head>
   <meta name="viewport" content="wide=device-width, initial_scale=1.0">
-<link rel="stylesheet" type="text/css" href="../../../static/homepage.css" />
-<title> homepage </title>
+  <link rel="stylesheet" type="text/css" href="../../../static/homepage.css" />
+  <title> homepage </title>
 </head>
 
 <body>
   <header>
     <img src="../../static/images/logoko.png" width="90" height="80" class="logo">
-    {%if user.user_type == 0 %}
     <ul>
       <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
+      <li><a href='' style="text-decoration: none">MY CLUBS</a></li>
       <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
     </ul>
-   {% endif %}
-   {%if user.user_type == 1 %}
-   <ul>
-     <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
-     <li><a href='{% url 'member_list' %}' style="text-decoration: none">MEMBERS</a></li>
-     <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
-   </ul>
-    {% endif %}
-   {%if user.user_type == 2 %}
-    <ul>
-      <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
-      <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
-      <li><a href='{% url 'member_list_for_officer' %}' style="text-decoration: none">MY CLUBS</a></li>
-      <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
-    </ul>
-  {% endif %}
-  {%if user.user_type == 3 %}
-  <ul>
-    <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
-    <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
-    <li><a href='{% url 'members_and_officers_for_clubowner' %}' style="text-decoration: none">MY CLUBS</a></li>
-    <li><a href='{% url 'officers' %}' style="text-decoration: none">OWNERSHIP</a></li>
-    <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
-  </ul>
-  {% endif %}
-
-
     <a class="logout" href='{% url 'log_out' %}'><button>LOG OUT</button></a>
   </header>
 
@@ -76,7 +49,6 @@
       deadline, they can also withdraw from the tournament.</p>
   </section>
 
-
   <script type="text/javascript">
     window.addEventListener("scroll", function() {
       var header = document.querySelector("header");
@@ -85,5 +57,6 @@
   </script>
 
 </body>
+
 </html>
 {% endblock %}

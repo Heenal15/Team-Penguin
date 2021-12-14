@@ -49,7 +49,7 @@ header ul li {
 }
 
 header ul li a {
-  position: relative;
+  position: absolute;
   margin: 0 15px;
   text-decoration: none;
   color: #fff;

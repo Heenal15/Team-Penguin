@@ -16,16 +16,12 @@
       <a href='{% url 'create_club' %}' class="btn">Create a Club</a>
       <br><br>
       <table class="table">
-        <th scope="col"> </th>
         <th scope="col">Club Name</th>
         <th scope="col">Location</th>
         <th scope="col">Description</th>
         <th scope="col">Apply</th>
         {% for club in clubs %}
         <tr>
-          <td>
-            <img src="{{ user.mini_gravatar }}" alt="Gravatar of {{ user.email }}" class="rounded-circle">
-          </td>
           <td>{{ club.club_name }}</td>
           <td>{{ club.club_location }}</td>
           <td>{{ club.club_description }}</td>
