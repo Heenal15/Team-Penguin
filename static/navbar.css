@@ -6,7 +6,7 @@
 }
 li, a, button3{
   font-family: sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1rem;
   color:white;
   text-decoration: none;
@@ -23,17 +23,18 @@ header{
   z-index: 100000;
 }
 button3{
-  color:#000;
-  font-size: 0.8rem;
+  color:white;
+  font-size: 1rem;
+  font-weight: bold;
   padding:4px 20px;
-  background-color: #C4C4C4;
+  background-color: #C1a779;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease 0s;
 }
 button3:hover{
-  background-color: gray;
+  background-color: black;
 }
 .logo{
   cursor: pointer;
