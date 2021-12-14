@@ -1,62 +1,18 @@
 * {
   margin: 0;
-  padding: 0;li, a, button3{
-  font-family: sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
-  color:white;
-  text-decoration: none;
-}
-header{
-  width:1196px;
-  height:60px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 20px 3%;
-  background-color: black;
-}
-button3{
-  color:#000;
-  font-size: 0.8rem;
-  padding:4px 20px;
-  background-color: #C4C4C4;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease 0s;
-}
-button3:hover{
-  background-color: gray;
-}
-.logo{
-  cursor: pointer;
-  margin-right: auto;
-}
-.nav_links{
-  list-style: none;
-  margin-top: 15px;
-}
-.nav_links li{
-  display: inline-block;
-  padding: 0px 20px;
-}
-.nav_links li a{
-  transition: all 0.3s ease 0s;
-}
-.nav_links li a:hover{
-  color:gray;
-}
-
+  padding: 0;
   box-sizing: border-box;
   font-family: 'poppins', sans-serif;
 }
-body th{
+/*th is the table*/
+th{
   text-align: center;
 }
-body tr td{
+/*tr td are contents*/
+tr td{
   text-align: center;
 }
+/*btn is for show_user*/
 .btn{
   text-align: center;
   font-size: 0.8em;
@@ -71,6 +27,7 @@ body tr td{
 .btn:hover{
   color:gray;
 }
+/*button & button1 is for un/approve & pro/demote*/
 button{
   text-align: center;
   font-size: 0.8em;

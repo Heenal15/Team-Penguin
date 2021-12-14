@@ -7,21 +7,11 @@
   <title>applicant</title>
 </head>
 
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <br><br><br><br>
-        <h2>Chess Club Members</h2>
-
-          <select name="clubs" id="clubs">
-            <option value="Club 1">Club 1</option>
-            <option value="Club 2">Club 2</option>
-            <option value="Club 3">Club 3</option>
-            <option value="Club 4">Club 4</option>
-          </select>
-          <button type="button" onclick="location.href='{% url 'load_club' %}'">Pick Club</button>
-
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <br><br><br><br>
+      <h2>Chess Club Members</h2>
       <table class="table">
         <th scope="col"> </th>
         <th scope="col">Full Name</th>
@@ -37,7 +27,9 @@
           <td><a href="{% url 'show_user' user.id %}" class="btn">Show Profile</a></td>
           <td>{{ user.get_user_type_display }}</td>
           <td>
-            <a class="promote" href="{% url 'promote' user.id %}"><button>PROMOTE</button></a>
+            <a class="promote" href="{% url 'promote' user.id %}">
+              <button>PROMOTE</button>
+            </a>
             <a class="demote" href="{% url 'demote' user.id %}">
               <button1>DEMOTE</button1>
             </a>
@@ -46,6 +38,5 @@
       </table>
     </div>
   </div>
-  </div>
-</body>
+</div>
 {% endblock %}
