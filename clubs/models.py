@@ -1,5 +1,4 @@
 """Models in the clubs app."""
-
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
@@ -74,16 +73,7 @@ class User(AbstractUser):
         """Return a URL to a miniature version of the user's gravatar."""
         return self.gravatar(size=60)
 
-class ClubManager(models.Manager):
-    def create_club(self, club_name, club_location, club_description):
-        club = self.create(club_name = club_name)
-        club = self.create(club_location = club_location)
-        club = self.create(club_description=club_description)
-
-        return club
-
 class Club(models.Model):
-    objects = ClubManager()
     club_name = models.CharField(max_length=50, blank=False)
     club_location = models.CharField(max_length=100, blank=False)
     club_description = models.CharField(max_length=520, blank=False)
@@ -97,23 +87,3 @@ class Club(models.Model):
     def mini_gravatar(self):
         """Return a URL to a miniature version of the user's gravatar."""
         return self.gravatar(size=60)
-
-class ClubContractManager(models.Manager):
-    def club_contract_create(self, user, club, role):
-        club_contract = self.create(user = user)
-        club_contract = self.create(club = club)
-        club_contract = self.create(role = role)
-
-        return club_contract
-
-class ClubContract(models.Model):
-    USER_TYPE = (
-        (0, 'Applicant'),
-        (1, 'Member'),
-        (2, 'Club Officer'),
-        (3, 'Club Owner'),
-    )
-
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    club = models.ForeignKey(Club, on_delete=models.SET_NULL, null=True)
-    role = models.IntegerField(choices=USER_TYPE, default=0)

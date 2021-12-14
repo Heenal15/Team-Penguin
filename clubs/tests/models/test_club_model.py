@@ -7,7 +7,7 @@ class ClubModelTestCase(TestCase):
     """Unit tests for the Club model."""
 
     def setUp(self):
-        self.club = Club.objects.create_club(
+        self.club = Club.objects.create(
             club_name = 'Club X',
             club_location = 'London',
             club_description = 'The club description',
