@@ -51,5 +51,6 @@ $ python3 manage.py test
 
 ## Sources
 The packages used by this application are specified in `requirements.txt`
+All the code has borrowed ideas from the recommended training videos.
 
 *Declare are other sources here.*

@@ -1,8 +1,10 @@
+"""Tests of the show user view."""
 from django.test import TestCase
 from django.urls import reverse
 from clubs.models import User
 
 class ShowUserTest(TestCase):
+    """Tests of the officer list view."""
 
     fixtures = [
         'clubs/tests/fixtures/default_user.json',

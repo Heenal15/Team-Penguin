@@ -1,31 +1,33 @@
+"""Tests of the officer list view."""
 from django.test import TestCase, Client
 from django.urls import reverse
 from clubs.models import User
 
-class ApplicantListTest(TestCase):
+class OfficerListTest(TestCase):
+    """Tests of the officer list view."""
 
     fixtures = ['clubs/tests/fixtures/other_users.json']
 
     def setUp(self):
-        self.url = reverse('applicant_list')
+        self.url = reverse('officers')
 
         self.user = User.objects.get(email='emilydoe@example.org')
         self.client = Client()
 
-    def test_applicant_list_url(self):
-        self.assertEqual(self.url,'/applicants/')
+    def test_officer_list_url(self):
+        self.assertEqual(self.url,'/officers/')
 
-    def deny_access_applicant_list_to_anonymous_user(self):
+    def deny_access_officer_list_to_anonymous_user(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 302)
 
-    def test_get_applicant_list_as_authorised_user(self):
+    def test_get_officer_list_as_authorised_user(self):
         self.client.login(email=self.user.email, password='Password123')
-        self._create_test_applicants(15-1)
+        self._create_test_officers(15-1)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'applicant_list.html')
-        self.assertEqual(len(response.context['applicants']), 15)
+        self.assertTemplateUsed(response, 'officers.html')
+        self.assertEqual(len(response.context['officers']), 15)
         for user_id in range(15-1):
             self.assertContains(response, f'Email{user_id}@test.org')
             self.assertContains(response, f'First{user_id}')
@@ -34,7 +36,7 @@ class ApplicantListTest(TestCase):
             user_url = reverse('show_user', kwargs={'user_id': user.id})
             self.assertContains(response, user_url)
 
-    def _create_test_applicants(self, user_count=4):
+    def _create_test_officers(self, user_count=4):
         for user_id in range(user_count):
             User.objects.create_user(f'Email{user_id}@test.org',
                 password='Password123',
@@ -43,5 +45,5 @@ class ApplicantListTest(TestCase):
                 bio=f'Bio {user_id}',
                 experience=f'Experience {user_id}',
                 statement=f'Statement {user_id}',
-                user_type = 0
+                user_type = 2
             )
