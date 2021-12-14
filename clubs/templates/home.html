@@ -14,9 +14,8 @@
   <header>
     <img src="../../static/images/logoko.png" width="90" height="80" class="logo">
     <ul>
-      <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
-      <li><a href='' style="text-decoration: none">MY CLUBS</a></li>
-      <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
+      <li><a href='{% url 'profile' %}'>MY PROFILE</a></li>
+      <li><a href='{% url 'club_list' %}'>CLUBS</a></li>
     </ul>
     <a class="logout" href='{% url 'log_out' %}'><button>LOG OUT</button></a>
   </header>
@@ -24,9 +23,9 @@
   <section class="banner">
     <div class="content">
       <h2>Let's Play Together</h2>
-      <p>Create a club to play with others</p>
+      <p>Create club to play with other</p>
       <br><br>
-      <a href='{% url 'create_club' %}' class="btn">Create Club</a>
+      <a href="#" class="btn">Create Club</a>
     </div>
   </section>
 
@@ -48,6 +47,7 @@
       capacity should be at least 2 and no more than 96 (you can set tighter limits to make the application a bit simplier). To participate, club members need to sign up for the tournament by a deadline set by the tournament organiser. Until that
       deadline, they can also withdraw from the tournament.</p>
   </section>
+
 
   <script type="text/javascript">
     window.addEventListener("scroll", function() {
