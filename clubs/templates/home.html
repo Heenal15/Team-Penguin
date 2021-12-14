@@ -12,7 +12,9 @@
 
 <body>
   <header>
-    <img src="../../static/images/logoko.png" width="90" height="80" class="logo">
+    <a href='{% url 'home' %}' >
+         <img src="../../static/images/logoko.png" width="90" height="80" class="logo">
+       </a>
     <ul>
       <li><a href='{% url 'profile' %}'>MY PROFILE</a></li>
       <li><a href='{% url 'club_list' %}'>CLUBS</a></li>
