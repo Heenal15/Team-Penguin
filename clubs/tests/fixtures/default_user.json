@@ -10,7 +10,8 @@
        "experience" : "Beginner",
        "statement" : "Hi I like to play chess at beginner level",
        "password": "pbkdf2_sha256$260000$4BNvFuAWoTT1XVU8D6hCay$KqDCG+bHl8TwYcvA60SGhOMluAheVOnF1PMz0wClilc=",
-       "is_active": true
+       "is_active": true,
+       "user_type": 0
      }
    }
 ]

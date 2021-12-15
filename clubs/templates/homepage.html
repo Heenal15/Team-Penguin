@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% block body %}
+
+<head>
+  <meta name="viewport" content="wide=device-width, initial_scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../../../static/homepage.css" />
+  <title> homepage </title>
+</head>
+
+<body>
+  <header>
+    <img src="../../static/images/logoko.png" width="90" height="80" class="logo">
+
+    <a class="log_in" href='{% url 'log_in' %}'><button>LOG IN</button></a>
+
+  </header>
+
+  <section class="banner">
+    <div class="content">
+      <h2>Let's Play Together</h2>
+      <p>Create a club to play with others</p>
+    </div>
+  </section>
+
+  <section class="about">
+
+
+  <script type="text/javascript">
+    window.addEventListener("scroll", function() {
+      var header = document.querySelector("header");
+      header.classList.toggle("sticky", window.scrollY > 0);
+    })
+  </script>
+
+</body>
+
+</html>
+{% endblock %}

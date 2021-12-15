@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<head>
+  <meta name="viewport" content="wide=device-width, initial_scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../../../static/list.css" />
+  <title>applicant</title>
+</head>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <br><br>
+      <br><br>
+      <h2>Club List</h2>
+      <a href='{% url 'create_club' %}' class="btn">Create a Club</a>
+      <br><br>
+      <table class="table">
+        <th scope="col">Club Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">Description</th>
+        <th scope="col">Apply</th>
+        {% for club in clubs %}
+        <tr>
+          <td>{{ club.club_name }}</td>
+          <td>{{ club.club_location }}</td>
+          <td>{{ club.club_description }}</td>
+          <td><a class="apply" href=""><button1>APPLY</button1></a></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
