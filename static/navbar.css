@@ -36,9 +36,18 @@ button3{
 button3:hover{
   background-color: black;
 }
-.logo{
+.logo-home-button{
   cursor: pointer;
   margin-right: auto;
+  font-size: 1rem;
+  font-weight: 600;
+  color:white;
+  border-radius: 10%;
+  transition: all 0.3s ease 0s;
+}
+.logo-home-button:hover{
+  background-color: white;
+  color: gray;
 }
 .nav_links{
   list-style: none;
