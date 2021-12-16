@@ -24,7 +24,7 @@
         {%if user.user_type == 1 %}
         <ul>
          <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
-         <li><a href='{% url 'user_list' %}' style="text-decoration: none">MEMBERS</a></li>
+         <li><a href='{% url 'user_list' %}' style="text-decoration: none">MY CLUB</a></li>
          <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
         </ul>
         {% endif %}
@@ -32,7 +32,7 @@
         <ul>
           <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
           <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
-          <li><a href='{% url 'user_list' %}' style="text-decoration: none">MEMBERS</a></li>
+          <li><a href='{% url 'user_list' %}' style="text-decoration: none">MY CLUB</a></li>
           <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
         </ul>
         {% endif %}
