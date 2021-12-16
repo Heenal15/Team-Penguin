@@ -42,7 +42,7 @@ class ShowUserTest(TestCase):
         response = self.client.get(url, follow=True)
         response_url = reverse('home')
         self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
-        self.assertTemplateUsed(response, 'home.html')
+        self.assertTemplateUsed(response, 'dashboard.html')
 
     def test_get_show_user_redirects_when_not_logged_in(self):
         response = self.client.get(self.url)

@@ -91,7 +91,7 @@ class ProfileViewTest(TestCase):
         self.assertEqual(after_count, before_count)
         response_url = reverse('home')
         self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
-        self.assertTemplateUsed(response, 'home.html')
+        self.assertTemplateUsed(response, 'dashboard.html')
         self.user.refresh_from_db()
         self.assertEqual(self.user.first_name, 'John2')
         self.assertEqual(self.user.last_name, 'Doe2')

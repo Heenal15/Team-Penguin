@@ -38,13 +38,13 @@
 
         <li>
           {% if user.user_type == 1 %}
-          <a href='{% url 'user_list' %}'>Members</a>
+          <a href='{% url 'member_list' %}'>Members</a>
           {% endif %}
           {% if user.user_type == 2 %}
-          <a href='{% url 'user_list' %}'>Members</a>
+          <a href='{% url 'member_list_for_officer' %}'>Members</a>
           {% endif %}
           {% if user.user_type == 3 %}
-          <a href='{% url 'user_list' %}'>Users</a>
+          <a href='{% url 'members_and_officers_for_clubowner' %}'>Users</a>
           {% endif %}
         </li>
         <li><a href='{% url 'club_list' %}'>Clubs</a></li>
