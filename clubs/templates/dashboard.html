@@ -12,59 +12,88 @@
 
 <body>
   <header>
-    <a href='{% url 'home' %}' >
-         <img src="../../static/images/logoko.png" width="90" height="80" class="logo">
-       </a>
-        {%if user.user_type == 0 %}
-        <ul>
-          <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
-          <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
-        </ul>
-        {% endif %}
-        {%if user.user_type == 1 %}
-        <ul>
-         <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
-         <li><a href='{% url 'user_list' %}' style="text-decoration: none">MY CLUB</a></li>
-         <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
-        </ul>
-        {% endif %}
-        {%if user.user_type == 2 %}
-        <ul>
-          <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
-          <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
-          <li><a href='{% url 'user_list' %}' style="text-decoration: none">MY CLUB</a></li>
-          <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
-        </ul>
-        {% endif %}
-        {%if user.user_type == 3 %}
-        <ul>
-        <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
-        <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
-        <li><a href='{% url 'user_list' %}' style="text-decoration: none">MY CLUB</a></li>
-        <li><a href='{% url 'officers' %}' style="text-decoration: none">OWNERSHIP</a></li>
-        <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
-        </ul>
-        {% endif %}
+    <a href='{% url 'home' %}'>
+      <img src="../../static/images/logoko.png" width="90" height="80" class="logo">
+    </a>
+    {%if user.user_type == 0 %}
+    <ul>
+      <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
+      <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
+    </ul>
+    {% endif %}
+    {%if user.user_type == 1 %}
+    <ul>
+      <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
+      <li><a href='{% url 'user_list' %}' style="text-decoration: none">MY CLUB</a></li>
+      <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
+    </ul>
+    {% endif %}
+    {%if user.user_type == 2 %}
+    <ul>
+      <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
+      <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
+      <li><a href='{% url 'user_list' %}' style="text-decoration: none">MY CLUB</a></li>
+      <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
+    </ul>
+    {% endif %}
+    {%if user.user_type == 3 %}
+    <ul>
+      <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
+      <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
+      <li><a href='{% url 'user_list' %}' style="text-decoration: none">MY CLUB</a></li>
+      <li><a href='{% url 'officers' %}' style="text-decoration: none">OWNERSHIP</a></li>
+      <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
+    </ul>
+    {% endif %}
     <a class="logout" href='{% url 'log_out' %}'><button>LOG OUT</button></a>
   </header>
 
   <section class="banner">
     <div class="content">
+      <br><br><br><br><br><br>
       <h2>Let's Play Together</h2>
       <p>Create a club to play with others</p>
-      <br><br>
+      <br>
       <a href='{% url 'create_club' %}' class="btn">Create Club</a>
-      <br><br>
-      <p> Welcome, {{ user.full_name }}, You are a {{ user.get_user_type_display }} </p>
-      <br><br>
-      <p> Scroll down for more information <p>
+      <br><br><br><br><br>
+      <h4>Scroll down for more information </h4>
       <br>
       <img src="../../static/images/Down Arrow.png" width="37" height="23" class="Down-Arrow">
     </div>
   </section>
 
+
   <section class="about">
-    <p>You are a {{ user.get_user_type_display }}</p>
+    <p>Welcome, {{ user.full_name }}</p>
+    <p>You are a <span>{{ user.get_user_type_display }}</span> in the club</p>
+    <br><br>
+    <p>As a <span>{{ user.get_user_type_display }}</span></p>
+    {% if user.user_type == 0 %}
+    <p>You can edit your profile and password in 'My Profile'</p>
+    <p>You can create your own club in 'Create Club'</p>
+    <p>You can apply clubs in 'Clubs'</p>
+    {% endif %}
+    {% if user.user_type == 1 %}
+    <p>You can edit your profile in 'My Profile'</p>
+    <p>You can create your own club in 'Create Club'</p>
+    <p>You can apply clubs in 'Clubs'</p>
+    <p>You can access a list of all the other members in clubs you take part in in'My Club'</p>
+    {% endif %}
+    {% if user.user_type == 2 %}
+    <p>You can edit your profile in 'My Profile'</p>
+    <p>You can create your own club in 'Create Club'</p>
+    <p>You can apply clubs in 'Clubs'</p>
+    <p>You can access the other members and their profiles in clubs you take part in in'My Club'</p>
+    {% endif %}
+    {% if user.user_type == 3 %}
+    <p>You can edit your profile in 'My Profile'</p>
+    <p>You can create your own club in 'Create Club'</p>
+    <p>You can apply clubs in 'Clubs'</p>
+    <p>You can access other members and their profiles in clubs you take part in in 'My Club'</p>
+    <p>You can promote a member as an officer, and also demote a officer as a member in 'My Club'</p>
+    <p>You can transfer your ownership to an officer in 'My Ownership'
+      {% endif %}
+  </section>
 
   <script type="text/javascript">
     window.addEventListener("scroll", function() {
