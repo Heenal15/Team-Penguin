@@ -59,7 +59,6 @@ def make_owner(request, user_id):
     """ Make some an owner """
     user = request.user
     current_user = User.objects.get(id = user_id)
-    # Current club owner becomes an officer
     user.user_type = 2
     user.save()
     if User.objects.filter(user_type = 3).exists():
