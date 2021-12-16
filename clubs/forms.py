@@ -42,7 +42,7 @@ class NewPasswordMixin(forms.Form):
                     'character and a number'
             )]
     )
-    password_confirmation = forms.CharField(label='Password confirmation', widget=forms.PasswordInput())
+    password_confirmation = forms.CharField(label='New Password confirmation', widget=forms.PasswordInput())
 
     def clean(self):
         """Form mixing for new_password and password_confirmation fields."""
