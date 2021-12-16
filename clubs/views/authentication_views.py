@@ -12,7 +12,7 @@ class LogInView(LoginProhibitedMixin, View):
     """View that handles log in."""
 
     http_method_names = ['get', 'post']
-    redirect_when_logged_in_url = 'home'
+    redirect_when_logged_in_url = 'dashboard'
 
     def get(self, request):
         """Display log in template."""
@@ -40,5 +40,10 @@ class LogInView(LoginProhibitedMixin, View):
 
 
 def log_out(request):
+    """ Log out users who are logged into the website """
     logout(request)
     return redirect('log_in')
+
+def unauthorised_access(request):
+    """ unauthorised access to the website when a user is not logged in """
+    return render(request, 'unauthorised_access.html')
