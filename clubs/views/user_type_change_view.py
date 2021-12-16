@@ -40,7 +40,7 @@ def promote(request, user_id):
     members = User.objects.filter(user_type = 1)
     officers =  User.objects.filter(user_type = 2)
     members_and_officers = members | officers
-    return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
+    return render(request, 'user_list.html', {'members_and_officers': members_and_officers})
 
 @user_passes_test(is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
 def demote(request, user_id):
@@ -52,7 +52,7 @@ def demote(request, user_id):
     members = User.objects.filter(user_type = 1)
     officers =  User.objects.filter(user_type = 2)
     members_and_officers = members | officers
-    return render(request, 'members_and_officers_for_clubowner.html', {'members_and_officers': members_and_officers})
+    return render(request, 'user_list.html', {'members_and_officers': members_and_officers})
 
 @user_passes_test(is_club_owner, login_url='unauthorised_access', redirect_field_name=None)
 def make_owner(request, user_id):
