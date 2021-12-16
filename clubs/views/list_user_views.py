@@ -8,8 +8,8 @@ from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import check_password
-from .user_type_checker import *
-from .authentication_view import *
+from .user_type_check import *
+from .authentication_views import *
 
 @user_passes_test(is_club_owner_or_officer, login_url='unauthorised_access', redirect_field_name=None)
 def applicant_list(request):
