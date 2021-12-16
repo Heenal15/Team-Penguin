@@ -19,13 +19,11 @@
         <th scope="col">Club Name</th>
         <th scope="col">Location</th>
         <th scope="col">Description</th>
-        <th scope="col">Apply</th>
         {% for club in clubs %}
         <tr>
           <td>{{ club.club_name }}</td>
           <td>{{ club.club_location }}</td>
           <td>{{ club.club_description }}</td>
-          <td><a class="apply" href=""><button1>APPLY</button1></a></td>
         </tr>
         {% endfor %}
       </table>

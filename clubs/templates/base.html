@@ -24,32 +24,32 @@
       <ul class="nav_links">
         <li>
           {% if user.user_type == 3 %}
-          <a href='{% url 'officers' %}'>ownership</a>
+          <a href='{% url 'officers' %}'>Ownership</a>
           {% endif %}
         </li>
         <li>
           {% if user.user_type == 2 %}
-          <a href='{% url 'applicant_list' %}'>applicants</a>
+          <a href='{% url 'applicant_list' %}'>Applicants</a>
           {% endif %}
           {% if user.user_type == 3 %}
-          <a href='{% url 'applicant_list' %}'>applicants</a>
+          <a href='{% url 'applicant_list' %}'>Applicants</a>
           {% endif %}
         </li>
 
         <li>
           {% if user.user_type == 1 %}
-          <a href='{% url 'member_list' %}'>my clubs</a>
+          <a href='{% url 'user_list' %}'>Members</a>
           {% endif %}
           {% if user.user_type == 2 %}
-          <a href='{% url 'member_list_for_officer' %}'>my clubs</a>
+          <a href='{% url 'user_list' %}'>Members</a>
           {% endif %}
           {% if user.user_type == 3 %}
-          <a href='{% url 'members_and_officers_for_clubowner' %}'>my clubs</a>
+          <a href='{% url 'user_list' %}'>Users</a>
           {% endif %}
         </li>
-        <li><a href='{% url 'club_list' %}'>clubs</a></li>
+        <li><a href='{% url 'club_list' %}'>Clubs</a></li>
 
-        <li><a href='{% url 'profile' %}'>my profile</a></li>
+        <li><a href='{% url 'profile' %}'>My Profile</a></li>
       </ul>
     </nav>
   </header>
