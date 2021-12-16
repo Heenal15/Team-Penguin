@@ -39,13 +39,7 @@ $ pip3 install -r requirements.txt
 ```
 
 Migrate the database:
-
-```
-$ python3 manage.py migrate
-```
-
-Any errors with the database:
-
+`
 ```
 $ python3 manage.py migrate --run-syncdb
 ```
