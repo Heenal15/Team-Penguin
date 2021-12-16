@@ -15,8 +15,7 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.is_superuser = False
         user.is_staff = False
-        #user.user_type=0   #overrides seeder and makes all users applicants
-        user.save(using=self._db) #giving error in tests
+        user.save(using=self._db)
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
@@ -47,10 +46,6 @@ class User(AbstractUser):
     )
 
     user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=0)
-    #user_type = models.ManyToManyField(Role)
-
-    #user_db = models.ManyToManyField('ClubContract', through='ClubContract')
-
     email = models.EmailField(unique=True, blank=False)
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)

@@ -7,10 +7,6 @@ from clubs.models import Club
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 
-def load_club(request):
-    """ Load all the avaible clubs """
-    return render(request, 'load_club.html',)
-
 def club_list(request):
     """ Display a list of all clubs """
     clubs = Club.objects.all()

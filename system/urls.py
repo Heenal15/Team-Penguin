@@ -40,5 +40,4 @@ urlpatterns = [
     path('club_sign_up/', views.club_sign_up, name='club_sign_up'),
     path('club_list/', views.club_list, name='club_list'),
     path('create_club/', views.create_club, name='create_club'),
-    path('load_club/', views.load_club, name='load_club'),
 ]
