@@ -44,7 +44,7 @@ class PasswordViewTest(TestCase):
         response = self.client.post(self.url, self.form_input, follow=True)
         response_url = reverse('home')
         self.assertRedirects(response, response_url, status_code=302, target_status_code=200)
-        self.assertTemplateUsed(response, 'home.html')
+        self.assertTemplateUsed(response, 'dashboard.html')
         self.user.refresh_from_db()
         is_password_correct = check_password('NewPassword123', self.user.password)
         self.assertTrue(is_password_correct)

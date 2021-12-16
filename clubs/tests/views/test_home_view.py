@@ -14,13 +14,13 @@ class HomeViewTestCase(TestCase):
         self.user = User.objects.get(email = 'johndoe@example.org')
 
     def test_home_url(self):
-        self.assertEqual(self.url,'/home/')
+        self.assertEqual(self.url,'/dashboard/')
 
     def test_get_home(self):
         self.client.login(email=self.user.email, password="Password123")
         response = self.client.get(self.url, follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'home.html')
+        self.assertTemplateUsed(response, 'dashboard.html')
 
     def test_get_home_redirects_when_not_logged_in(self):
         redirect_url = reverse_with_next('log_in', self.url)
