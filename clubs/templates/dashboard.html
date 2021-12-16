@@ -54,6 +54,9 @@
       <p>Create a club to play with others</p>
       <br><br>
       <a href='{% url 'create_club' %}' class="btn">Create Club</a>
+
+      <p> Welcome, {{ user.full_name }}, You are a {{ user.get_user_type_display }} </p>
+      <p> Scroll down for more information <p>
     </div>
   </section>
 
