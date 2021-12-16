@@ -8,7 +8,6 @@ The members of the team are:
 - Kai Corr
 - Abbenayan Jeyakumar
 
-*Add any further information about the team here, such as absent team members.*
 
 ## Project structure
 The project is called `system`.  It currently consists of a single app `clubs`.
@@ -36,6 +35,12 @@ Migrate the database:
 $ python3 manage.py migrate
 ```
 
+Any errors with the database:
+
+```
+$ python3 manage.py migrate --run-syncdb
+```
+
 Seed the development database with:
 
 ```
@@ -47,10 +52,6 @@ Run all tests with:
 $ python3 manage.py test
 ```
 
-*The above instructions should work in your version of the application.  If there are deviations, declare those here in bold.  Otherwise, remove this line.*
-
 ## Sources
 The packages used by this application are specified in `requirements.txt`
 All the code has borrowed ideas from the recommended training videos.
-
-*Declare are other sources here.*
