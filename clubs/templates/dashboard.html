@@ -64,7 +64,43 @@
   </section>
 
   <section class="about">
-    <p>You are a {{ user.get_user_type_display }}</p>
+    {%if user.user_type == 3 %}
+    <p>You are a {{ user.get_user_type_display }}:</p>
+
+      <ol style="color:#FFFFFF">
+        <li>Owners can view and edit their profile</li>
+        <li>Owners can view members and all details about them</li>
+        <li>Owners can promote and demote members and officers in their club</li>
+        <li>Owners can approve and unapprove applicants to the club</li>
+        <li>Owners can transfer ownership to another officer</li>
+        <li>Owners can view clubs on the website</li>
+      </ol>
+    {% endif %}
+    {%if user.user_type == 2 %}
+    <p>You are a {{ user.get_user_type_display }}:</p>
+    <ul>
+      <li>Officers can view and edit their profile</li>
+      <li>Officers can view members and all details about them</li>
+      <li>Officers can promote and demote members of their club</li>
+      <li>Officers can approve and unapprove applicants to the club</li>
+      <li>Officers can view clubs on the website</li>
+    </ul>
+    {% endif %}
+    {%if user.user_type == 1 %}
+    <p>You are a {{ user.get_user_type_display }}:</p>
+    <ul>
+      <li>Members can view and edit their profile</li>
+      <li>Members can view other members with the website</li>
+      <li>Members can view clubs on the website</li>
+    </ul>
+    {% endif %}
+    {%if user.user_type == 0 %}
+    <p>You are an {{ user.get_user_type_display }}:</p>
+    <ul>
+      <li>Applicants can edit their profile</li>
+      <li>Applicants can view current clubs</li>
+    </ul>
+    {% endif %}
 
   <script type="text/javascript">
     window.addEventListener("scroll", function() {
