@@ -1,3 +1,5 @@
+Ensure you follow the 'Installation instructions' in order to run the project successfully.
+
 # Team Penguin Small Group project
 
 ## Team members
