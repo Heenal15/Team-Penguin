@@ -69,31 +69,30 @@
     <br><br>
     <p>As a <span>{{ user.get_user_type_display }}</span></p>
     {% if user.user_type == 0 %}
-    <p>You can edit your profile and password in 'My Profile'</p>
-    <p>You can create your own club in 'Create Club'</p>
-    <p>You can apply clubs in 'Clubs'</p>
+    <p>You can edit your profile in <a href='{% url 'profile' %}'>My Profile</a></p>
+    <p>You can create your own club in <a href='{% url 'create_club' %}'>Create Club</a></p>
+    <p>You can apply any other clubs in <a href='{% url 'club_list' %}'>Clubs</a></p>
     {% endif %}
     {% if user.user_type == 1 %}
-    <p>You can edit your profile in 'My Profile'</p>
-    <p>You can create your own club in 'Create Club'</p>
-    <p>You can apply clubs in 'Clubs'</p>
-    <p>You can access a list of all the other members in clubs you take part in in'My Club'</p>
+    <p>You can edit your profile in <a href='{% url 'profile' %}'>My Profile</a></p>
+    <p>You can create your own club in <a href='{% url 'create_club' %}'>Create Club</a></p>
+    <p>You can apply any other clubs in <a href='{% url 'club_list' %}'>Clubs</a></p>
+    <p>You can access the other members in clubs you join in <a href='{% url 'user_list' %}'>My Club</a></p>
     {% endif %}
     {% if user.user_type == 2 %}
-    <p>You can edit your profile in 'My Profile'</p>
-    <p>You can create your own club in 'Create Club'</p>
-    <p>You can apply clubs in 'Clubs'</p>
-    <p>You can approve or unapprove user's apply in "Application"</p>
-    <p>You can access the other members and their profiles in clubs you take part in in'My Club'</p>
+    <p>You can edit your profile in <a href='{% url 'profile' %}'>My Profile</a></p>
+    <p>You can create your own club in <a href='{% url 'create_club' %}'>Create Club</a></p>
+    <p>You can apply any other clubs in <a href='{% url 'club_list' %}'>Clubs</a></p>
+    <p>You can approve or unapprove user's apply in <a href='{% url 'applicant_list' %}'>Application</a></p>
+    <p>You can access the other members in clubs you join in <a href='{% url 'user_list' %}'>My Club</a></p>
     {% endif %}
     {% if user.user_type == 3 %}
-    <p>You can edit your profile in 'My Profile'</p>
-    <p>You can create your own club in 'Create Club'</p>
-    <p>You can apply clubs in 'Clubs'</p>
-        <p>You can approve or unapprove user's apply in "Application"</p>
-    <p>You can access other members and their profiles in clubs you take part in in 'My Club'</p>
-    <p>You can promote a member as an officer, and also demote a officer as a member in 'My Club'</p>
-    <p>You can transfer your ownership to an officer in 'My Ownership'
+    <p>You can edit your profile in <a href='{% url 'profile' %}'>My Profile</a></p>
+    <p>You can create your own club in <a href='{% url 'create_club' %}'>Create Club</a></p>
+    <p>You can apply any other clubs in <a href='{% url 'club_list' %}'>Clubs</a></p>
+    <p>You can approve or unapprove user's apply in <a href='{% url 'applicant_list' %}'>Application</a></p>
+    <p>You can access the other members in clubs you join in <a href='{% url 'user_list' %}'>My Club</a></p>
+    <p>You can transfer your ownership to an officer in <a href='{% url 'officers' %}'>Ownership</a></p>
       {% endif %}
   </section>
 
