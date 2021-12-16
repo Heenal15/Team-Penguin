@@ -9,11 +9,12 @@ The members of the team are:
 - Abbenayan Jeyakumar
 
 ## Chess Club Management System
-The chess club system allows officers of a club to manage memberships of the club.
-Users register on the website and becomes an applicant, awaiting approval or rejection from an officer.
-Applicants at this stage can only eidt their profile once they log into the site.
-Once a approved and a member; a member can access a list of other members just displaying thie name, public bio and gravatar.
-An office can also make a member into an officer and officers can be demoted to member by club owner.
+The chess club system allows officers and club owner of a club to manage memberships of the club.
+Users register on the website and become an applicant, awaiting approval or rejection from an officer or club owner.
+Applicants at this stage can only edit their profile once they log into the site.
+Once approved and a member; a member can access a list of other members.
+The list displays the name, public bio and gravatar of each member.
+Club owners can promote a member to an officer and demote an officer to a member.
 A club owner can transfer ownership to another officer.
 A member can register and create a club which can be viewed by all users.
 
