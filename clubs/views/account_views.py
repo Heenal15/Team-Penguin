@@ -32,7 +32,7 @@ class PasswordView(LoginRequiredMixin, FormView):
         """Redirect the user after successful password change."""
 
         messages.add_message(self.request, messages.SUCCESS, "Password updated!")
-        return reverse('home')
+        return reverse('profile')
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
@@ -50,7 +50,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         """Return redirect URL after successful update."""
         messages.add_message(self.request, messages.SUCCESS, "Profile updated!")
-        return reverse(settings.REDIRECT_URL_WHEN_LOGGED_IN)
+        return reverse('profile')
 
 
 class RegisterView(LoginProhibitedMixin, FormView):

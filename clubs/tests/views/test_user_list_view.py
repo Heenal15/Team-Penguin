@@ -9,13 +9,13 @@ class MemberListTest(TestCase):
     fixtures = ['clubs/tests/fixtures/other_users.json']
 
     def setUp(self):
-        self.url = reverse('member_list')
+        self.url = reverse('user_list')
 
         self.user = User.objects.get(email='lilydoe@example.org')
         self.client = Client()
 
     def test_member_list_url(self):
-        self.assertEqual(self.url,'/members/')
+        self.assertEqual(self.url,'/user_list/')
 
     def deny_access_member_list_to_anonymous_user(self):
         response = self.client.get(self.url)
@@ -26,7 +26,7 @@ class MemberListTest(TestCase):
         self._create_test_members(15-1)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'member_list.html')
+        self.assertTemplateUsed(response, 'user_list.html')
         self.assertEqual(len(response.context['members']), 15)
         for user_id in range(15-1):
             self.assertContains(response, f'Email{user_id}@test.org')

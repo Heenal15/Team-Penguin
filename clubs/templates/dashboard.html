@@ -15,7 +15,7 @@
     <a href='{% url 'home' %}' >
          <img src="../../static/images/logoko.png" width="90" height="80" class="logo">
        </a>
-            {%if user.user_type == 0 %}
+        {%if user.user_type == 0 %}
         <ul>
           <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
           <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
@@ -24,7 +24,7 @@
         {%if user.user_type == 1 %}
         <ul>
          <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
-         <li><a href='{% url 'member_list' %}' style="text-decoration: none">MEMBERS</a></li>
+         <li><a href='{% url 'user_list' %}' style="text-decoration: none">MEMBERS</a></li>
          <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
         </ul>
         {% endif %}
@@ -32,7 +32,7 @@
         <ul>
           <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
           <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
-          <li><a href='{% url 'member_list_for_officer' %}' style="text-decoration: none">MEMBERS</a></li>
+          <li><a href='{% url 'user_list' %}' style="text-decoration: none">MEMBERS</a></li>
           <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
         </ul>
         {% endif %}
@@ -40,7 +40,7 @@
         <ul>
         <li><a href='{% url 'club_list' %}' style="text-decoration: none">CLUBS</a></li>
         <li><a href='{% url 'applicant_list' %}' style="text-decoration: none">APPLICANTS</a></li>
-        <li><a href='{% url 'members_and_officers_for_clubowner' %}' style="text-decoration: none">MY CLUB</a></li>
+        <li><a href='{% url 'user_list' %}' style="text-decoration: none">MY CLUB</a></li>
         <li><a href='{% url 'officers' %}' style="text-decoration: none">OWNERSHIP</a></li>
         <li><a href='{% url 'profile' %}' style="text-decoration: none">MY PROFILE</a></li>
         </ul>
