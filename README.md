@@ -1,4 +1,4 @@
-Ensure you follow the 'Installation instructions' in order to run the project successfully.
+If cloning from the github repo, ensure you follow the 'Installation instructions' in order to run the project successfully.
 
 # Team Penguin Small Group project
 
