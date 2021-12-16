@@ -8,7 +8,14 @@ The members of the team are:
 - Kai Corr
 - Abbenayan Jeyakumar
 
-*Add any further information about the team here, such as absent team members.*
+## Chess Club Management System
+The chess club system allows officers of a club to manage memberships of the club.
+Users register on the website and becomes an applicant, awaiting approval or rejection from an officer.
+Applicants at this stage can only eidt their profile once they log into the site.
+Once a approved and a member; a member can access a list of other members just displaying thie name, public bio and gravatar.
+An office can also make a member into an officer and officers can be demoted to member by club owner.
+A club owner can transfer ownership to another officer.
+A member can register and create a club which can be viewed by all users.
 
 ## Project structure
 The project is called `system`.  It currently consists of a single app `clubs`.
@@ -36,6 +43,12 @@ Migrate the database:
 $ python3 manage.py migrate
 ```
 
+Any errors with the database:
+
+```
+$ python3 manage.py migrate --run-syncdb
+```
+
 Seed the development database with:
 
 ```
@@ -47,10 +60,6 @@ Run all tests with:
 $ python3 manage.py test
 ```
 
-*The above instructions should work in your version of the application.  If there are deviations, declare those here in bold.  Otherwise, remove this line.*
-
 ## Sources
 The packages used by this application are specified in `requirements.txt`
 All the code has borrowed ideas from the recommended training videos.
-
-*Declare are other sources here.*
