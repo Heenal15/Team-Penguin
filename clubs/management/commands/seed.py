@@ -136,8 +136,8 @@ class Command(BaseCommand):
         )
 
     def _create_club(self):
-        club_name = self.faker.word()
-        club_location = self.faker.location_on_land()
+        club_name = self.faker.company() + ' Club'
+        club_location = self.faker.country()
         club_description = self.faker.text(max_nb_chars=200)
         Club.objects.create(
 
@@ -149,7 +149,7 @@ class Command(BaseCommand):
 
     def _create_kerbal_club(self):
         club_name = 'Kerbal Chess Club'
-        club_location = self.faker.location_on_land()
+        club_location = 'Kerbal Space Center'
         club_description = 'Welcome to Kerbal Chess Club'
         Club.objects.create(
 
