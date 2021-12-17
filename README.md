@@ -1,6 +1,8 @@
-If cloning from the github repo, ensure you follow the 'Installation instructions' in order to run the project successfully.
-
 # Team Penguin Small Group project
+
+Deployment notes:
+If cloning from the github repo, ensure you follow the 'Installation instructions' in order to run the project successfully.
+If you expereince any errors when logging in especailly after signing up please log out, you may use this link to do so [Log Out Link](https://guarded-scrubland-54800.herokuapp.com/log_out/)
 
 ## Team members
 The members of the team are:
